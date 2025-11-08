@@ -41,9 +41,9 @@ export default function Hero() {
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-primary-blue/30 rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
           }}
           animate={{
             y: [0, -30, 0],
