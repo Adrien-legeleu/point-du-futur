@@ -54,7 +54,7 @@ export default function HowItWorks() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Comment ça <span className="gradient-text">fonctionne ?</span>
+            Comment ça <span className="text-accent-600">fonctionne ?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Un parcours en 4 étapes pour t'accompagner vers la réussite
@@ -64,7 +64,7 @@ export default function HowItWorks() {
         {/* Timeline - Desktop */}
         <div className="hidden md:block relative">
           {/* Timeline line */}
-          <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue via-primary-green to-primary-blue transform -translate-y-1/2 rounded-full" />
+          <div className="absolute top-1/2 left-0 right-0 h-1 bg-accent-600 transform -translate-y-1/2 rounded-full" />
 
           <div className="grid grid-cols-4 gap-8">
             {steps.map((step, index) => (
@@ -78,16 +78,16 @@ export default function HowItWorks() {
               >
                 {/* Number badge */}
                 <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="relative z-10 w-20 h-20 mx-auto mb-6 bg-white rounded-full border-4 border-primary-blue flex items-center justify-center shadow-xl"
+                  whileHover={{ scale: 1.02 }}
+                  className="relative z-10 w-20 h-20 mx-auto mb-6 bg-white rounded-full border-4 border-accent-600 flex items-center justify-center shadow-lg hover-lift"
                 >
-                  <span className="text-2xl font-bold text-primary-blue">
+                  <span className="text-2xl font-bold text-accent-600">
                     {step.number}
                   </span>
                 </motion.div>
 
                 {/* Content card */}
-                <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
                   <h3 className="text-xl font-bold mb-3 text-gray-900">
                     {step.title}
                   </h3>
@@ -113,13 +113,13 @@ export default function HowItWorks() {
             >
               {/* Number badge */}
               <div className="flex-shrink-0">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-blue to-primary-green rounded-full flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 bg-accent-600 rounded-full flex items-center justify-center shadow-md">
                   <span className="text-xl font-bold text-white">
                     {step.number}
                   </span>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="w-1 h-16 bg-gradient-to-b from-primary-blue to-primary-green mx-auto mt-2 rounded-full" />
+                  <div className="w-1 h-16 bg-accent-600 mx-auto mt-2 rounded-full" />
                 )}
               </div>
 

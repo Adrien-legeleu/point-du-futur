@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function CTA() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-primary-blue via-primary-green to-primary-blue">
+    <section className="relative py-24 md:py-32 overflow-hidden bg-accent-600 bg-pattern">
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -73,10 +73,10 @@ export default function CTA() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-blue rounded-full font-semibold shadow-2xl hover:shadow-3xl transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-accent-600 rounded-full font-semibold shadow-lg hover:shadow-lg transition-all hover-lift"
               >
                 <Mail className="w-5 h-5" />
                 Devenir membre
@@ -84,10 +84,10 @@ export default function CTA() {
               </Link>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#mentor"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold border-2 border-white/30 hover:bg-white/20 transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold border-2 border-white/30 hover:bg-white/20 transition-all hover-lift"
               >
                 <Heart className="w-5 h-5" />
                 Devenir bénévole

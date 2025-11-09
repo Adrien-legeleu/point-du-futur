@@ -29,7 +29,7 @@ export default function Stories() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-24 md:py-32 bg-pattern-light">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section title */}
         <motion.div
@@ -39,7 +39,7 @@ export default function Stories() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Leurs <span className="gradient-text">Histoires</span>
+            Leurs <span className="text-accent-600">Histoires</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Découvrez les témoignages de ceux qui ont vécu l'expérience Pont du
@@ -55,11 +55,11 @@ export default function Stories() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30 }}
-            className="relative p-10 md:p-12 rounded-[3rem] bg-white shadow-2xl border border-gray-100"
+            className="relative p-10 md:p-12 rounded-[3rem] bg-white shadow-lg border border-gray-100"
           >
             {/* Quote icon */}
-            <div className="absolute top-8 left-8 w-16 h-16 bg-gradient-to-br from-primary-blue to-primary-green rounded-2xl flex items-center justify-center opacity-10">
-              <Quote className="w-8 h-8" />
+            <div className="absolute top-8 left-8 w-16 h-16 bg-accent-600/10 rounded-2xl flex items-center justify-center">
+              <Quote className="w-8 h-8 text-accent-600/30" />
             </div>
 
             {/* Content */}
@@ -70,7 +70,7 @@ export default function Stories() {
 
               <div className="flex items-center gap-4">
                 {/* Avatar */}
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-blue/20 to-primary-green/20 flex items-center justify-center text-3xl">
+                <div className="w-16 h-16 rounded-full bg-accent-600/10 flex items-center justify-center text-3xl">
                   {testimonials[activeIndex].avatar}
                 </div>
 
@@ -95,7 +95,7 @@ export default function Stories() {
                 onClick={() => setActiveIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? 'w-10 bg-primary-blue'
+                    ? 'w-10 bg-accent-600'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />

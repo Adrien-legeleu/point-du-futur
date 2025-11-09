@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-blue/10 via-white to-primary-green/10">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-pattern-light">
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -76,7 +76,7 @@ export default function Hero() {
 
           {/* Main title */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-            <span className="gradient-text">Construisons</span>
+            <span className="text-accent-600">Construisons</span>
             <br />
             <span className="text-gray-900">ton avenir,</span>
             <br />
@@ -92,10 +92,10 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-blue text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all glow-blue"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-accent-600 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all hover-lift"
               >
                 <Users className="w-5 h-5" />
                 Devenir membre
@@ -103,10 +103,10 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="#mentor"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary-green text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all glow-green"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-success text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all hover-lift"
               >
                 <Heart className="w-5 h-5" />
                 Devenir mentor

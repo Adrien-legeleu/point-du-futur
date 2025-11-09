@@ -63,7 +63,7 @@ function Counter({
 
 export default function Impact() {
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-br from-gray-900 via-primary-blue/90 to-primary-green/90 text-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-primary-900 text-white relative overflow-hidden bg-pattern">
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -85,7 +85,7 @@ export default function Impact() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Notre <span className="text-primary-green">Impact</span>
+            Notre <span className="text-success">Impact</span>
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
             Des chiffres qui témoignent de notre engagement quotidien
@@ -106,8 +106,8 @@ export default function Impact() {
                 className="text-center group"
               >
                 <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-20 h-20 mx-auto mb-4 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.02, rotate: 5 }}
+                  className="w-20 h-20 mx-auto mb-4 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300 hover-lift"
                 >
                   <Icon className="w-10 h-10" />
                 </motion.div>
