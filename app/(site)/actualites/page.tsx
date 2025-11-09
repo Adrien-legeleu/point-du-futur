@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import ActualitesList from '@/components/actualites/ActualitesList';
 import Newsletter from '@/components/actualites/Newsletter';
 import ActualitesHero from '@/components/actualites/Actualiteshero';
+import { getPublishedArticles } from '@/lib/supabase/articles';
 
 export const metadata: Metadata = {
   title: 'Actualités | Pont du Futur - Événements et Témoignages',
@@ -35,11 +36,15 @@ export const metadata: Metadata = {
   robots: 'index, follow',
 };
 
-export default function ActualitesPage() {
+export const revalidate = 60; // Revalider toutes les 60 secondes
+
+export default async function ActualitesPage() {
+  const articles = await getPublishedArticles();
+
   return (
     <>
       <ActualitesHero />
-      <ActualitesList />
+      <ActualitesList articles={articles} />
       <Newsletter />
     </>
   );
