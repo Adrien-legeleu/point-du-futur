@@ -111,7 +111,7 @@ export default function ArticleShare({ article }: ArticleShareProps) {
               whileTap={{ scale: 0.95 }}
               className={`flex items-center gap-3 px-6 py-3 rounded-xl font-semibold transition-all ${
                 copied
-                  ? 'bg-primary-green text-white'
+                  ? 'bg-future text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >

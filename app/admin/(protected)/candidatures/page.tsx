@@ -98,7 +98,7 @@ export default async function CandidaturesPage() {
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                       stat.color === 'blue'
-                        ? 'bg-primary-blue/10'
+                        ? 'bg-trust/10'
                         : stat.color === 'green'
                         ? 'bg-green-100'
                         : stat.color === 'orange'
@@ -109,7 +109,7 @@ export default async function CandidaturesPage() {
                     <Icon
                       className={`w-6 h-6 ${
                         stat.color === 'blue'
-                          ? 'text-primary-blue'
+                          ? 'text-trust'
                           : stat.color === 'green'
                           ? 'text-green-600'
                           : stat.color === 'orange'

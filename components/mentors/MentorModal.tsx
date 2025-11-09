@@ -89,20 +89,20 @@ export default function MentorModal({ mentor, onClose }: MentorModalProps) {
               <h3 className="font-bold text-gray-900 mb-4">Contact</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-2 text-gray-700">
-                  <Mail className="w-4 h-4 text-primary-blue" />
+                  <Mail className="w-4 h-4 text-trust" />
                   <a
                     href={`mailto:${mentor.email}`}
-                    className="hover:text-primary-blue transition-colors"
+                    className="hover:text-trust transition-colors"
                   >
                     {mentor.email}
                   </a>
                 </div>
                 {mentor.telephone && (
                   <div className="flex items-center gap-2 text-gray-700">
-                    <Phone className="w-4 h-4 text-primary-green" />
+                    <Phone className="w-4 h-4 text-future" />
                     <a
                       href={`tel:${mentor.telephone}`}
-                      className="hover:text-primary-green transition-colors"
+                      className="hover:text-future transition-colors"
                     >
                       {mentor.telephone}
                     </a>
@@ -201,7 +201,7 @@ export default function MentorModal({ mentor, onClose }: MentorModalProps) {
           <div className="mt-8 flex gap-3">
             <a
               href={`mailto:${mentor.email}`}
-              className="flex-1 py-3 bg-primary-blue text-white rounded-xl font-semibold text-center hover:bg-primary-blue/90 transition-colors"
+              className="flex-1 py-3 bg-trust text-white rounded-xl font-semibold text-center hover:bg-trust/90 transition-colors"
             >
               Envoyer un email
             </a>

@@ -73,7 +73,7 @@ export default function AdminSidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-gray-800">
         <Link href="/admin" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-green rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-trust to-future rounded-xl flex items-center justify-center">
             <span className="text-xl font-bold">PF</span>
           </div>
           <div>
@@ -103,7 +103,7 @@ export default function AdminSidebar() {
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 <span className="font-medium">{item.title}</span>
                 {item.badge && (
-                  <span className="ml-auto w-6 h-6 bg-primary-blue rounded-full flex items-center justify-center text-xs font-bold">
+                  <span className="ml-auto w-6 h-6 bg-trust rounded-full flex items-center justify-center text-xs font-bold">
                     {item.badge}
                   </span>
                 )}
@@ -116,7 +116,7 @@ export default function AdminSidebar() {
       {/* User */}
       <div className="p-4 border-t border-gray-800">
         <div className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-green rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-trust to-future rounded-full flex items-center justify-center">
             👨‍💼
           </div>
           <div className="flex-1 min-w-0">

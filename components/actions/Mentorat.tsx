@@ -57,7 +57,7 @@ export default function Mentorat() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-blue/10 text-primary-blue font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-trust/10 text-trust font-medium mb-6">
               <Users className="w-4 h-4" />
               Programme phare
             </div>
@@ -83,8 +83,8 @@ export default function Mentorat() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="mt-1 w-6 h-6 rounded-full bg-primary-blue/10 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-4 h-4 text-primary-blue" />
+                  <div className="mt-1 w-6 h-6 rounded-full bg-trust/10 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-4 h-4 text-trust" />
                   </div>
                   <span className="text-gray-700">{benefit}</span>
                 </motion.div>

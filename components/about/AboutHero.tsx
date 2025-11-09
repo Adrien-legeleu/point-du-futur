@@ -12,9 +12,9 @@ export default function AboutHero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-blue/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-trust/20 mb-8"
           >
-            <Heart className="w-4 h-4 text-primary-blue" />
+            <Heart className="w-4 h-4 text-trust" />
             <span className="text-sm font-medium text-gray-700">
               Qui sommes-nous ?
             </span>

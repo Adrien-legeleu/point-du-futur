@@ -108,7 +108,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             required
             value={formData.title}
             onChange={(e) => handleTitleChange(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             placeholder="Titre de l'article"
           />
         </div>
@@ -127,7 +127,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, slug: e.target.value })
               }
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
               placeholder="mon-article"
             />
           </div>
@@ -145,7 +145,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               setFormData({ ...formData, excerpt: e.target.value })
             }
             rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all resize-none"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all resize-none"
             placeholder="Court résumé de l'article..."
           />
         </div>
@@ -187,7 +187,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             >
               <option value="actualite">Actualité</option>
               <option value="evenement">Événement</option>
@@ -206,7 +206,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, status: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             >
               <option value="draft">Brouillon</option>
               <option value="published">Publié</option>
@@ -227,7 +227,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, tags: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
               placeholder="Innovation, Tech, Mentorat"
             />
           </div>
@@ -246,7 +246,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
                   read_time: parseInt(e.target.value),
                 })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             />
           </div>
         </div>
@@ -263,7 +263,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, author_name: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
               placeholder="Nom de l'auteur"
             />
           </div>
@@ -278,7 +278,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, author_avatar: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
               placeholder="👨‍💼"
             />
           </div>
@@ -315,7 +315,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             disabled={loading}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-trust to-future text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

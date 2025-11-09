@@ -148,7 +148,7 @@ export default function MentorsTable({ mentors }: { mentors: Mentor[] }) {
                 placeholder="Rechercher un mentor..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
               />
             </div>
 
@@ -156,7 +156,7 @@ export default function MentorsTable({ mentors }: { mentors: Mentor[] }) {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             >
               <option value="all">Tous les statuts</option>
               <option value="pending">En attente</option>
@@ -243,7 +243,7 @@ export default function MentorsTable({ mentors }: { mentors: Mentor[] }) {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-primary-green" />
+                      <Users className="w-4 h-4 text-future" />
                       <span className="font-semibold text-gray-900">
                         {mentor.mentees_count}
                       </span>

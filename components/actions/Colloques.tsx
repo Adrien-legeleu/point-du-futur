@@ -82,7 +82,7 @@ export default function Colloques() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green/10 text-primary-green font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-future/10 text-future font-medium mb-6"
           >
             <MessageCircle className="w-4 h-4" />
             Grands rendez-vous
@@ -94,7 +94,7 @@ export default function Colloques() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
           >
-            <span className="text-primary-green">Colloques</span> et conférences
+            <span className="text-future">Colloques</span> et conférences
           </motion.h2>
 
           <motion.p

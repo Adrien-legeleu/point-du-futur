@@ -128,14 +128,14 @@ export default function EvenementsTable({
               placeholder="Rechercher un événement..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
             />
           </div>
 
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+            className="px-4 py-3 rounded-xl border border-gray-200 focus:border-trust focus:ring-2 focus:ring-trust/20 outline-none transition-all"
           >
             <option value="all">Tous les statuts</option>
             <option value="upcoming">À venir</option>
@@ -228,7 +228,7 @@ export default function EvenementsTable({
                 <td className="px-6 py-4">
                   {evenement.places_total ? (
                     <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4 text-primary-blue" />
+                      <Users className="w-4 h-4 text-trust" />
                       <span className="text-sm font-semibold text-gray-900">
                         {evenement.places_restantes || 0}
                       </span>

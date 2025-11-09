@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-20 w-96 h-96 bg-primary-blue/20 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-96 h-96 bg-trust/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -22,7 +22,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-primary-green/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-96 h-96 bg-future/20 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -40,7 +40,7 @@ export default function Hero() {
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-primary-blue/30 rounded-full"
+          className="absolute w-2 h-2 bg-trust/30 rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -65,10 +65,10 @@ export default function Hero() {
         >
           {/* Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-blue/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-trust/20 mb-8"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="w-2 h-2 bg-primary-green rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-future rounded-full animate-pulse" />
             <span className="text-sm font-medium text-gray-700">
               Ensemble, construisons l'avenir
             </span>

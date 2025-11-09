@@ -56,7 +56,7 @@ export default function Seminaires() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-blue/10 text-primary-blue font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-trust/10 text-trust font-medium mb-6"
           >
             <Calendar className="w-4 h-4" />
             Événements inspirants
@@ -85,7 +85,7 @@ export default function Seminaires() {
         {/* Upcoming seminars */}
         <div className="mb-16">
           <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-            <Star className="w-6 h-6 text-primary-blue" />
+            <Star className="w-6 h-6 text-trust" />
             Prochains séminaires
           </h3>
 
@@ -111,11 +111,11 @@ export default function Seminaires() {
                   {/* Details */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Calendar className="w-4 h-4 text-primary-blue" />
+                      <Calendar className="w-4 h-4 text-trust" />
                       {seminar.date}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Clock className="w-4 h-4 text-primary-green" />
+                      <Clock className="w-4 h-4 text-future" />
                       {seminar.time}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -123,14 +123,14 @@ export default function Seminaires() {
                       {seminar.location}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Users className="w-4 h-4 text-primary-blue" />
+                      <Users className="w-4 h-4 text-trust" />
                       {seminar.speakers.join(', ')}
                     </div>
                   </div>
 
                   {/* Spots badge */}
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 bg-primary-blue/10 text-primary-blue rounded-full text-sm font-medium">
+                    <span className="px-3 py-1 bg-trust/10 text-trust rounded-full text-sm font-medium">
                       {seminar.spots}
                     </span>
                     <motion.button

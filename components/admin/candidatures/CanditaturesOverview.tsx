@@ -45,7 +45,7 @@ export default function CandidaturesOverview({
 
   const getTypeColor = (color: string) => {
     const colors: Record<string, string> = {
-      blue: 'bg-primary-blue/10 text-primary-blue',
+      blue: 'bg-trust/10 text-trust',
       green: 'bg-green-100 text-green-700',
       orange: 'bg-orange-100 text-orange-700',
       purple: 'bg-purple-100 text-purple-700',
@@ -69,7 +69,7 @@ export default function CandidaturesOverview({
               onClick={() => setFilter(f.value)}
               className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                 filter === f.value
-                  ? 'bg-primary-blue text-white'
+                  ? 'bg-trust text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
