@@ -6,38 +6,7 @@ import Link from 'next/link';
 
 export default function ActionsCTA() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-br from-primary-blue via-primary-green to-primary-orange">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            x: [0, -50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-        />
-      </div>
-
+    <section className="relative py-24 md:py-32 overflow-hidden bg-primary-900">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -50,7 +19,7 @@ export default function ActionsCTA() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 mb-8 shadow-md"
           >
             <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
             <span className="text-sm font-medium">Rejoins l'aventure</span>
@@ -71,10 +40,10 @@ export default function ActionsCTA() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-blue rounded-full font-semibold shadow-2xl hover:shadow-3xl transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-900 rounded-full font-semibold shadow-lg hover-lift"
               >
                 <Users className="w-5 h-5" />
                 Devenir membre
@@ -82,10 +51,10 @@ export default function ActionsCTA() {
               </Link>
             </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold border-2 border-white/30 hover:bg-white/20 transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 text-white rounded-full font-semibold border-2 border-white/30 shadow-md hover-lift"
               >
                 <Heart className="w-5 h-5" />
                 Devenir mentor
@@ -133,8 +102,7 @@ export default function ActionsCTA() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + index * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all group"
+                  className="bg-white/10 rounded-2xl p-6 border border-white/20 shadow-md hover-lift group"
                 >
                   <Icon className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
                   <h3 className="text-lg font-bold mb-1">{card.title}</h3>

@@ -57,7 +57,7 @@ const roles = [
 
 export default function JoinUs() {
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-24 md:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section title */}
         <motion.div
@@ -67,7 +67,7 @@ export default function JoinUs() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Comment nous <span className="gradient-text">rejoindre ?</span>
+            Comment nous <span className="text-primary-900">rejoindre ?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Plusieurs façons de participer à l'aventure Pont du Futur
@@ -85,26 +85,25 @@ export default function JoinUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group relative bg-white rounded-[2rem] p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group relative bg-white rounded-[2rem] p-8 shadow-md hover:shadow-lg hover-lift transition-all duration-300"
               >
                 {/* Icon */}
                 <div
-                  className={`w-16 h-16 mb-6 bg-gradient-to-br ${
+                  className={`w-16 h-16 mb-6 ${
                     role.color === 'blue'
-                      ? 'from-primary-blue/20 to-primary-blue/10'
+                      ? 'bg-accent-600/10'
                       : role.color === 'green'
-                      ? 'from-primary-green/20 to-primary-green/10'
-                      : 'from-primary-orange/20 to-primary-orange/10'
+                      ? 'bg-success/10'
+                      : 'bg-warning/10'
                   } rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}
                 >
                   <Icon
                     className={`w-8 h-8 ${
                       role.color === 'blue'
-                        ? 'text-primary-blue'
+                        ? 'text-accent-600'
                         : role.color === 'green'
-                        ? 'text-primary-green'
-                        : 'text-primary-orange'
+                        ? 'text-success'
+                        : 'text-warning'
                     }`}
                   />
                 </div>
@@ -129,10 +128,10 @@ export default function JoinUs() {
                       <div
                         className={`w-1.5 h-1.5 rounded-full ${
                           role.color === 'blue'
-                            ? 'bg-primary-blue'
+                            ? 'bg-accent-600'
                             : role.color === 'green'
-                            ? 'bg-primary-green'
-                            : 'bg-primary-orange'
+                            ? 'bg-success'
+                            : 'bg-warning'
                         }`}
                       />
                       {benefit}
@@ -145,10 +144,10 @@ export default function JoinUs() {
                   href={role.href}
                   className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
                     role.color === 'blue'
-                      ? 'bg-primary-blue text-white hover:brightness-110'
+                      ? 'bg-accent-600 text-white hover:brightness-110'
                       : role.color === 'green'
-                      ? 'bg-primary-green text-white hover:brightness-110'
-                      : 'bg-primary-orange text-white hover:brightness-110'
+                      ? 'bg-success text-white hover:brightness-110'
+                      : 'bg-warning text-white hover:brightness-110'
                   }`}
                 >
                   {role.cta}
@@ -157,13 +156,13 @@ export default function JoinUs() {
 
                 {/* Hover border effect */}
                 <div
-                  className={`absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-${
+                  className={`absolute inset-0 rounded-[2rem] border-2 border-transparent ${
                     role.color === 'blue'
-                      ? 'primary-blue'
+                      ? 'group-hover:border-accent-600/20'
                       : role.color === 'green'
-                      ? 'primary-green'
-                      : 'primary-orange'
-                  }/20 transition-all duration-300 pointer-events-none`}
+                      ? 'group-hover:border-success/20'
+                      : 'group-hover:border-warning/20'
+                  } transition-all duration-300 pointer-events-none`}
                 />
               </motion.div>
             );
@@ -182,9 +181,9 @@ export default function JoinUs() {
           </p>
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-900 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all"
           >
             Contactez-nous
             <ArrowRight className="w-5 h-5" />

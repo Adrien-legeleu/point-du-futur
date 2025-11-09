@@ -12,45 +12,16 @@ import {
 
 export default function ActionsHero() {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-blue/10 via-white to-primary-green/10 pt-24">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-20 w-96 h-96 bg-primary-blue/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-primary-green/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            opacity: [0.6, 0.3, 0.6],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-        />
-      </div>
-
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gray-50 pt-24">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-blue/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-accent-600/20 mb-8 shadow-md"
           >
-            <Compass className="w-4 h-4 text-primary-blue" />
+            <Compass className="w-4 h-4 text-accent-600" />
             <span className="text-sm font-medium text-gray-700">
               Nos programmes
             </span>
@@ -65,7 +36,7 @@ export default function ActionsHero() {
           >
             Découvre nos
             <br />
-            <span className="gradient-text">Actions</span>
+            <span className="text-primary-900">Actions</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -96,8 +67,8 @@ export default function ActionsHero() {
               const Icon = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-primary-blue/20 to-primary-green/20 rounded-2xl flex items-center justify-center">
-                    <Icon className="w-8 h-8 text-primary-blue" />
+                  <div className="w-16 h-16 mx-auto mb-3 bg-accent-600/10 rounded-2xl flex items-center justify-center shadow-md">
+                    <Icon className="w-8 h-8 text-accent-600" />
                   </div>
                   <div className="text-3xl font-bold text-gray-900 mb-1">
                     {stat.value}

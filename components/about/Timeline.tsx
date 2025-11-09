@@ -52,7 +52,7 @@ export default function Timeline() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Notre <span className="gradient-text">Parcours</span>
+            Notre <span className="text-accent-600">Parcours</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             3 ans d'engagement, d'innovation et d'impact
@@ -62,7 +62,7 @@ export default function Timeline() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line (desktop) */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-blue via-primary-green to-primary-blue transform -translate-x-1/2" />
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-accent-600 transform -translate-x-1/2" />
 
           {/* Milestones */}
           <div className="space-y-16">
@@ -81,8 +81,8 @@ export default function Timeline() {
                 >
                   {/* Content */}
                   <div className={`flex-1 ${isLeft ? 'md:pr-12' : 'md:pl-12'}`}>
-                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                      <div className="text-sm font-semibold text-primary-blue mb-2">
+                    <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                      <div className="text-sm font-semibold text-accent-600 mb-2">
                         {milestone.year}
                       </div>
                       <h3 className="text-xl font-bold mb-2 text-gray-900">
@@ -94,7 +94,7 @@ export default function Timeline() {
 
                   {/* Center dot */}
                   <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
-                    <div className="w-6 h-6 bg-white border-4 border-primary-blue rounded-full shadow-lg" />
+                    <div className="w-6 h-6 bg-white border-4 border-accent-600 rounded-full shadow-md" />
                   </div>
 
                   {/* Empty space (for alternating layout) */}

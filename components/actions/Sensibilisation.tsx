@@ -105,10 +105,9 @@ export default function Sensibilisation() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-gradient-to-br from-primary-orange/10 to-primary-orange/5 rounded-2xl p-6 border border-primary-orange/20 hover:shadow-lg transition-all"
+                className="bg-white rounded-2xl p-6 border border-warning/20 shadow-md hover-lift"
               >
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-orange to-primary-orange/80 rounded-xl flex items-center justify-center mb-4 shadow-lg">
+                <div className="w-12 h-12 bg-warning rounded-xl flex items-center justify-center mb-4 shadow-md">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">{theme.title}</h3>
@@ -160,7 +159,7 @@ export default function Sensibilisation() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-primary-orange/10 to-primary-orange/5 rounded-[2rem] p-8 border border-primary-orange/20"
+            className="bg-white rounded-[2rem] p-8 border border-warning/20 shadow-md"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               👥 Publics cibles
@@ -207,7 +206,7 @@ export default function Sensibilisation() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-orange to-primary-orange/80 rounded-[2rem] p-12 text-white"
+          className="bg-warning rounded-[2rem] p-12 text-white shadow-lg"
         >
           <h3 className="text-3xl font-bold text-center mb-12">
             Notre impact en chiffres
@@ -225,7 +224,7 @@ export default function Sensibilisation() {
                 <div className="text-4xl md:text-5xl font-bold mb-2">
                   {stat.value}
                 </div>
-                <div className="text-white/80 text-sm">{stat.label}</div>
+                <div className="text-white/90 text-sm">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -243,9 +242,9 @@ export default function Sensibilisation() {
           </p>
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-orange text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-warning text-white rounded-full font-semibold shadow-md hover-lift"
           >
             <Lightbulb className="w-5 h-5" />
             Nous contacter

@@ -66,7 +66,7 @@ export default function Team() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Notre <span className="gradient-text">Équipe</span>
+            Notre <span className="text-primary-900">Équipe</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Des personnes passionnées, dévouées et engagées pour la réussite des
@@ -83,17 +83,13 @@ export default function Team() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group relative bg-white rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group relative bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-lg hover-lift transition-all duration-300"
             >
-              {/* Background gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/5 to-primary-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
               <div className="relative z-10 p-8 text-center">
                 {/* Avatar */}
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-primary-blue/20 to-primary-green/20 rounded-full flex items-center justify-center text-5xl"
+                  className="w-24 h-24 mx-auto mb-4 bg-accent-600/10 rounded-full flex items-center justify-center text-5xl"
                 >
                   {member.avatar}
                 </motion.div>
@@ -102,7 +98,7 @@ export default function Team() {
                 <h3 className="text-xl font-bold mb-1 text-gray-900">
                   {member.name}
                 </h3>
-                <div className="text-sm font-semibold text-primary-blue mb-3">
+                <div className="text-sm font-semibold text-accent-600 mb-3">
                   {member.role}
                 </div>
 
@@ -115,17 +111,17 @@ export default function Team() {
                 <div className="flex justify-center gap-3">
                   <motion.a
                     href={member.linkedin}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-primary-blue/10 rounded-xl flex items-center justify-center text-primary-blue hover:bg-primary-blue hover:text-white transition-all"
+                    className="w-10 h-10 bg-accent-600/10 rounded-xl flex items-center justify-center text-accent-600 hover:bg-accent-600 hover:text-white transition-all"
                   >
                     <Linkedin className="w-5 h-5" />
                   </motion.a>
                   <motion.a
                     href={`mailto:${member.email}`}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-primary-green/10 rounded-xl flex items-center justify-center text-primary-green hover:bg-primary-green hover:text-white transition-all"
+                    className="w-10 h-10 bg-success/10 rounded-xl flex items-center justify-center text-success hover:bg-success hover:text-white transition-all"
                   >
                     <Mail className="w-5 h-5" />
                   </motion.a>
@@ -133,7 +129,7 @@ export default function Team() {
               </div>
 
               {/* Hover border effect */}
-              <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-primary-blue/20 transition-all duration-300 pointer-events-none" />
+              <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-accent-600/20 transition-all duration-300 pointer-events-none" />
             </motion.div>
           ))}
         </div>
@@ -145,7 +141,7 @@ export default function Team() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-block p-8 bg-gradient-to-r from-primary-blue/10 to-primary-green/10 rounded-[2rem] border border-primary-blue/20">
+          <div className="inline-block p-8 bg-accent-600/5 rounded-[2rem] border border-accent-600/20">
             <h3 className="text-2xl font-bold mb-2 text-gray-900">
               Envie de nous rejoindre ?
             </h3>
@@ -155,9 +151,9 @@ export default function Team() {
             </p>
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-full font-semibold shadow-lg"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-900 text-white rounded-full font-semibold shadow-md"
             >
               <Mail className="w-5 h-5" />
               Nous contacter
