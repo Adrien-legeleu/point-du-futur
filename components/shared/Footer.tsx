@@ -64,7 +64,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-primary-900 text-white">
+    <footer className="relative bg-gradient-to-br from-trust-900 to-trust-800 text-white">
       {/* Pattern subtil */}
       <div className="absolute inset-0 opacity-5 bg-pattern-light" />
 
@@ -79,7 +79,7 @@ export default function Footer() {
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="w-14 h-14 bg-accent-600 rounded-2xl flex items-center justify-center shadow-lg"
+                className="w-14 h-14 bg-gradient-to-br from-trust-500 to-future-500 rounded-2xl flex items-center justify-center shadow-lg"
               >
                 <span className="text-white font-bold text-2xl">PF</span>
               </motion.div>
