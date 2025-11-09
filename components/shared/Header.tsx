@@ -11,6 +11,8 @@ const navItems = [
   { name: 'À Propos', href: '/about' },
   { name: 'Nos Actions', href: '/actions' },
   { name: 'Actualités', href: '/actualites' },
+  { name: 'Événements', href: '/evenements' },
+  { name: 'Membres', href: '/membres' },
   { name: 'Contact', href: '/contact' },
 ];
 

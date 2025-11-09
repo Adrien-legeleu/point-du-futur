@@ -1,35 +1,70 @@
 @import 'tailwindcss';
 
 @theme {
-  /* === Couleurs Modernes Pont du Futur === */
-  --color-primary: #0F172A;      /* Slate 900 - Bleu très foncé moderne */
-  --color-accent: #3B82F6;       /* Blue 500 - Bleu moderne */
-  --color-success: #22C55E;      /* Green 500 - Vert moderne */
-  --color-warning: #F59E0B;      /* Amber 500 - Orange moderne */
+  /* === 🎨 NOUVELLE PALETTE PONT DU FUTUR === */
+  /* Bleu Confiance (couleur principale) - pâle et élégant */
+  --color-trust-50: #F0F7FF;        /* Bleu très pâle */
+  --color-trust-100: #E0EFFF;       /* Bleu pâle */
+  --color-trust-200: #B8DCFF;       /* Bleu clair */
+  --color-trust-300: #7EC2FF;       /* Bleu moyen */
+  --color-trust-400: #5AADFF;       /* Bleu vif */
+  --color-trust-500: #3B9EFF;       /* Bleu principal */
+  --color-trust-600: #2B7FD6;       /* Bleu foncé */
+  --color-trust-700: #1D5FA3;       /* Bleu très foncé */
+  --color-trust-800: #154270;       /* Bleu profond */
+  --color-trust-900: #0D2B4D;       /* Bleu nuit */
 
-  /* Variations de la couleur primaire */
-  --color-primary-50: #F8FAFC;
-  --color-primary-100: #F1F5F9;
-  --color-primary-200: #E2E8F0;
-  --color-primary-300: #CBD5E1;
-  --color-primary-400: #94A3B8;
-  --color-primary-500: #64748B;
-  --color-primary-600: #475569;
-  --color-primary-700: #334155;
-  --color-primary-800: #1E293B;
-  --color-primary-900: #0F172A;
+  /* Vert Avenir - frais et moderne */
+  --color-future-50: #F0FDF7;       /* Vert très pâle */
+  --color-future-100: #DCFCE7;      /* Vert pâle */
+  --color-future-200: #BBF7D0;      /* Vert clair */
+  --color-future-300: #86EFAC;      /* Vert moyen */
+  --color-future-400: #4ADE80;      /* Vert vif */
+  --color-future-500: #22C55E;      /* Vert principal */
+  --color-future-600: #16A34A;      /* Vert foncé */
+  --color-future-700: #15803D;      /* Vert très foncé */
+  --color-future-800: #166534;      /* Vert profond */
+  --color-future-900: #14532D;      /* Vert nuit */
 
-  /* Variations de l'accent */
-  --color-accent-50: #EFF6FF;
-  --color-accent-100: #DBEAFE;
-  --color-accent-200: #BFDBFE;
-  --color-accent-300: #93C5FD;
-  --color-accent-400: #60A5FA;
-  --color-accent-500: #3B82F6;
-  --color-accent-600: #2563EB;
-  --color-accent-700: #1D4ED8;
-  --color-accent-800: #1E40AF;
-  --color-accent-900: #1E3A8A;
+  /* Orange Énergie - chaleureux et dynamique */
+  --color-energy-50: #FFF7ED;       /* Orange très pâle */
+  --color-energy-100: #FFEDD5;      /* Orange pâle */
+  --color-energy-200: #FED7AA;      /* Orange clair */
+  --color-energy-300: #FDBA74;      /* Orange moyen */
+  --color-energy-400: #FB923C;      /* Orange vif */
+  --color-energy-500: #F97316;      /* Orange principal */
+  --color-energy-600: #EA580C;      /* Orange foncé */
+  --color-energy-700: #C2410C;      /* Orange très foncé */
+  --color-energy-800: #9A3412;      /* Orange profond */
+  --color-energy-900: #7C2D12;      /* Orange nuit */
+
+  /* Couleurs fonctionnelles (aliases) */
+  --color-primary: var(--color-trust-500);
+  --color-primary-50: var(--color-trust-50);
+  --color-primary-100: var(--color-trust-100);
+  --color-primary-200: var(--color-trust-200);
+  --color-primary-300: var(--color-trust-300);
+  --color-primary-400: var(--color-trust-400);
+  --color-primary-500: var(--color-trust-500);
+  --color-primary-600: var(--color-trust-600);
+  --color-primary-700: var(--color-trust-700);
+  --color-primary-800: var(--color-trust-800);
+  --color-primary-900: var(--color-trust-900);
+
+  --color-accent: var(--color-future-500);
+  --color-accent-50: var(--color-future-50);
+  --color-accent-100: var(--color-future-100);
+  --color-accent-200: var(--color-future-200);
+  --color-accent-300: var(--color-future-300);
+  --color-accent-400: var(--color-future-400);
+  --color-accent-500: var(--color-future-500);
+  --color-accent-600: var(--color-future-600);
+  --color-accent-700: var(--color-future-700);
+  --color-accent-800: var(--color-future-800);
+  --color-accent-900: var(--color-future-900);
+
+  --color-success: var(--color-future-500);
+  --color-warning: var(--color-energy-500);
 
   /* Grays modernes */
   --color-gray-50: #F9FAFB;
