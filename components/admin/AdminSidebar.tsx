@@ -124,10 +124,12 @@ export default function AdminSidebar() {
             <div className="text-xs text-gray-400">admin@pontdufutur.org</div>
           </div>
         </div>
-        <button className="w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium">Déconnexion</span>
-        </button>
+        <Link href="/admin/logout">
+          <button className="w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+            <LogOut className="w-5 h-5" />
+            <span className="font-medium">Déconnexion</span>
+          </button>
+        </Link>
       </div>
     </aside>
   );

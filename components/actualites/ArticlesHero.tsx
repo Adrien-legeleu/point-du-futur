@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/articles-data';
-import { categories } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
+import { categories } from '@/lib/constants';
 
 interface ArticleHeroProps {
   article: Article;

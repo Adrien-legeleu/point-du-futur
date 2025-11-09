@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Article } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
 
 interface ArticleContentProps {
   article: Article;
