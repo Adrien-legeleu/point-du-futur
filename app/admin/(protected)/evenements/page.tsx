@@ -29,7 +29,7 @@ export default async function EvenementsPage() {
           </p>
         </div>
         <Link href="/admin/evenements/nouveau">
-          <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
+          <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-trust-500 to-trust-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
             <Plus className="w-5 h-5" />
             Nouvel événement
           </button>
@@ -43,28 +43,28 @@ export default async function EvenementsPage() {
             label: 'Total',
             value: evenements?.length || 0,
             icon: Calendar,
-            color: 'blue' as const,
+            color: 'trust' as const,
           },
           {
-            label: 'À venir',
+            label: 'Publiés',
             value:
-              evenements?.filter((e: Evenement) => e.status === 'upcoming')
-                .length || 0,
-            icon: Clock,
-            color: 'orange' as const,
-          },
-          {
-            label: 'En cours',
-            value:
-              evenements?.filter((e: Evenement) => e.status === 'ongoing')
+              evenements?.filter((e: Evenement) => e.status === 'published')
                 .length || 0,
             icon: CheckCircle,
-            color: 'green' as const,
+            color: 'future' as const,
           },
           {
-            label: 'Terminés',
+            label: 'Brouillons',
             value:
-              evenements?.filter((e: Evenement) => e.status === 'completed')
+              evenements?.filter((e: Evenement) => e.status === 'draft')
+                .length || 0,
+            icon: Clock,
+            color: 'energy' as const,
+          },
+          {
+            label: 'Archivés',
+            value:
+              evenements?.filter((e: Evenement) => e.status === 'archived')
                 .length || 0,
             icon: CheckCircle,
             color: 'gray' as const,
@@ -74,28 +74,28 @@ export default async function EvenementsPage() {
           return (
             <div
               key={index}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+              className="bg-white rounded-2xl p-6 shadow-sm"
             >
               <div className="flex items-center justify-between mb-4">
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                    stat.color === 'blue'
-                      ? 'bg-primary-blue/10'
-                      : stat.color === 'green'
-                      ? 'bg-green-100'
-                      : stat.color === 'orange'
-                      ? 'bg-orange-100'
+                    stat.color === 'trust'
+                      ? 'bg-trust-100'
+                      : stat.color === 'future'
+                      ? 'bg-future-100'
+                      : stat.color === 'energy'
+                      ? 'bg-energy-100'
                       : 'bg-gray-100'
                   }`}
                 >
                   <Icon
                     className={`w-6 h-6 ${
-                      stat.color === 'blue'
-                        ? 'text-primary-blue'
-                        : stat.color === 'green'
-                        ? 'text-green-600'
-                        : stat.color === 'orange'
-                        ? 'text-orange-600'
+                      stat.color === 'trust'
+                        ? 'text-trust-600'
+                        : stat.color === 'future'
+                        ? 'text-future-600'
+                        : stat.color === 'energy'
+                        ? 'text-energy-600'
                         : 'text-gray-600'
                     }`}
                   />
