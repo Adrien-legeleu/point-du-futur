@@ -1,27 +1,35 @@
-import MentorsTable from '@/components/mentors/MentorsTable';
+import MembresTable from '@/components/membres/MembresTable';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { Heart, UserCheck, UserX, Clock } from 'lucide-react';
+import { Users, UserCheck, UserX, Clock } from 'lucide-react';
 
-export default async function MentorsPage() {
-  const supabase = createServerSupabaseClient();
+// 🔹 Type minimal pour les stats
+type MembreStatus = 'active' | 'pending' | 'inactive';
 
-  const { data: mentors, error } = await supabase
-    .from('mentors')
-    .select('*')
+type MembreForStats = {
+  status: MembreStatus;
+};
+
+export default async function MembresPage() {
+  const supabase = await createServerSupabaseClient();
+
+  const { data: membres, error } = await supabase
+    .from('membres')
+    .select('*, mentors(nom, prenom)')
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching mentors:', error);
+    console.error('Error fetching membres:', error);
   }
+
+  // ✅ Version typée pour les stats (pas de any, plus de never)
+  const membresForStats: MembreForStats[] = (membres ?? []) as MembreForStats[];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Mentors</h1>
-        <p className="text-gray-600 mt-1">
-          Gérez les mentors bénévoles de Pont du Futur
-        </p>
+        <h1 className="text-3xl font-bold text-gray-900">Membres</h1>
+        <p className="text-gray-600 mt-1">Gérez les membres de Pont du Futur</p>
       </div>
 
       {/* Stats */}
@@ -29,27 +37,28 @@ export default async function MentorsPage() {
         {[
           {
             label: 'Total',
-            value: mentors?.length || 0,
-            icon: Heart,
+            value: membresForStats.length,
+            icon: Users,
             color: 'blue',
           },
           {
             label: 'Actifs',
-            value: mentors?.filter((m) => m.status === 'active').length || 0,
+            value: membresForStats.filter((m) => m.status === 'active').length,
             icon: UserCheck,
             color: 'green',
           },
           {
             label: 'En attente',
-            value: mentors?.filter((m) => m.status === 'pending').length || 0,
+            value: membresForStats.filter((m) => m.status === 'pending').length,
             icon: Clock,
             color: 'orange',
           },
           {
-            label: 'Mentorés',
-            value: mentors?.reduce((sum, m) => sum + m.mentees_count, 0) || 0,
-            icon: Heart,
-            color: 'purple',
+            label: 'Inactifs',
+            value: membresForStats.filter((m) => m.status === 'inactive')
+              .length,
+            icon: UserX,
+            color: 'red',
           },
         ].map((stat, index) => {
           const Icon = stat.icon;
@@ -67,7 +76,7 @@ export default async function MentorsPage() {
                       ? 'bg-green-100'
                       : stat.color === 'orange'
                       ? 'bg-orange-100'
-                      : 'bg-purple-100'
+                      : 'bg-red-100'
                   }`}
                 >
                   <Icon
@@ -78,7 +87,7 @@ export default async function MentorsPage() {
                         ? 'text-green-600'
                         : stat.color === 'orange'
                         ? 'text-orange-600'
-                        : 'text-purple-600'
+                        : 'text-red-600'
                     }`}
                   />
                 </div>
@@ -93,7 +102,8 @@ export default async function MentorsPage() {
       </div>
 
       {/* Table */}
-      <MentorsTable mentors={mentors || []} />
+      {/* ici on garde les données complètes (avec le mentor) */}
+      <MembresTable membres={membres || []} />
     </div>
   );
 }

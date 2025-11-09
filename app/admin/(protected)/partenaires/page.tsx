@@ -1,26 +1,38 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import BenevolesTable from '@/components/admin/benevoles/BenevolesTable';
-import { Briefcase, UserCheck, UserX, Clock } from 'lucide-react';
+import PartenairesTable from '@/components/admin/partenaires/PartenairesTable';
+import { Handshake, UserCheck, UserX, Clock } from 'lucide-react';
 
-export default async function BenevolesPage() {
-  const supabase = createServerSupabaseClient();
+// 🔹 Type minimal pour les stats partenaires
+type PartenaireStatus = 'active' | 'pending' | 'inactive';
 
-  const { data: benevoles, error } = await supabase
-    .from('benevoles')
+type PartenaireForStats = {
+  status: PartenaireStatus;
+};
+
+export default async function PartenairesPage() {
+  // ✅ penser à await
+  const supabase = await createServerSupabaseClient();
+
+  const { data: partenaires, error } = await supabase
+    .from('partenaires')
     .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching benevoles:', error);
+    console.error('Error fetching partenaires:', error);
   }
+
+  // ✅ version typée pour les stats (pas de any, plus de never)
+  const partenairesForStats: PartenaireForStats[] = (partenaires ??
+    []) as PartenaireForStats[];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Bénévoles</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Partenaires</h1>
         <p className="text-gray-600 mt-1">
-          Gérez les bénévoles de Pont du Futur
+          Gérez les partenaires de Pont du Futur
         </p>
       </div>
 
@@ -29,26 +41,28 @@ export default async function BenevolesPage() {
         {[
           {
             label: 'Total',
-            value: benevoles?.length || 0,
-            icon: Briefcase,
+            value: partenairesForStats.length,
+            icon: Handshake,
             color: 'blue',
           },
           {
             label: 'Actifs',
-            value: benevoles?.filter((b) => b.status === 'active').length || 0,
+            value: partenairesForStats.filter((p) => p.status === 'active')
+              .length,
             icon: UserCheck,
             color: 'green',
           },
           {
             label: 'En attente',
-            value: benevoles?.filter((b) => b.status === 'pending').length || 0,
+            value: partenairesForStats.filter((p) => p.status === 'pending')
+              .length,
             icon: Clock,
             color: 'orange',
           },
           {
             label: 'Inactifs',
-            value:
-              benevoles?.filter((b) => b.status === 'inactive').length || 0,
+            value: partenairesForStats.filter((p) => p.status === 'inactive')
+              .length,
             icon: UserX,
             color: 'red',
           },
@@ -94,7 +108,8 @@ export default async function BenevolesPage() {
       </div>
 
       {/* Table */}
-      <BenevolesTable benevoles={benevoles || []} />
+      {/* ici on laisse les données complètes aller à la table */}
+      <PartenairesTable partenaires={partenaires || []} />
     </div>
   );
 }

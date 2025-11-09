@@ -2,8 +2,12 @@ import CandidaturesOverview from '@/components/admin/anditatures/CanditaturesOve
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Users, Heart, Briefcase, Handshake } from 'lucide-react';
 
+type HasStatus = {
+  status: 'pending' | 'accepted' | 'rejected' | 'inactive';
+};
+
 export default async function CandidaturesPage() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   // Récupérer toutes les candidatures
   const [
@@ -30,6 +34,12 @@ export default async function CandidaturesPage() {
       .order('created_at', { ascending: false }),
   ]);
 
+  // ✅ Tableaux "safe" juste pour les stats, avec un type qui a au moins `status`
+  const membresWithStatus = (membres ?? []) as HasStatus[];
+  const mentorsWithStatus = (mentors ?? []) as HasStatus[];
+  const benevolesWithStatus = (benevoles ?? []) as HasStatus[];
+  const partenairesWithStatus = (partenaires ?? []) as HasStatus[];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -45,33 +55,36 @@ export default async function CandidaturesPage() {
         {[
           {
             label: 'Membres',
-            value: membres?.filter((m) => m.status === 'pending').length || 0,
-            total: membres?.length || 0,
+            value: membresWithStatus.filter((m) => m.status === 'pending')
+              .length,
+            total: membresWithStatus.length,
             icon: Users,
             color: 'blue',
             href: '/admin/membres',
           },
           {
             label: 'Mentors',
-            value: mentors?.filter((m) => m.status === 'pending').length || 0,
-            total: mentors?.length || 0,
+            value: mentorsWithStatus.filter((m) => m.status === 'pending')
+              .length,
+            total: mentorsWithStatus.length,
             icon: Heart,
             color: 'green',
             href: '/admin/mentors',
           },
           {
             label: 'Bénévoles',
-            value: benevoles?.filter((b) => b.status === 'pending').length || 0,
-            total: benevoles?.length || 0,
+            value: benevolesWithStatus.filter((b) => b.status === 'pending')
+              .length,
+            total: benevolesWithStatus.length,
             icon: Briefcase,
             color: 'orange',
             href: '/admin/benevoles',
           },
           {
             label: 'Partenaires',
-            value:
-              partenaires?.filter((p) => p.status === 'pending').length || 0,
-            total: partenaires?.length || 0,
+            value: partenairesWithStatus.filter((p) => p.status === 'pending')
+              .length,
+            total: partenairesWithStatus.length,
             icon: Handshake,
             color: 'purple',
             href: '/admin/partenaires',

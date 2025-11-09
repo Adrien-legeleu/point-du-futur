@@ -1,25 +1,45 @@
-import MembresTable from '@/components/membres/MembresTable';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { Users, UserCheck, UserX, Clock } from 'lucide-react';
+import BenevolesTable from '@/components/admin/benevoles/BenevolesTable';
+import { Briefcase, UserCheck, UserX, Clock } from 'lucide-react';
 
-export default async function MembresPage() {
-  const supabase = createServerSupabaseClient();
+type Benevole = {
+  id: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string | null;
+  age: number | null;
+  ville: string | null;
+  motivation: string | null;
+  competences: string | null;
+  disponibilite: string | null;
+  status: string;
+  created_at: string;
+};
 
-  const { data: membres, error } = await supabase
-    .from('membres')
-    .select('*, mentors(nom, prenom)')
+export default async function BenevolesPage() {
+  const supabase = await createServerSupabaseClient();
+
+  const { data, error } = await supabase
+    .from('benevoles')
+    .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching membres:', error);
+    console.error('Error fetching benevoles:', error);
   }
+
+  // ✅ ici on force le type proprement (pas de any)
+  const benevoles: Benevole[] = (data ?? []) as Benevole[];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Membres</h1>
-        <p className="text-gray-600 mt-1">Gérez les membres de Pont du Futur</p>
+        <h1 className="text-3xl font-bold text-gray-900">Bénévoles</h1>
+        <p className="text-gray-600 mt-1">
+          Gérez les bénévoles de Pont du Futur
+        </p>
       </div>
 
       {/* Stats */}
@@ -27,25 +47,25 @@ export default async function MembresPage() {
         {[
           {
             label: 'Total',
-            value: membres?.length || 0,
-            icon: Users,
+            value: benevoles.length,
+            icon: Briefcase,
             color: 'blue',
           },
           {
             label: 'Actifs',
-            value: membres?.filter((m) => m.status === 'active').length || 0,
+            value: benevoles.filter((b) => b.status === 'active').length,
             icon: UserCheck,
             color: 'green',
           },
           {
             label: 'En attente',
-            value: membres?.filter((m) => m.status === 'pending').length || 0,
+            value: benevoles.filter((b) => b.status === 'pending').length,
             icon: Clock,
             color: 'orange',
           },
           {
             label: 'Inactifs',
-            value: membres?.filter((m) => m.status === 'inactive').length || 0,
+            value: benevoles.filter((b) => b.status === 'inactive').length,
             icon: UserX,
             color: 'red',
           },
@@ -91,7 +111,7 @@ export default async function MembresPage() {
       </div>
 
       {/* Table */}
-      <MembresTable membres={membres || []} />
+      <BenevolesTable benevoles={benevoles} />
     </div>
   );
 }

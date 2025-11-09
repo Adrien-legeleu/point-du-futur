@@ -1,20 +1,6 @@
+'use client';
+
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { createClient } from '@supabase/supabase-js';
-
-// Client pour les composants client
-export const supabase = createClientComponentClient();
-
-// Client avec service role pour les opérations admin (server-side)
-export const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  }
-);
 
 // Types
 export type Database = {
@@ -127,3 +113,6 @@ export type Database = {
     };
   };
 };
+
+// 👇 Client Supabase pour les composants client (AdminLoginPage, etc.)
+export const supabase = createClientComponentClient<Database>();

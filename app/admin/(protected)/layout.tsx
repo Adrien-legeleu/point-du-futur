@@ -1,19 +1,21 @@
+// app/admin/(protected)/layout.tsx
 import { redirect } from 'next/navigation';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminSidebar from '@/components/admin/ADminSideBar';
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
+  // 🔐 Ici c'est OK de rediriger : on est UNIQUEMENT sur les routes protégées
   if (!session) {
     redirect('/admin/login');
   }

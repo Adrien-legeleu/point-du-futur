@@ -4,10 +4,9 @@ import Link from 'next/link';
 import { Plus } from 'lucide-react';
 
 export default async function ArticlesPage() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
-  // Récupérer tous les articles
-  const { data: articles, error } = await supabase
+  const { data, error } = await supabase
     .from('articles')
     .select('*')
     .order('created_at', { ascending: false });
@@ -15,6 +14,14 @@ export default async function ArticlesPage() {
   if (error) {
     console.error('Error fetching articles:', error);
   }
+
+  // ✅ tableau typé, jamais null
+  const articles = (data ?? []) as any[];
+  // ✅ stats avec types corrects
+  const total = articles.length;
+  const published = articles.filter((a) => a.status === 'published').length;
+  const drafts = articles.filter((a) => a.status === 'draft').length;
+  const totalViews = articles.reduce((sum, a) => sum + (a.views ?? 0), 0);
 
   return (
     <div className="space-y-6">
@@ -37,23 +44,10 @@ export default async function ArticlesPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { label: 'Total', value: articles?.length || 0, color: 'blue' },
-          {
-            label: 'Publiés',
-            value:
-              articles?.filter((a) => a.status === 'published').length || 0,
-            color: 'green',
-          },
-          {
-            label: 'Brouillons',
-            value: articles?.filter((a) => a.status === 'draft').length || 0,
-            color: 'orange',
-          },
-          {
-            label: 'Vues totales',
-            value: articles?.reduce((sum, a) => sum + a.views, 0) || 0,
-            color: 'purple',
-          },
+          { label: 'Total', value: total, color: 'blue' },
+          { label: 'Publiés', value: published, color: 'green' },
+          { label: 'Brouillons', value: drafts, color: 'orange' },
+          { label: 'Vues totales', value: totalViews, color: 'purple' },
         ].map((stat, index) => (
           <div
             key={index}
@@ -68,7 +62,7 @@ export default async function ArticlesPage() {
       </div>
 
       {/* Articles list */}
-      <ArticlesList articles={articles || []} />
+      <ArticlesList articles={articles} />
     </div>
   );
 }

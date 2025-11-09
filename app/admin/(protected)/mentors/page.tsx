@@ -1,26 +1,38 @@
+import MentorsTable from '@/components/mentors/MentorsTable';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import PartenairesTable from '@/components/admin/partenaires/PartenairesTable';
-import { Handshake, UserCheck, UserX, Clock } from 'lucide-react';
+import { Heart, UserCheck, UserX, Clock } from 'lucide-react';
 
-export default async function PartenairesPage() {
-  const supabase = createServerSupabaseClient();
+// 🔹 Type minimal pour les stats mentors
+type MentorStatus = 'active' | 'pending' | 'inactive';
 
-  const { data: partenaires, error } = await supabase
-    .from('partenaires')
+type MentorForStats = {
+  status: MentorStatus;
+  mentees_count: number | null;
+};
+
+export default async function MentorsPage() {
+  // ✅ on attend le client Supabase
+  const supabase = await createServerSupabaseClient();
+
+  const { data: mentors, error } = await supabase
+    .from('mentors')
     .select('*')
     .order('created_at', { ascending: false });
 
   if (error) {
-    console.error('Error fetching partenaires:', error);
+    console.error('Error fetching mentors:', error);
   }
+
+  // ✅ version typée pour les stats (pas de any, plus de never)
+  const mentorsForStats: MentorForStats[] = (mentors ?? []) as MentorForStats[];
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Partenaires</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Mentors</h1>
         <p className="text-gray-600 mt-1">
-          Gérez les partenaires de Pont du Futur
+          Gérez les mentors bénévoles de Pont du Futur
         </p>
       </div>
 
@@ -29,30 +41,30 @@ export default async function PartenairesPage() {
         {[
           {
             label: 'Total',
-            value: partenaires?.length || 0,
-            icon: Handshake,
+            value: mentorsForStats.length,
+            icon: Heart,
             color: 'blue',
           },
           {
             label: 'Actifs',
-            value:
-              partenaires?.filter((p) => p.status === 'active').length || 0,
+            value: mentorsForStats.filter((m) => m.status === 'active').length,
             icon: UserCheck,
             color: 'green',
           },
           {
             label: 'En attente',
-            value:
-              partenaires?.filter((p) => p.status === 'pending').length || 0,
+            value: mentorsForStats.filter((m) => m.status === 'pending').length,
             icon: Clock,
             color: 'orange',
           },
           {
-            label: 'Inactifs',
-            value:
-              partenaires?.filter((p) => p.status === 'inactive').length || 0,
-            icon: UserX,
-            color: 'red',
+            label: 'Mentorés',
+            value: mentorsForStats.reduce(
+              (sum, m) => sum + (m.mentees_count ?? 0),
+              0
+            ),
+            icon: Heart,
+            color: 'purple',
           },
         ].map((stat, index) => {
           const Icon = stat.icon;
@@ -70,7 +82,7 @@ export default async function PartenairesPage() {
                       ? 'bg-green-100'
                       : stat.color === 'orange'
                       ? 'bg-orange-100'
-                      : 'bg-red-100'
+                      : 'bg-purple-100'
                   }`}
                 >
                   <Icon
@@ -81,7 +93,7 @@ export default async function PartenairesPage() {
                         ? 'text-green-600'
                         : stat.color === 'orange'
                         ? 'text-orange-600'
-                        : 'text-red-600'
+                        : 'text-purple-600'
                     }`}
                   />
                 </div>
@@ -96,7 +108,8 @@ export default async function PartenairesPage() {
       </div>
 
       {/* Table */}
-      <PartenairesTable partenaires={partenaires || []} />
+      {/* ici on continue de passer les mentors complets à la table */}
+      <MentorsTable mentors={mentors || []} />
     </div>
   );
 }

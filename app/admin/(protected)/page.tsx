@@ -1,3 +1,4 @@
+// app/admin/(protected)/page.tsx
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import {
   Users,
@@ -11,8 +12,22 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+// 🔹 Types minimalistes pour les stats
+type ArticleStatus = 'draft' | 'published';
+type UserStatus = 'pending' | 'active' | 'inactive';
+type EventStatus = 'upcoming' | 'past' | 'cancelled';
+
+type ArticleForStats = {
+  status: ArticleStatus;
+  views: number | null;
+};
+
+type WithStatus<S extends string> = {
+  status: S;
+};
+
 export default async function AdminDashboard() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   // Récupérer les statistiques
   const [
@@ -31,59 +46,66 @@ export default async function AdminDashboard() {
     supabase.from('evenements').select('id, status'),
   ]);
 
-  // Calculer les stats
+  const articlesSafe = (articles ?? []) as ArticleForStats[];
+  const membresSafe = (membres ?? []) as WithStatus<UserStatus>[];
+  const mentorsSafe = (mentors ?? []) as WithStatus<UserStatus>[];
+  const benevolesSafe = (benevoles ?? []) as WithStatus<UserStatus>[];
+  const partenairesSafe = (partenaires ?? []) as WithStatus<UserStatus>[];
+  const evenementsSafe = (evenements ?? []) as WithStatus<EventStatus>[];
+
   const stats = [
     {
       label: 'Articles',
-      value: articles?.length || 0,
-      pending: articles?.filter((a) => a.status === 'draft').length || 0,
+      value: articlesSafe.length,
+      pending: articlesSafe.filter((a) => a.status === 'draft').length,
       icon: FileText,
       color: 'blue',
       href: '/admin/articles',
     },
     {
       label: 'Membres',
-      value: membres?.length || 0,
-      pending: membres?.filter((m) => m.status === 'pending').length || 0,
+      value: membresSafe.length,
+      pending: membresSafe.filter((m) => m.status === 'pending').length,
       icon: Users,
       color: 'green',
       href: '/admin/membres',
     },
     {
       label: 'Mentors',
-      value: mentors?.length || 0,
-      pending: mentors?.filter((m) => m.status === 'pending').length || 0,
+      value: mentorsSafe.length,
+      pending: mentorsSafe.filter((m) => m.status === 'pending').length,
       icon: Heart,
       color: 'purple',
       href: '/admin/mentors',
     },
     {
       label: 'Bénévoles',
-      value: benevoles?.length || 0,
-      pending: benevoles?.filter((b) => b.status === 'pending').length || 0,
+      value: benevolesSafe.length,
+      pending: benevolesSafe.filter((b) => b.status === 'pending').length,
       icon: Briefcase,
       color: 'orange',
       href: '/admin/benevoles',
     },
     {
       label: 'Partenaires',
-      value: partenaires?.length || 0,
-      pending: partenaires?.filter((p) => p.status === 'pending').length || 0,
+      value: partenairesSafe.length,
+      pending: partenairesSafe.filter((p) => p.status === 'pending').length,
       icon: Handshake,
       color: 'indigo',
       href: '/admin/partenaires',
     },
     {
       label: 'Événements',
-      value: evenements?.length || 0,
-      pending: evenements?.filter((e) => e.status === 'upcoming').length || 0,
+      value: evenementsSafe.length,
+      pending: evenementsSafe.filter((e) => e.status === 'upcoming').length,
       icon: Calendar,
       color: 'pink',
       href: '/admin/evenements',
     },
   ];
 
-  const totalViews = articles?.reduce((sum, a) => sum + (a.views || 0), 0) || 0;
+  const totalViews =
+    articlesSafe.reduce((sum, a) => sum + (a.views ?? 0), 0) || 0;
   const totalPending = stats.reduce((sum, stat) => sum + stat.pending, 0) || 0;
 
   return (

@@ -7,7 +7,8 @@ export default async function EditArticlePage({
 }: {
   params: { id: string };
 }) {
-  const supabase = createServerSupabaseClient();
+  // ✅ on attend la Promise
+  const supabase = await createServerSupabaseClient();
 
   const { data: article, error } = await supabase
     .from('articles')
@@ -16,6 +17,7 @@ export default async function EditArticlePage({
     .single();
 
   if (error || !article) {
+    console.error('Erreur chargement article :', error);
     notFound();
   }
 

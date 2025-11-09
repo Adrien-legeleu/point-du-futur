@@ -7,7 +7,7 @@ import type { Database } from '@/lib/supabase/client';
 type Evenement = Database['public']['Tables']['evenements']['Row'];
 
 export default async function EvenementsPage() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data: evenements, error } = await supabase
     .from('evenements')
