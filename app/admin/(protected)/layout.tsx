@@ -1,5 +1,6 @@
 // app/admin/(protected)/layout.tsx
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
 export default async function AdminLayout({
   children,
@@ -13,7 +14,7 @@ export default async function AdminLayout({
   } = await supabase.auth.getSession();
 
   if (!session?.user) {
-    return null;
+    redirect('/admin/login');
   }
 
   return (
