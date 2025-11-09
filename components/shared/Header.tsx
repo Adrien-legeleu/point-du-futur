@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Menu, X, Heart, Sparkles } from 'lucide-react';
+import { motion, useScroll } from 'framer-motion';
+import { Menu, X, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 const navItems = [
   { name: 'Accueil', href: '/' },
   { name: 'À Propos', href: '/about' },
-  { name: 'Nos Actions', href: '/nos-actions' },
+  { name: 'Nos Actions', href: '/actions' },
   { name: 'Actualités', href: '/actualites' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -41,15 +41,15 @@ export default function Header() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
           isScrolled ? 'w-[95%] max-w-6xl' : 'w-[95%] max-w-7xl'
         }`}
       >
         <nav
-          className={`relative rounded-2xl transition-all duration-500 ${
+          className={`relative rounded-2xl transition-all duration-300 ${
             isScrolled
-              ? 'bg-white/80 backdrop-blur-xl shadow-2xl border border-gray-200/50'
-              : 'bg-white/70 backdrop-blur-md shadow-xl border border-white/20'
+              ? 'bg-white/95 backdrop-blur-xl shadow-xl border border-gray-200'
+              : 'bg-white/90 backdrop-blur-lg shadow-lg border border-gray-100'
           }`}
         >
           <div className="px-6 py-4">
@@ -57,23 +57,14 @@ export default function Header() {
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3 group">
                 <motion.div
-                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative"
+                  className="w-11 h-11 bg-primary-900 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all"
                 >
-                  <div className="w-11 h-11 bg-gradient-to-br from-primary-blue via-primary-green to-primary-orange rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <span className="text-white font-bold text-xl">P</span>
-                  </div>
-                  <motion.div
-                    className="absolute -top-1 -right-1"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <Sparkles className="w-4 h-4 text-primary-orange" />
-                  </motion.div>
+                  <span className="text-white font-bold text-xl">PF</span>
                 </motion.div>
                 <div className="hidden sm:block">
-                  <div className="font-display font-bold text-lg text-gray-900">
+                  <div className="font-display font-bold text-lg text-primary-900">
                     Pont du Futur
                   </div>
                   <div className="text-xs text-gray-500 -mt-0.5">
@@ -83,7 +74,7 @@ export default function Header() {
               </Link>
 
               {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center gap-2">
+              <div className="hidden lg:flex items-center gap-1">
                 {navItems.map((item) => {
                   const active = isActive(item.href);
                   return (
@@ -93,19 +84,19 @@ export default function Header() {
                       className="relative group"
                     >
                       <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                           active
-                            ? 'text-primary-blue bg-primary-blue/10'
-                            : 'text-gray-700 hover:text-primary-blue hover:bg-gray-50'
+                            ? 'text-accent-600 bg-accent-50 shadow-sm'
+                            : 'text-gray-700 hover:text-primary-900 hover:bg-gray-50'
                         }`}
                       >
                         {item.name}
                         {active && (
                           <motion.div
                             layoutId="activeTab"
-                            className="absolute inset-0 bg-primary-blue/10 rounded-xl -z-10"
+                            className="absolute inset-0 bg-accent-50 rounded-xl -z-10 border border-accent-100"
                             transition={{
                               type: 'spring',
                               stiffness: 300,
@@ -122,18 +113,15 @@ export default function Header() {
               {/* CTA Button */}
               <div className="hidden lg:flex items-center gap-3">
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Link
                     href="/contact"
-                    className="relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary-blue via-primary-green to-primary-blue bg-size-200 bg-pos-0 hover:bg-pos-100 text-white rounded-xl font-semibold text-sm shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-900 hover:bg-primary-800 text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all"
                   >
-                    <span className="relative z-10 flex items-center gap-2">
-                      <Heart className="w-4 h-4" />
-                      Adhérer
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary-green to-primary-blue opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Heart className="w-4 h-4" />
+                    Adhérer
                   </Link>
                 </motion.div>
               </div>
@@ -159,8 +147,8 @@ export default function Header() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden border-t border-gray-200/50 backdrop-blur-xl"
+              transition={{ duration: 0.2 }}
+              className="lg:hidden border-t border-gray-200 bg-white/95"
             >
               <div className="px-6 py-4 space-y-2">
                 {navItems.map((item) => {
@@ -172,8 +160,8 @@ export default function Header() {
                       onClick={() => setIsOpen(false)}
                       className={`block px-4 py-3 rounded-xl font-medium transition-all ${
                         active
-                          ? 'text-primary-blue bg-primary-blue/10'
-                          : 'text-gray-700 hover:text-primary-blue hover:bg-gray-50'
+                          ? 'text-accent-600 bg-accent-50'
+                          : 'text-gray-700 hover:text-primary-900 hover:bg-gray-50'
                       }`}
                     >
                       {item.name}
@@ -184,7 +172,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg mt-4"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-primary-900 hover:bg-primary-800 text-white rounded-xl font-semibold shadow-md mt-4 transition-colors"
                 >
                   <Heart className="w-4 h-4" />
                   Adhérer
@@ -192,15 +180,6 @@ export default function Header() {
               </div>
             </motion.div>
           )}
-
-          {/* Glow effect on hover */}
-          <motion.div
-            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.1), transparent 70%)',
-            }}
-          />
         </nav>
       </motion.header>
     </>

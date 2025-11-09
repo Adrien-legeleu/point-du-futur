@@ -28,8 +28,9 @@ export default function AdminLoginPage() {
       if (error) throw error;
 
       if (data.session) {
-        router.push('/admin');
-        router.refresh();
+        // Utiliser window.location.href pour forcer un rechargement complet
+        // et garantir que les cookies de session sont bien envoyés au serveur
+        window.location.href = '/admin';
       }
     } catch (err: any) {
       setError(err.message || 'Erreur de connexion');

@@ -53,7 +53,7 @@ export default function Partners() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Nos <span className="gradient-text">Partenaires</span>
+            Nos <span className="text-accent-600">Partenaires</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Ils nous font confiance et nous soutiennent dans notre mission
@@ -75,8 +75,8 @@ export default function Partners() {
               >
                 {/* Category header */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 bg-gradient-to-br from-primary-blue/20 to-primary-green/20 rounded-2xl flex items-center justify-center">
-                    <Icon className="w-7 h-7 text-primary-blue" />
+                  <div className="w-14 h-14 bg-accent-600/10 rounded-2xl flex items-center justify-center">
+                    <Icon className="w-7 h-7 text-accent-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">
                     {category.title}
@@ -90,7 +90,7 @@ export default function Partners() {
                       key={partner}
                       className="flex items-center gap-3 text-gray-700"
                     >
-                      <div className="w-2 h-2 bg-primary-blue rounded-full" />
+                      <div className="w-2 h-2 bg-accent-600 rounded-full" />
                       {partner}
                     </li>
                   ))}
@@ -107,7 +107,7 @@ export default function Partners() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="max-w-2xl mx-auto p-8 bg-gradient-to-r from-primary-blue to-primary-green rounded-[2rem] text-white">
+          <div className="max-w-2xl mx-auto p-8 bg-primary-900 rounded-[2rem] text-white shadow-lg">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               Devenez partenaire
             </h3>
@@ -118,9 +118,9 @@ export default function Partners() {
             </p>
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-blue rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-900 rounded-full font-semibold shadow-md hover:shadow-lg transition-all"
             >
               Devenir partenaire
             </motion.a>

@@ -63,7 +63,7 @@ export default function Actions() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Nos <span className="gradient-text">Actions</span>
+            Nos <span className="text-accent-600">Actions</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Séminaires, mentorat, colloques... Découvrez nos programmes pour
@@ -83,20 +83,20 @@ export default function Actions() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="group relative overflow-hidden rounded-[2rem] bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group relative overflow-hidden rounded-[2rem] bg-white shadow-md hover:shadow-lg transition-all duration-300 hover-lift"
               >
                 {/* Image background with overlay */}
                 <div className="relative h-48 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/80 to-primary-green/80 z-10" />
+                  <div className="absolute inset-0 bg-accent-600/90 z-10" />
                   <div className="absolute inset-0 bg-gray-200 z-0">
-                    {/* Placeholder gradient si pas d'image */}
-                    <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400" />
+                    {/* Placeholder si pas d'image */}
+                    <div className="w-full h-full bg-gray-300" />
                   </div>
 
                   {/* Icon */}
                   <div className="absolute inset-0 z-20 flex items-center justify-center">
                     <motion.div
-                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      whileHover={{ scale: 1.02, rotate: 10 }}
                       className="w-20 h-20 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/30"
                     >
                       <Icon className="w-10 h-10 text-white" />
@@ -106,7 +106,7 @@ export default function Actions() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-primary-blue transition-colors">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-accent-600 transition-colors">
                     {action.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -115,7 +115,7 @@ export default function Actions() {
                 </div>
 
                 {/* Hover effect border */}
-                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-primary-blue/50 transition-all duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-accent-600/50 transition-all duration-300 pointer-events-none" />
               </motion.div>
             );
           })}

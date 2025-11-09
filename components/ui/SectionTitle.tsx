@@ -22,14 +22,14 @@ export default function SectionTitle({
       viewport={{ once: true }}
       className={centered ? 'text-center mb-16' : 'mb-16'}
     >
-      <h2 className="text-4xl md:text-6xl font-bold mb-4">
+      <h2 className="text-4xl md:text-6xl font-bold mb-4 text-primary-900">
         {title}{' '}
-        {highlight && <span className="gradient-text">{highlight}</span>}
+        {highlight && <span className="text-accent-600">{highlight}</span>}
       </h2>
       {subtitle && (
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
       )}
-      <div className="w-24 h-1 bg-gradient-to-r from-primary-blue to-primary-green mx-auto rounded-full mt-6" />
+      <div className="w-24 h-1 bg-accent-600 mx-auto rounded-full mt-6" />
     </motion.div>
   );
 }

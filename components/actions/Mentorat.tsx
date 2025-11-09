@@ -63,7 +63,7 @@ export default function Mentorat() {
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Programme de <span className="gradient-text">Mentorat</span>
+              Programme de <span className="text-primary-900">Mentorat</span>
             </h2>
 
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -94,9 +94,9 @@ export default function Mentorat() {
             {/* CTA */}
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary-blue text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary-900 text-white rounded-full font-semibold shadow-md hover-lift"
             >
               <Users className="w-5 h-5" />
               Devenir mentoré
@@ -110,7 +110,7 @@ export default function Mentorat() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="bg-gradient-to-br from-primary-blue/5 to-primary-green/5 rounded-[3rem] p-8 border border-primary-blue/10">
+            <div className="bg-gray-50 rounded-[3rem] p-8 border border-gray-200 shadow-md">
               <h3 className="text-2xl font-bold mb-8 text-gray-900">
                 Comment ça marche ?
               </h3>
@@ -130,15 +130,15 @@ export default function Mentorat() {
                       {/* Number + Icon */}
                       <div className="flex-shrink-0">
                         <div className="relative">
-                          <div className="w-14 h-14 bg-gradient-to-br from-primary-blue to-primary-green rounded-2xl flex items-center justify-center shadow-lg">
+                          <div className="w-14 h-14 bg-primary-900 rounded-2xl flex items-center justify-center shadow-md">
                             <Icon className="w-7 h-7 text-white" />
                           </div>
-                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full border-2 border-primary-blue flex items-center justify-center text-xs font-bold text-primary-blue">
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full border-2 border-accent-600 flex items-center justify-center text-xs font-bold text-accent-600">
                             {index + 1}
                           </div>
                         </div>
                         {index < steps.length - 1 && (
-                          <div className="w-1 h-12 bg-gradient-to-b from-primary-blue to-primary-green mx-auto mt-2 rounded-full" />
+                          <div className="w-1 h-12 bg-primary-900 mx-auto mt-2 rounded-full" />
                         )}
                       </div>
 
@@ -162,10 +162,10 @@ export default function Mentorat() {
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              className="absolute -top-6 -right-6 px-6 py-3 bg-white rounded-full shadow-xl border border-primary-blue/20"
+              className="absolute -top-6 -right-6 px-6 py-3 bg-white rounded-full shadow-lg border border-accent-600/20"
             >
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-primary-blue" />
+                <Clock className="w-5 h-5 text-accent-600" />
                 <span className="font-bold text-gray-900">6 mois</span>
               </div>
             </motion.div>

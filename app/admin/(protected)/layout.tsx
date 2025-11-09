@@ -1,6 +1,7 @@
-// app/admin/(protected)/layout.tsx
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
+import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminHeader from '@/components/admin/AdminHeader';
 
 export default async function AdminLayout({
   children,
@@ -18,13 +19,20 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-4 mb-4 rounded">
-        <h2 className="text-xl font-bold">
-          Connecté en tant que: {session.user.email}
-        </h2>
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
+      {/* Sidebar */}
+      <AdminSidebar />
+
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Header */}
+        <AdminHeader user={session.user} />
+
+        {/* Page content */}
+        <main className="flex-1 overflow-y-auto p-8">
+          {children}
+        </main>
       </div>
-      <div className="bg-white p-4 rounded">{children}</div>
     </div>
   );
 }

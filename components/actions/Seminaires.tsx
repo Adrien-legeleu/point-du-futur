@@ -68,7 +68,7 @@ export default function Seminaires() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold mb-6 text-gray-900"
           >
-            <span className="gradient-text">Séminaires</span> thématiques
+            <span className="text-primary-900">Séminaires</span> thématiques
           </motion.h2>
 
           <motion.p
@@ -97,11 +97,10 @@ export default function Seminaires() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
+                className="bg-white rounded-2xl overflow-hidden shadow-md hover-lift"
               >
-                {/* Header with gradient */}
-                <div className="h-2 bg-gradient-to-r from-primary-blue to-primary-green" />
+                {/* Header stripe */}
+                <div className="h-2 bg-primary-900" />
 
                 <div className="p-6">
                   {/* Title */}
@@ -135,9 +134,9 @@ export default function Seminaires() {
                       {seminar.spots}
                     </span>
                     <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-4 py-2 bg-primary-blue text-white rounded-full text-sm font-semibold hover:bg-primary-blue/90 transition-colors"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="px-4 py-2 bg-primary-900 text-white rounded-full text-sm font-semibold shadow-md hover-lift"
                     >
                       S'inscrire
                     </motion.button>
@@ -189,7 +188,7 @@ export default function Seminaires() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-primary-blue/10 to-primary-green/10 rounded-[2rem] p-8 border border-primary-blue/20"
+            className="bg-gray-50 rounded-[2rem] p-8 border border-gray-200 shadow-md"
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               🎯 Thématiques abordées
@@ -224,7 +223,7 @@ export default function Seminaires() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-blue via-primary-green to-primary-blue rounded-[2rem] p-8 text-white text-center"
+          className="bg-primary-900 rounded-[2rem] p-8 text-white text-center shadow-lg"
         >
           <h3 className="text-2xl font-bold mb-8">
             Nos séminaires en chiffres
@@ -247,7 +246,7 @@ export default function Seminaires() {
                   {stat.value}
                   <span className="text-2xl">{stat.suffix}</span>
                 </div>
-                <div className="text-white/80 text-sm">{stat.label}</div>
+                <div className="text-white/90 text-sm">{stat.label}</div>
               </motion.div>
             ))}
           </div>

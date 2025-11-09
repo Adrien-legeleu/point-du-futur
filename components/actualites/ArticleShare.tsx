@@ -9,7 +9,7 @@ import {
   Check,
 } from 'lucide-react';
 import { useState } from 'react';
-import type { Article } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
 
 interface ArticleShareProps {
   article: Article;

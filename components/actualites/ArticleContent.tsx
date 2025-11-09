@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Article } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
 
 interface ArticleContentProps {
   article: Article;
@@ -33,10 +33,10 @@ export default function ArticleContent({ article }: ArticleContentProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 p-8 bg-gradient-to-br from-gray-50 to-white rounded-[2rem] border border-gray-100"
+          className="mt-16 p-8 bg-gray-50 rounded-[2rem] border border-gray-100"
         >
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-blue/20 to-primary-green/20 flex items-center justify-center text-3xl">
+            <div className="w-16 h-16 rounded-full bg-accent-600/10 flex items-center justify-center text-3xl">
               {article.author.avatar}
             </div>
             <div>

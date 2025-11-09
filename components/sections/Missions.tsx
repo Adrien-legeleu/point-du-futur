@@ -9,24 +9,24 @@ const missions = [
     title: 'Accompagnement',
     description:
       'Soutenir les jeunes dans leur parcours académique et professionnel avec un réseau de mentors engagés',
-    color: 'blue',
-    gradient: 'from-primary-blue/20 to-primary-blue/5',
+    color: 'accent-600',
+    bgColor: 'bg-accent-600/5',
   },
   {
     icon: BookOpen,
     title: 'Égalité des chances',
     description:
       "Promouvoir l'égalité des chances et favoriser l'intégration sociale de tous",
-    color: 'green',
-    gradient: 'from-primary-green/20 to-primary-green/5',
+    color: 'success',
+    bgColor: 'bg-success/5',
   },
   {
     icon: TrendingUp,
     title: "Réseau d'entraide",
     description:
       "Créer un réseau durable de mentorat et de partage d'expériences entre générations",
-    color: 'orange',
-    gradient: 'from-primary-orange/20 to-primary-orange/5',
+    color: 'warning',
+    bgColor: 'bg-warning/5',
   },
 ];
 
@@ -42,9 +42,9 @@ export default function Mission() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Notre <span className="gradient-text">Mission</span>
+            Notre <span className="text-accent-600">Mission</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-blue to-primary-green mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-accent-600 mx-auto rounded-full" />
         </motion.div>
 
         {/* Cards grid */}
@@ -59,17 +59,11 @@ export default function Mission() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
                 whileHover={{ y: -10, scale: 1.02 }}
-                className={`relative p-8 rounded-[3rem] bg-gradient-to-br ${mission.gradient} backdrop-blur-xl border border-white/20 shadow-xl hover:shadow-2xl transition-all duration-300`}
+                className={`relative p-8 rounded-[3rem] ${mission.bgColor} border border-gray-100 shadow-md hover:shadow-lg transition-all duration-300 hover-lift`}
               >
                 {/* Icon */}
                 <div
-                  className={`w-16 h-16 bg-gradient-to-br ${
-                    mission.color === 'blue'
-                      ? 'from-primary-blue to-primary-blue/80'
-                      : mission.color === 'green'
-                      ? 'from-primary-green to-primary-green/80'
-                      : 'from-primary-orange to-primary-orange/80'
-                  } rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
+                  className={`w-16 h-16 bg-${mission.color} rounded-2xl flex items-center justify-center mb-6 shadow-md`}
                 >
                   <Icon className="w-8 h-8 text-white" />
                 </div>
@@ -81,17 +75,6 @@ export default function Mission() {
                 <p className="text-gray-600 leading-relaxed">
                   {mission.description}
                 </p>
-
-                {/* Glow effect */}
-                <div
-                  className={`absolute inset-0 rounded-[3rem] opacity-0 hover:opacity-100 transition-opacity duration-300 ${
-                    mission.color === 'blue'
-                      ? 'glow-blue'
-                      : mission.color === 'green'
-                      ? 'glow-green'
-                      : ''
-                  }`}
-                />
               </motion.div>
             );
           })}

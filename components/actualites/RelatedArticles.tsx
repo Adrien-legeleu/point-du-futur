@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/articles-data';
-import { categories } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
+import { categories } from '@/lib/constants';
 
 interface RelatedArticlesProps {
   articles: Article[];
@@ -48,26 +48,25 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group bg-gray-50 rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all duration-300"
+              className="group bg-gray-50 rounded-[2rem] overflow-hidden hover:shadow-lg hover-lift transition-all duration-300"
             >
               {/* Image */}
               <Link href={`/actualites/${article.slug}`}>
-                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary-blue/20 to-primary-green/20">
-                  {/* Placeholder gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300" />
+                <div className="relative h-48 overflow-hidden bg-gray-200">
+                  {/* Placeholder */}
+                  <div className="absolute inset-0 bg-gray-300" />
 
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 z-10">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${
                         getCategoryColor(article.category) === 'blue'
-                          ? 'bg-primary-blue'
+                          ? 'bg-accent-600'
                           : getCategoryColor(article.category) === 'green'
-                          ? 'bg-primary-green'
+                          ? 'bg-success'
                           : getCategoryColor(article.category) === 'orange'
-                          ? 'bg-primary-orange'
-                          : 'bg-purple-600'
+                          ? 'bg-warning'
+                          : 'bg-primary-900'
                       }`}
                     >
                       {getCategoryLabel(article.category)}
@@ -95,7 +94,7 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
 
                 {/* Title */}
                 <Link href={`/actualites/${article.slug}`}>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary-blue transition-colors line-clamp-2">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors line-clamp-2">
                     {article.title}
                   </h3>
                 </Link>
@@ -108,7 +107,7 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
                 {/* CTA */}
                 <Link
                   href={`/actualites/${article.slug}`}
-                  className="inline-flex items-center gap-2 text-primary-blue font-semibold text-sm group-hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-accent-600 font-semibold text-sm group-hover:gap-3 transition-all"
                 >
                   Lire l'article
                   <ArrowRight className="w-4 h-4" />
@@ -127,7 +126,7 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
         >
           <Link
             href="/actualites"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent-600 text-white rounded-full font-semibold shadow-md hover:shadow-lg hover-lift transition-all"
           >
             Voir toutes les actualités
             <ArrowRight className="w-5 h-5" />

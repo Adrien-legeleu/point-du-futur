@@ -119,11 +119,10 @@ export default function Colloques() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="text-center bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all"
+                className="text-center bg-white rounded-2xl p-6 shadow-md hover-lift"
               >
-                <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary-green/20 to-primary-green/10 rounded-xl flex items-center justify-center">
-                  <Icon className="w-7 h-7 text-primary-green" />
+                <div className="w-14 h-14 mx-auto mb-4 bg-success/10 rounded-xl flex items-center justify-center shadow-md">
+                  <Icon className="w-7 h-7 text-success" />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">
                   {objective.title}
@@ -141,12 +140,12 @@ export default function Colloques() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-br from-primary-green/10 to-primary-green/5 rounded-[3rem] p-10 md:p-12 border border-primary-green/20 mb-16"
+          className="bg-success/5 rounded-[3rem] p-10 md:p-12 border border-success/20 shadow-lg mb-16"
         >
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left - Info */}
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green/20 text-primary-green font-bold text-sm mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success/20 text-success font-bold text-sm mb-6">
                 <Award className="w-4 h-4" />
                 PROCHAIN COLLOQUE
               </div>
@@ -157,23 +156,23 @@ export default function Colloques() {
 
               <div className="space-y-3 mb-8">
                 <div className="flex items-center gap-3 text-gray-700">
-                  <div className="w-2 h-2 bg-primary-green rounded-full" />
+                  <div className="w-2 h-2 bg-success rounded-full" />
                   <span className="font-semibold">{nextColloque.date}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <div className="w-2 h-2 bg-primary-green rounded-full" />
+                  <div className="w-2 h-2 bg-success rounded-full" />
                   <span>{nextColloque.duration}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <div className="w-2 h-2 bg-primary-green rounded-full" />
+                  <div className="w-2 h-2 bg-success rounded-full" />
                   <span>{nextColloque.participants}</span>
                 </div>
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-primary-green text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 py-4 bg-success text-white rounded-full font-semibold shadow-md hover-lift"
               >
                 Réserver ma place
               </motion.button>
@@ -208,7 +207,7 @@ export default function Colloques() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-start gap-3"
                   >
-                    <div className="mt-1.5 w-1.5 h-1.5 bg-primary-green rounded-full flex-shrink-0" />
+                    <div className="mt-1.5 w-1.5 h-1.5 bg-success rounded-full flex-shrink-0" />
                     <span className="text-gray-700">{theme}</span>
                   </motion.li>
                 ))}
@@ -231,15 +230,15 @@ export default function Colloques() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 text-center"
+              className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 text-center"
             >
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-green/20 to-primary-green/10 rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-primary-green">
+              <div className="w-16 h-16 mx-auto mb-4 bg-success/10 rounded-full flex items-center justify-center shadow-md">
+                <span className="text-2xl font-bold text-success">
                   {colloque.year}
                 </span>
               </div>
               <h4 className="font-bold text-gray-900 mb-3">{colloque.title}</h4>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-green/10 text-primary-green rounded-full text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-success/10 text-success rounded-full text-sm font-medium">
                 <Users className="w-4 h-4" />
                 {colloque.participants} participants
               </div>
@@ -252,9 +251,9 @@ export default function Colloques() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-gradient-to-r from-primary-green to-primary-green/80 rounded-[2rem] p-10 text-white text-center"
+          className="bg-success rounded-[2rem] p-10 text-white text-center shadow-lg"
         >
-          <MessageCircle className="w-16 h-16 mx-auto mb-6 opacity-80" />
+          <MessageCircle className="w-16 h-16 mx-auto mb-6 opacity-90" />
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Participe à nos colloques
           </h3>
@@ -266,17 +265,17 @@ export default function Colloques() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
               href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-green rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-success rounded-full font-semibold shadow-md hover-lift"
             >
               Être informé(e)
             </motion.a>
             <motion.a
               href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-semibold border-2 border-white/30 hover:bg-white/20 transition-all"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 text-white rounded-full font-semibold border-2 border-white/30 shadow-md hover-lift"
             >
               Voir les archives
             </motion.a>

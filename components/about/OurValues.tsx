@@ -54,7 +54,7 @@ export default function OurValues() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Nos <span className="gradient-text">Valeurs</span>
+            Nos <span className="text-primary-900">Valeurs</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Les principes qui guident chacune de nos actions au quotidien
@@ -72,12 +72,11 @@ export default function OurValues() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group relative p-8 bg-white rounded-[2rem] shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group relative p-8 bg-white rounded-[2rem] shadow-md hover:shadow-lg hover-lift transition-all duration-300"
               >
                 {/* Icon */}
-                <div className="w-16 h-16 mb-6 bg-gradient-to-br from-primary-blue/20 to-primary-green/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Icon className="w-8 h-8 text-primary-blue" />
+                <div className="w-16 h-16 mb-6 bg-accent-600/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Icon className="w-8 h-8 text-accent-600" />
                 </div>
 
                 {/* Content */}
@@ -89,7 +88,7 @@ export default function OurValues() {
                 </p>
 
                 {/* Hover border effect */}
-                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-primary-blue/20 transition-all duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-accent-600/20 transition-all duration-300 pointer-events-none" />
               </motion.div>
             );
           })}

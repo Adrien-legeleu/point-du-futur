@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/articles-data';
-import { categories } from '@/lib/articles-data';
+import type { Article } from '@/lib/types';
+import { categories } from '@/lib/constants';
 
 interface ArticleHeroProps {
   article: Article;
@@ -14,12 +14,12 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
   const category = categories.find((c) => c.value === article.category);
 
   return (
-    <section className="relative pt-32 pb-16 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
+    <section className="relative pt-32 pb-16 overflow-hidden bg-white">
       {/* Back button */}
       <div className="max-w-4xl mx-auto px-6 mb-8">
         <Link
           href="/actualites"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-primary-blue transition-colors group"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-accent-600 transition-colors group"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           Retour aux actualités
@@ -36,12 +36,12 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           <span
             className={`inline-block px-4 py-2 rounded-full text-sm font-semibold text-white ${
               category?.color === 'blue'
-                ? 'bg-primary-blue'
+                ? 'bg-accent-600'
                 : category?.color === 'green'
-                ? 'bg-primary-green'
+                ? 'bg-success'
                 : category?.color === 'orange'
-                ? 'bg-primary-orange'
-                : 'bg-purple-600'
+                ? 'bg-warning'
+                : 'bg-primary-900'
             }`}
           >
             {category?.label}
@@ -66,11 +66,11 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           className="flex flex-wrap items-center gap-6 text-gray-600 mb-8"
         >
           <div className="flex items-center gap-2">
-            <User className="w-5 h-5 text-primary-blue" />
+            <User className="w-5 h-5 text-accent-600" />
             <span className="font-medium">{article.author.name}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-primary-green" />
+            <Calendar className="w-5 h-5 text-success" />
             <span>
               {new Date(article.publishedAt).toLocaleDateString('fr-FR', {
                 day: 'numeric',
@@ -80,7 +80,7 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-primary-orange" />
+            <Clock className="w-5 h-5 text-warning" />
             <span>{article.readTime} min de lecture</span>
           </div>
         </motion.div>
@@ -90,13 +90,10 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          className="relative aspect-video rounded-[2rem] overflow-hidden shadow-2xl mb-8"
+          className="relative aspect-video rounded-[2rem] overflow-hidden shadow-lg mb-8 bg-gray-100"
         >
-          {/* Placeholder gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-blue/30 via-primary-green/20 to-primary-orange/30" />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          {/* Placeholder */}
+          <div className="absolute inset-0 bg-gray-200" />
         </motion.div>
 
         {/* Tags */}

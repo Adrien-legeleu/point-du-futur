@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 interface CardProps {
   children: ReactNode;
-  variant?: 'default' | 'glass' | 'gradient';
+  variant?: 'default' | 'glass' | 'subtle';
   className?: string;
   hover?: boolean;
 }
@@ -15,16 +15,16 @@ export default function Card({
   hover = true,
 }: CardProps) {
   const variants = {
-    default: 'bg-white border border-gray-100 shadow-lg',
-    glass: 'bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl',
-    gradient:
-      'bg-gradient-to-br from-primary-blue/10 to-primary-green/10 border border-gray-100 shadow-lg',
+    default: 'bg-white border border-gray-200 shadow-md',
+    glass: 'bg-white/90 backdrop-blur-lg border border-gray-100 shadow-lg',
+    subtle:
+      'bg-gray-50 border border-gray-100 shadow-sm',
   };
 
   return (
     <motion.div
-      whileHover={hover ? { y: -10, scale: 1.02 } : {}}
-      className={`rounded-[2rem] p-6 transition-all duration-300 ${variants[variant]} ${className}`}
+      whileHover={hover ? { y: -4, scale: 1.01 } : {}}
+      className={`rounded-2xl p-6 transition-all duration-300 ${variants[variant]} ${hover ? 'hover-lift' : ''} ${className}`}
     >
       {children}
     </motion.div>
