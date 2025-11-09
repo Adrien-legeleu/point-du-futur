@@ -46,25 +46,25 @@ export default async function EvenementsPage() {
             color: 'trust' as const,
           },
           {
-            label: 'Publiés',
+            label: 'À venir',
             value:
-              evenements?.filter((e: Evenement) => e.status === 'published')
+              evenements?.filter((e: Evenement) => e.status === 'upcoming')
                 .length || 0,
-            icon: CheckCircle,
+            icon: Clock,
             color: 'future' as const,
           },
           {
-            label: 'Brouillons',
+            label: 'En cours',
             value:
-              evenements?.filter((e: Evenement) => e.status === 'draft')
+              evenements?.filter((e: Evenement) => e.status === 'ongoing')
                 .length || 0,
-            icon: Clock,
+            icon: CheckCircle,
             color: 'energy' as const,
           },
           {
-            label: 'Archivés',
+            label: 'Terminés',
             value:
-              evenements?.filter((e: Evenement) => e.status === 'archived')
+              evenements?.filter((e: Evenement) => e.status === 'completed')
                 .length || 0,
             icon: CheckCircle,
             color: 'gray' as const,

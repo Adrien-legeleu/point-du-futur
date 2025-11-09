@@ -16,15 +16,13 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
     description: evenement?.description || '',
     date_debut: evenement?.date_debut || '',
     date_fin: evenement?.date_fin || '',
-    heure_debut: evenement?.heure_debut || '',
-    heure_fin: evenement?.heure_fin || '',
     lieu: evenement?.lieu || '',
-    ville: evenement?.ville || '',
     type: evenement?.type || 'seminaire',
-    status: evenement?.status || 'draft',
-    places_max: evenement?.places_max || '',
-    places_disponibles: evenement?.places_disponibles || '',
+    status: evenement?.status || 'upcoming',
+    places_total: evenement?.places_total || '',
+    places_restantes: evenement?.places_restantes || '',
     image_url: evenement?.image_url || '',
+    slug: evenement?.slug || '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,10 +41,8 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          places_max: formData.places_max ? parseInt(formData.places_max) : null,
-          places_disponibles: formData.places_disponibles
-            ? parseInt(formData.places_disponibles)
-            : null,
+          places_total: formData.places_total ? parseInt(formData.places_total) : null,
+          places_restantes: formData.places_restantes ? parseInt(formData.places_restantes) : null,
         }),
       });
 
@@ -132,9 +128,10 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
             >
-              <option value="draft">Brouillon</option>
-              <option value="published">Publié</option>
-              <option value="archived">Archivé</option>
+              <option value="upcoming">À venir</option>
+              <option value="ongoing">En cours</option>
+              <option value="completed">Terminé</option>
+              <option value="cancelled">Annulé</option>
             </select>
           </div>
         </div>
@@ -176,34 +173,6 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
             />
           </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Heure de début
-            </label>
-            <input
-              type="time"
-              value={formData.heure_debut}
-              onChange={(e) =>
-                setFormData({ ...formData, heure_debut: e.target.value })
-              }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Heure de fin
-            </label>
-            <input
-              type="time"
-              value={formData.heure_fin}
-              onChange={(e) =>
-                setFormData({ ...formData, heure_fin: e.target.value })
-              }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
-            />
-          </div>
         </div>
       </div>
 
@@ -225,23 +194,23 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
               value={formData.lieu}
               onChange={(e) => setFormData({ ...formData, lieu: e.target.value })}
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
-              placeholder="Ex: Salle Polyvalente"
+              placeholder="Ex: Salle Polyvalente, 123 Rue de la Paix, Paris"
             />
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Ville *
+              Slug *
             </label>
             <input
               type="text"
               required
-              value={formData.ville}
+              value={formData.slug}
               onChange={(e) =>
-                setFormData({ ...formData, ville: e.target.value })
+                setFormData({ ...formData, slug: e.target.value })
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
-              placeholder="Ex: Paris"
+              placeholder="Ex: seminaire-entrepreneuriat-2024"
             />
           </div>
         </div>
@@ -257,13 +226,13 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Places maximum
+              Places totales
             </label>
             <input
               type="number"
-              value={formData.places_max}
+              value={formData.places_total}
               onChange={(e) =>
-                setFormData({ ...formData, places_max: e.target.value })
+                setFormData({ ...formData, places_total: e.target.value })
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
               placeholder="Ex: 100"
@@ -272,13 +241,13 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Places disponibles
+              Places restantes
             </label>
             <input
               type="number"
-              value={formData.places_disponibles}
+              value={formData.places_restantes}
               onChange={(e) =>
-                setFormData({ ...formData, places_disponibles: e.target.value })
+                setFormData({ ...formData, places_restantes: e.target.value })
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
               placeholder="Ex: 50"
