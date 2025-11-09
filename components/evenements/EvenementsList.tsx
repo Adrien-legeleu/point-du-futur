@@ -16,17 +16,16 @@ import Link from 'next/link';
 interface Evenement {
   id: string;
   titre: string;
+  slug: string;
   description: string;
   date_debut: string;
-  date_fin?: string;
-  heure_debut?: string;
-  heure_fin?: string;
+  date_fin?: string | null;
   lieu: string;
-  ville: string;
   type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre';
-  places_max?: number;
-  places_disponibles?: number;
-  image_url?: string;
+  places_total?: number | null;
+  places_restantes?: number | null;
+  status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
+  image_url?: string | null;
 }
 
 interface EvenementsListProps {
@@ -59,7 +58,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
       filtered = filtered.filter(
         (event) =>
           event.titre.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          event.ville.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          event.lieu.toLowerCase().includes(searchQuery.toLowerCase()) ||
           event.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
@@ -169,11 +168,12 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                       {getTypeLabel(event.type)}
                     </span>
                   </div>
-                  {event.places_disponibles !== undefined &&
-                    event.places_disponibles < 10 && (
+                  {event.places_restantes !== undefined &&
+                    event.places_restantes !== null &&
+                    event.places_restantes < 10 && (
                       <div className="absolute top-4 right-4 z-10">
                         <span className="px-3 py-1 rounded-full text-xs font-bold bg-energy-500 text-white">
-                          {event.places_disponibles} places restantes
+                          {event.places_restantes} places restantes
                         </span>
                       </div>
                     )}
@@ -188,14 +188,9 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                       {new Date(event.date_debut).toLocaleDateString('fr-FR', {
                         day: 'numeric',
                         month: 'short',
+                        year: 'numeric',
                       })}
                     </div>
-                    {event.heure_debut && (
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4 text-future-500" />
-                        {event.heure_debut}
-                      </div>
-                    )}
                   </div>
 
                   {/* Title */}
@@ -211,15 +206,15 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                   {/* Location */}
                   <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
                     <MapPin className="w-4 h-4" />
-                    {event.ville}
+                    {event.lieu}
                   </div>
 
                   {/* Footer */}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    {event.places_max && (
+                    {event.places_total && (
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <Users className="w-4 h-4" />
-                        {event.places_max} places
+                        {event.places_total} places
                       </div>
                     )}
                     <button className="flex items-center gap-2 text-trust-600 font-semibold text-sm group-hover:gap-3 transition-all">

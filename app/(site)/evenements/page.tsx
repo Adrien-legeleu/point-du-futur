@@ -13,11 +13,11 @@ export const revalidate = 60; // Revalidate toutes les 60 secondes
 export default async function EvenementsPage() {
   const supabase = await createServerSupabaseClient();
 
-  // Récupérer tous les événements publiés
+  // Récupérer tous les événements à venir et en cours
   const { data: evenements } = await supabase
     .from('evenements')
     .select('*')
-    .eq('status', 'published')
+    .in('status', ['upcoming', 'ongoing'])
     .order('date_debut', { ascending: true });
 
   return (
