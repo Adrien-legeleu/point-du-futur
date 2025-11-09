@@ -25,36 +25,8 @@ export default function Newsletter() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary-blue via-primary-green to-primary-orange p-12 md:p-16 text-white"
+          className="relative overflow-hidden rounded-[3rem] bg-accent-600 p-12 md:p-16 text-white shadow-lg"
         >
-          {/* Background decorations */}
-          <div className="absolute inset-0 opacity-20">
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 90, 0],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="absolute -top-20 -right-20 w-64 h-64 bg-white rounded-full blur-3xl"
-            />
-            <motion.div
-              animate={{
-                scale: [1.2, 1, 1.2],
-                rotate: [90, 0, 90],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="absolute -bottom-20 -left-20 w-64 h-64 bg-white rounded-full blur-3xl"
-            />
-          </div>
-
           <div className="relative z-10 text-center">
             {/* Icon */}
             <motion.div
@@ -62,7 +34,7 @@ export default function Newsletter() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ type: 'spring', stiffness: 200 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-6"
+              className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-6"
             >
               <Mail className="w-8 h-8" />
             </motion.div>
@@ -88,13 +60,13 @@ export default function Newsletter() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="ton@email.com"
-                    className="flex-1 px-6 py-4 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:border-white/50 transition-all"
+                    className="flex-1 px-6 py-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/70 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
                   />
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-white text-primary-blue rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-4 bg-white text-accent-600 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     <Send className="w-5 h-5" />
                     S'inscrire
@@ -109,13 +81,13 @@ export default function Newsletter() {
               >
                 <Sparkles className="w-6 h-6 text-white" />
                 <p className="text-lg font-semibold">
-                  Merci ! Tu es maintenant inscrit(e) à notre newsletter 🎉
+                  Merci ! Tu es maintenant inscrit(e) à notre newsletter
                 </p>
               </motion.div>
             )}
 
             {/* Privacy note */}
-            <p className="mt-6 text-white/70 text-sm">
+            <p className="mt-6 text-white/80 text-sm">
               En t'inscrivant, tu acceptes de recevoir nos emails. Tu peux te
               désinscrire à tout moment.
             </p>

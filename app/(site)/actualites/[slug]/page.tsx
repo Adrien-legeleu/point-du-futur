@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { mockArticles } from '@/lib/articles-data';
+import { getArticleBySlug, getRelatedArticles, getAllArticleSlugs } from '@/lib/supabase/articles';
 import ArticleContent from '@/components/actualites/ArticleContent';
 import ArticleShare from '@/components/actualites/ArticleShare';
 import RelatedArticles from '@/components/actualites/RelatedArticles';
 import ArticleHero from '@/components/actualites/ArticlesHero';
+
+// Revalidate every 60 seconds
+export const revalidate = 60;
 
 type Props = {
   params: { slug: string };
@@ -12,14 +15,15 @@ type Props = {
 
 // Generate static params for all articles
 export async function generateStaticParams() {
-  return mockArticles.map((article) => ({
-    slug: article.slug,
+  const slugs = await getAllArticleSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = mockArticles.find((a) => a.slug === params.slug);
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
     return {
@@ -58,17 +62,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ArticlePage({ params }: Props) {
-  const article = mockArticles.find((a) => a.slug === params.slug);
+export default async function ArticlePage({ params }: Props) {
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
     notFound();
   }
 
-  // Find related articles (same category, exclude current)
-  const relatedArticles = mockArticles
-    .filter((a) => a.category === article.category && a.id !== article.id)
-    .slice(0, 3);
+  // Get related articles (same category, exclude current)
+  const relatedArticles = await getRelatedArticles(article.category, article.slug);
 
   return (
     <>
