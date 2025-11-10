@@ -19,9 +19,20 @@ export async function PUT(
 
     const body = await request.json();
 
+    // Nettoyer les données : convertir les chaînes vides en null
+    const cleanedData = {
+      ...body,
+      date_fin: body.date_fin || null,
+      heure_debut: body.heure_debut || null,
+      heure_fin: body.heure_fin || null,
+      places_max: body.places_max || null,
+      places_disponibles: body.places_disponibles || null,
+      image_url: body.image_url || null,
+    };
+
     const { data, error } = await supabase
       .from('evenements')
-      .update(body)
+      .update(cleanedData)
       .eq('id', params.id)
       .select()
       .single();
