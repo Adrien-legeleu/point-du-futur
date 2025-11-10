@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import Image from 'next/image';
 
 export default function OurStory() {
   return (
@@ -17,7 +18,13 @@ export default function OurStory() {
           >
             <div className="relative rounded-[3rem] overflow-hidden shadow-lg">
               {/* Image placeholder */}
-              <div className="aspect-[4/3] bg-gray-100" />
+              <Image
+                src="/about/since-2021.jpg"
+                alt="Equipe Pont du Futur"
+                width={600}
+                height={600}
+                className="w-full aspect-4/3 object-cover"
+              />
 
               {/* Badge flottant */}
               <motion.div

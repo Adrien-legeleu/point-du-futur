@@ -36,14 +36,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Spacer pour éviter que le contenu passe sous le header */}
-      <div className="h-20" />
-
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
           isScrolled ? 'w-[95%] max-w-6xl' : 'w-[95%] max-w-7xl'
         }`}
       >

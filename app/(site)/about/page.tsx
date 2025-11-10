@@ -46,8 +46,7 @@ export default function AboutPage() {
       <OurStory />
       <OurValues />
       <Timeline />
-      <Team />
-      <Partners />
+      {/* <Partners /> */}
       <JoinUs />
     </>
   );

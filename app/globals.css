@@ -3,40 +3,40 @@
 @theme {
   /* === 🎨 NOUVELLE PALETTE PONT DU FUTUR === */
   /* Bleu Confiance (couleur principale) - pâle et élégant */
-  --color-trust-50: #F0F7FF;        /* Bleu très pâle */
-  --color-trust-100: #E0EFFF;       /* Bleu pâle */
-  --color-trust-200: #B8DCFF;       /* Bleu clair */
-  --color-trust-300: #7EC2FF;       /* Bleu moyen */
-  --color-trust-400: #5AADFF;       /* Bleu vif */
-  --color-trust-500: #3B9EFF;       /* Bleu principal */
-  --color-trust-600: #2B7FD6;       /* Bleu foncé */
-  --color-trust-700: #1D5FA3;       /* Bleu très foncé */
-  --color-trust-800: #154270;       /* Bleu profond */
-  --color-trust-900: #0D2B4D;       /* Bleu nuit */
+  --color-trust-50: #f0f7ff; /* Bleu très pâle */
+  --color-trust-100: #e0efff; /* Bleu pâle */
+  --color-trust-200: #b8dcff; /* Bleu clair */
+  --color-trust-300: #7ec2ff; /* Bleu moyen */
+  --color-trust-400: #5aadff; /* Bleu vif */
+  --color-trust-500: #3b9eff; /* Bleu principal */
+  --color-trust-600: #2b7fd6; /* Bleu foncé */
+  --color-trust-700: #1d5fa3; /* Bleu très foncé */
+  --color-trust-800: #154270; /* Bleu profond */
+  --color-trust-900: #0d2b4d; /* Bleu nuit */
 
   /* Vert Avenir - frais et moderne */
-  --color-future-50: #F0FDF7;       /* Vert très pâle */
-  --color-future-100: #DCFCE7;      /* Vert pâle */
-  --color-future-200: #BBF7D0;      /* Vert clair */
-  --color-future-300: #86EFAC;      /* Vert moyen */
-  --color-future-400: #4ADE80;      /* Vert vif */
-  --color-future-500: #22C55E;      /* Vert principal */
-  --color-future-600: #16A34A;      /* Vert foncé */
-  --color-future-700: #15803D;      /* Vert très foncé */
-  --color-future-800: #166534;      /* Vert profond */
-  --color-future-900: #14532D;      /* Vert nuit */
+  --color-future-50: #f0fdf7; /* Vert très pâle */
+  --color-future-100: #dcfce7; /* Vert pâle */
+  --color-future-200: #bbf7d0; /* Vert clair */
+  --color-future-300: #86efac; /* Vert moyen */
+  --color-future-400: #4ade80; /* Vert vif */
+  --color-future-500: #22c55e; /* Vert principal */
+  --color-future-600: #16a34a; /* Vert foncé */
+  --color-future-700: #15803d; /* Vert très foncé */
+  --color-future-800: #166534; /* Vert profond */
+  --color-future-900: #14532d; /* Vert nuit */
 
   /* Orange Énergie - chaleureux et dynamique */
-  --color-energy-50: #FFF7ED;       /* Orange très pâle */
-  --color-energy-100: #FFEDD5;      /* Orange pâle */
-  --color-energy-200: #FED7AA;      /* Orange clair */
-  --color-energy-300: #FDBA74;      /* Orange moyen */
-  --color-energy-400: #FB923C;      /* Orange vif */
-  --color-energy-500: #F97316;      /* Orange principal */
-  --color-energy-600: #EA580C;      /* Orange foncé */
-  --color-energy-700: #C2410C;      /* Orange très foncé */
-  --color-energy-800: #9A3412;      /* Orange profond */
-  --color-energy-900: #7C2D12;      /* Orange nuit */
+  --color-energy-50: #fff7ed; /* Orange très pâle */
+  --color-energy-100: #ffedd5; /* Orange pâle */
+  --color-energy-200: #fed7aa; /* Orange clair */
+  --color-energy-300: #fdba74; /* Orange moyen */
+  --color-energy-400: #fb923c; /* Orange vif */
+  --color-energy-500: #f97316; /* Orange principal */
+  --color-energy-600: #ea580c; /* Orange foncé */
+  --color-energy-700: #c2410c; /* Orange très foncé */
+  --color-energy-800: #9a3412; /* Orange profond */
+  --color-energy-900: #7c2d12; /* Orange nuit */
 
   /* Couleurs fonctionnelles (aliases) */
   --color-primary: var(--color-trust-500);
@@ -67,18 +67,18 @@
   --color-warning: var(--color-energy-500);
 
   /* Grays modernes */
-  --color-gray-50: #F9FAFB;
-  --color-gray-100: #F3F4F6;
-  --color-gray-200: #E5E7EB;
-  --color-gray-300: #D1D5DB;
-  --color-gray-400: #9CA3AF;
-  --color-gray-500: #6B7280;
-  --color-gray-600: #4B5563;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
   --color-gray-700: #374151;
-  --color-gray-800: #1F2937;
+  --color-gray-800: #1f2937;
   --color-gray-900: #111827;
 
-  --color-white: #FFFFFF;
+  --color-white: #ffffff;
   --color-black: #000000;
 
   /* === Polices === */
@@ -111,9 +111,12 @@
 
   /* === Ombres modernes === */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -1px rgb(0 0 0 / 0.04);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -2px rgb(0 0 0 / 0.04);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 10px 10px -5px rgb(0 0 0 / 0.02);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07),
+    0 2px 4px -1px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08),
+    0 4px 6px -2px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08),
+    0 10px 10px -5px rgb(0 0 0 / 0.02);
   --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.15);
 }
 
@@ -157,19 +160,27 @@
   /* Selection */
   ::selection {
     background-color: rgba(59, 130, 246, 0.2);
-    color: #1E40AF;
+    color: #1e40af;
   }
 }
 
 @layer utilities {
   /* === Backgrounds modernes === */
   .bg-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.03) 1px, transparent 0);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(0 0 0 / 0.03) 1px,
+      transparent 0
+    );
     background-size: 24px 24px;
   }
 
   .bg-pattern-light {
-    background-image: radial-gradient(circle at 1px 1px, rgb(0 0 0 / 0.015) 1px, transparent 0);
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgb(0 0 0 / 0.015) 1px,
+      transparent 0
+    );
     background-size: 32px 32px;
   }
 

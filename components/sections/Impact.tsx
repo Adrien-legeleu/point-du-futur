@@ -26,7 +26,7 @@ const stats = [
   {
     icon: TrendingUp,
     value: 95,
-    label: 'Satisfaction',
+    label: 'Taux de satisfaction',
     suffix: '%',
   },
 ];
@@ -63,17 +63,10 @@ function Counter({
 
 export default function Impact() {
   return (
-    <section className="py-24 md:py-32 bg-primary-900 text-white relative overflow-hidden bg-pattern">
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+    <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-t from-primary-50 via-primary-100/70 to-white">
+      {/* Background pattern léger */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-40 bg-pattern-light" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -84,11 +77,12 @@ export default function Impact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4">
-            Notre <span className="text-success">Impact</span>
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-primary-700">
+            Notre <span className="text-primary-500">Impact</span>
           </h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Des chiffres qui témoignent de notre engagement quotidien
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Des chiffres concrets qui montrent ce que nous construisons déjà,
+            avec et pour les jeunes.
           </p>
         </motion.div>
 
@@ -99,25 +93,25 @@ export default function Impact() {
             return (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="text-center group"
               >
                 <motion.div
-                  whileHover={{ scale: 1.02, rotate: 5 }}
-                  className="w-20 h-20 mx-auto mb-4 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-all duration-300 hover-lift"
+                  whileHover={{ scale: 1.03, translateY: -4 }}
+                  className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/80 border border-primary-100 shadow-md flex items-center justify-center hover-lift group-hover:bg-primary-500 group-hover:border-primary-300 transition-all duration-300"
                 >
-                  <Icon className="w-10 h-10" />
+                  <Icon className="w-10 h-10 text-primary-500 group-hover:text-white transition-colors duration-300" />
                 </motion.div>
 
-                <div className="text-5xl md:text-6xl font-bold mb-2 font-display">
+                <div className="text-4xl md:text-5xl font-bold mb-2 font-display text-primary-700">
                   <Counter value={stat.value} />
                   {stat.suffix}
                 </div>
 
-                <div className="text-white/70 font-medium">{stat.label}</div>
+                <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             );
           })}
@@ -130,11 +124,11 @@ export default function Impact() {
           viewport={{ once: true }}
           className="mt-20 max-w-3xl mx-auto text-center"
         >
-          <blockquote className="text-2xl md:text-3xl font-light italic text-white/90 leading-relaxed">
-            "Chaque jeune accompagné est une victoire pour l'égalité des chances
-            et un pas vers un avenir meilleur."
+          <blockquote className="text-2xl md:text-3xl font-light italic text-gray-800 leading-relaxed">
+            « Chaque jeune accompagné est une victoire pour l’égalité des
+            chances et un pas concret vers un avenir plus juste. »
           </blockquote>
-          <div className="mt-6 text-white/60">— L'équipe Pont du Futur</div>
+          <div className="mt-6 text-gray-500">— L’équipe Pont du Futur</div>
         </motion.div>
       </div>
     </section>

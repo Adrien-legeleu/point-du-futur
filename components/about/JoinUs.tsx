@@ -16,8 +16,8 @@ const roles = [
       "Réseau d'entraide",
     ],
     cta: 'Rejoindre',
-    href: '/rejoindre/membre',
-    color: 'blue',
+    href: '/contact',
+    color: 'green', // primary
   },
   {
     icon: Heart,
@@ -30,8 +30,8 @@ const roles = [
       'Impact concret',
     ],
     cta: "S'engager",
-    href: '/rejoindre/mentor',
-    color: 'green',
+    href: '/contact',
+    color: 'green', // accent
   },
   {
     icon: Briefcase,
@@ -40,8 +40,8 @@ const roles = [
       'Tu veux contribuer à nos actions (événements, communication, admin) ?',
     benefits: ['Flexibilité horaires', 'Missions variées', 'Équipe passionnée'],
     cta: 'Nous aider',
-    href: '#contact',
-    color: 'orange',
+    href: '/contact',
+    color: 'green', // energy
   },
   {
     icon: Handshake,
@@ -50,14 +50,14 @@ const roles = [
       "Votre entreprise ou institution veut soutenir l'égalité des chances ?",
     benefits: ['Mécénat & sponsoring', 'Actions conjointes', 'Impact social'],
     cta: 'Collaborer',
-    href: '#contact',
-    color: 'blue',
+    href: '/contact',
+    color: 'blue', // primary
   },
 ];
 
 export default function JoinUs() {
   return (
-    <section className="py-24 md:py-32 bg-gray-50">
+    <section className="py-24 md:py-32 bg-gradient-to-b from-accent-50 via-white to-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section title */}
         <motion.div
@@ -70,7 +70,7 @@ export default function JoinUs() {
             Comment nous <span className="text-primary-900">rejoindre ?</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Plusieurs façons de participer à l'aventure Pont du Futur
+            Plusieurs façons de participer à l&apos;aventure Pont du Futur
           </p>
         </motion.div>
 
@@ -78,6 +78,44 @@ export default function JoinUs() {
         <div className="grid md:grid-cols-2 gap-8">
           {roles.map((role, index) => {
             const Icon = role.icon;
+
+            const gradientClass =
+              role.color === 'blue'
+                ? 'from-primary-50 to-white'
+                : role.color === 'green'
+                ? 'from-accent-50 to-white'
+                : 'from-energy-50 to-white';
+
+            const iconRingClass =
+              role.color === 'blue'
+                ? 'ring-primary-100'
+                : role.color === 'green'
+                ? 'ring-accent-100'
+                : 'ring-energy-100';
+
+            const iconColorClass =
+              role.color === 'blue'
+                ? 'text-primary-500'
+                : role.color === 'green'
+                ? 'text-accent-500'
+                : 'text-energy-500';
+
+            const bulletColorClass =
+              role.color === 'blue'
+                ? 'bg-primary-400'
+                : role.color === 'green'
+                ? 'bg-accent-400'
+                : 'bg-energy-400';
+
+            const ctaClass =
+              role.color === 'blue'
+                ? 'bg-primary-500 hover:bg-primary-600'
+                : role.color === 'green'
+                ? 'bg-accent-500 hover:bg-accent-600'
+                : 'bg-energy-500 hover:bg-energy-600';
+
+            const ctaShadow = 'shadow-[0_20px_50px_-20px_rgba(0,0,0,0.15)]';
+
             return (
               <motion.div
                 key={role.title}
@@ -85,27 +123,13 @@ export default function JoinUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative bg-white rounded-[2rem] p-8 shadow-md hover:shadow-lg hover-lift transition-all duration-300"
+                className={`group relative flex flex-col items-start justify-between rounded-[2rem] p-8 bg-gradient-to-br ${gradientClass} shadow-[0_25px_60px_-18px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300`}
               >
                 {/* Icon */}
                 <div
-                  className={`w-16 h-16 mb-6 ${
-                    role.color === 'blue'
-                      ? 'bg-accent-600/10'
-                      : role.color === 'green'
-                      ? 'bg-success/10'
-                      : 'bg-warning/10'
-                  } rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform`}
+                  className={`w-16 h-16 mb-6 rounded-2xl flex items-center justify-center bg-white/80 ring-1 ${iconRingClass} group-hover:scale-110 transition-transform`}
                 >
-                  <Icon
-                    className={`w-8 h-8 ${
-                      role.color === 'blue'
-                        ? 'text-accent-600'
-                        : role.color === 'green'
-                        ? 'text-success'
-                        : 'text-warning'
-                    }`}
-                  />
+                  <Icon className={`w-8 h-8 ${iconColorClass}`} />
                 </div>
 
                 {/* Title */}
@@ -126,13 +150,7 @@ export default function JoinUs() {
                       className="flex items-center gap-2 text-sm text-gray-700"
                     >
                       <div
-                        className={`w-1.5 h-1.5 rounded-full ${
-                          role.color === 'blue'
-                            ? 'bg-accent-600'
-                            : role.color === 'green'
-                            ? 'bg-success'
-                            : 'bg-warning'
-                        }`}
+                        className={`w-1.5 h-1.5 rounded-full ${bulletColorClass}`}
                       />
                       {benefit}
                     </li>
@@ -142,28 +160,14 @@ export default function JoinUs() {
                 {/* CTA */}
                 <Link
                   href={role.href}
-                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
-                    role.color === 'blue'
-                      ? 'bg-accent-600 text-white hover:brightness-110'
-                      : role.color === 'green'
-                      ? 'bg-success text-white hover:brightness-110'
-                      : 'bg-warning text-white hover:brightness-110'
-                  }`}
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-[1.2rem] font-semibold text-white transition-all ${ctaClass} ${ctaShadow}`}
                 >
                   {role.cta}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
 
-                {/* Hover border effect */}
-                <div
-                  className={`absolute inset-0 rounded-[2rem] border-2 border-transparent ${
-                    role.color === 'blue'
-                      ? 'group-hover:border-accent-600/20'
-                      : role.color === 'green'
-                      ? 'group-hover:border-success/20'
-                      : 'group-hover:border-warning/20'
-                  } transition-all duration-300 pointer-events-none`}
-                />
+                {/* Hover border effect très léger */}
+                <div className="absolute inset-0 rounded-[2rem] border border-white/40 group-hover:border-white/60 transition-all duration-300 pointer-events-none" />
               </motion.div>
             );
           })}
@@ -177,13 +181,13 @@ export default function JoinUs() {
           className="mt-16 text-center"
         >
           <p className="text-xl text-gray-600 mb-6">
-            Une question ? Besoin de plus d'informations ?
+            Une question ? Besoin de plus d&apos;informations ?
           </p>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-900 text-white rounded-full font-semibold shadow-md hover:shadow-lg transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-primary-500 text-white rounded-2xl font-semibold shadow-[0_25px_60px_-18px_rgba(0,0,0,0.12)] hover:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.16)] transition-all"
           >
             Contactez-nous
             <ArrowRight className="w-5 h-5" />

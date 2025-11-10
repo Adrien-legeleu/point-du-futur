@@ -1,27 +1,23 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  Users,
-  Compass,
-  Lightbulb,
-  Calendar,
-  MessageCircle,
-  Network,
-} from 'lucide-react';
+import { Users, Compass, Lightbulb, Calendar, Network } from 'lucide-react';
 
 export default function ActionsHero() {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-gray-50 pt-24">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="relative min-h-[100vh] flex items-start justify-center overflow-hidden bg-gradient-to-b from-primary-50 via-white to-white pt-24">
+      {/* Pattern léger (comme About) */}
+      <div className="absolute inset-0 bg-pattern-light opacity-80" />
+
+      <div className="max-w-7xl mx-auto px-6 pt-10 relative z-10">
         <div className="text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-accent-600/20 mb-8 shadow-md"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 glass-subtle border border-accent-100 mb-8"
           >
-            <Compass className="w-4 h-4 text-accent-600" />
+            <Compass className="w-4 h-4 text-accent-500" />
             <span className="text-sm font-medium text-gray-700">
               Nos programmes
             </span>
@@ -47,7 +43,7 @@ export default function ActionsHero() {
             className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed"
           >
             Séminaires, mentorat, colloques, orientation... Des programmes
-            variés pour t'accompagner dans ton parcours académique et
+            variés pour t&apos;accompagner dans ton parcours académique et
             professionnel.
           </motion.p>
 
@@ -67,8 +63,8 @@ export default function ActionsHero() {
               const Icon = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-3 bg-accent-600/10 rounded-2xl flex items-center justify-center shadow-md">
-                    <Icon className="w-8 h-8 text-accent-600" />
+                  <div className="w-16 h-16 mx-auto mb-3 bg-accent-50 rounded-2xl flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-accent-500" />
                   </div>
                   <div className="text-3xl font-bold text-gray-900 mb-1">
                     {stat.value}

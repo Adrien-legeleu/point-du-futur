@@ -1,4 +1,4 @@
-import CandidaturesOverview from '@/components/admin/candidatures/CandidaturesOverview';
+import CandidaturesOverview from '@/components/admin/candidatures/CanditaturesOverview';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Users, Heart, Briefcase, Handshake } from 'lucide-react';
 
