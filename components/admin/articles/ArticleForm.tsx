@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-// Importer ReactQuill dynamiquement (SSR disabled)
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
@@ -49,7 +48,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
     author_avatar: article?.author.avatar || '👨‍💼',
   });
 
-  // Générer le slug automatiquement
   const generateSlug = (title: string) => {
     return title
       .toLowerCase()
@@ -96,7 +94,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
       };
 
       if (article) {
-        // Update
         const { error } = await supabase
           .from('articles')
           .update(articleData)
@@ -104,7 +101,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
 
         if (error) throw error;
       } else {
-        // Create
         const { error } = await supabase.from('articles').insert([articleData]);
 
         if (error) throw error;
@@ -122,8 +118,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        {/* Title */}
+      <div className="bg-white rounded-2xl shadow-sm p-8">
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Titre *
@@ -138,7 +133,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           />
         </div>
 
-        {/* Slug */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Slug (URL)
@@ -158,7 +152,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Image URL */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Image (URL)
@@ -189,7 +182,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           )}
         </div>
 
-        {/* Excerpt */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Extrait *
@@ -206,7 +198,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           />
         </div>
 
-        {/* Content */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Contenu *
@@ -231,7 +222,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Category & Status */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -271,7 +261,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Tags & Read time */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -307,7 +296,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Author */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -341,7 +329,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center justify-between">
         <Link href="/admin/articles">
           <button
@@ -358,7 +345,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             <Link href={`/actualites/${article.slug}`} target="_blank">
               <button
                 type="button"
-                className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-white shadow-sm text-gray-700 rounded-xl font-semibold hover:shadow-md transition-all"
               >
                 <Eye className="w-5 h-5" />
                 Prévisualiser

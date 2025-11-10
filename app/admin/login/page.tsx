@@ -13,7 +13,6 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Connexion avec email/password
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -37,7 +36,6 @@ export default function AdminLoginPage() {
     }
   };
 
-  // Connexion avec Google
   const handleGoogleLogin = async () => {
     setLoading(true);
     setError('');
@@ -59,10 +57,8 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 bg-pattern-light opacity-50" />
 
-      {/* Animated blobs */}
       <motion.div
         className="absolute top-20 left-20 w-96 h-96 bg-primary-300/20 rounded-full blur-3xl"
         animate={{
@@ -94,7 +90,6 @@ export default function AdminLoginPage() {
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-md relative z-10"
       >
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl mb-4 shadow-lg">
             <span className="text-3xl font-bold text-white">PF</span>
@@ -105,20 +100,18 @@ export default function AdminLoginPage() {
           </p>
         </div>
 
-        {/* Login form */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-200">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl"
+              className="mb-6 p-4 bg-red-50 rounded-xl"
             >
               <p className="text-red-600 text-sm font-medium">{error}</p>
             </motion.div>
           )}
 
           <form onSubmit={handleEmailLogin} className="space-y-6">
-            {/* Email */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Email
@@ -136,7 +129,6 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Mot de passe
@@ -154,7 +146,6 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            {/* Submit button */}
             <motion.button
               type="submit"
               disabled={loading}
@@ -173,7 +164,6 @@ export default function AdminLoginPage() {
             </motion.button>
           </form>
 
-          {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200" />
@@ -183,7 +173,6 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          {/* Google login */}
           <motion.button
             type="button"
             onClick={handleGoogleLogin}
@@ -197,7 +186,6 @@ export default function AdminLoginPage() {
           </motion.button>
         </div>
 
-        {/* Back to site */}
         <div className="text-center mt-6">
           <a
             href="/"
