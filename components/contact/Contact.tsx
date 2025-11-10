@@ -127,7 +127,7 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 glass-subtle border border-primary-100 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 glass-subtle hover:shadow-2xl transition-shadow mb-6"
             whileHover={{ scale: 1.05 }}
           >
             <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse" />
@@ -156,7 +156,7 @@ export default function Contact() {
           >
             {/* Devenir Membre Card */}
             <motion.div
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-100"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow"
               whileHover={{ scale: 1.02, translateY: -5 }}
               transition={{ duration: 0.3 }}
             >
@@ -178,7 +178,7 @@ export default function Contact() {
 
             {/* Devenir Mentor Card */}
             <motion.div
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-accent-100"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow"
               whileHover={{ scale: 1.02, translateY: -5 }}
               transition={{ duration: 0.3 }}
             >
@@ -200,7 +200,7 @@ export default function Contact() {
 
             {/* Contact Info Card */}
             <motion.div
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow"
               whileHover={{ scale: 1.02, translateY: -5 }}
               transition={{ duration: 0.3 }}
             >
@@ -236,7 +236,7 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 Envoie-nous un message
               </h2>

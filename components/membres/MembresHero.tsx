@@ -62,7 +62,7 @@ export default function MembresHero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
-                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover-lift"
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl text-center hover-lift transition-all"
               >
                 <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary-50 flex items-center justify-center">
                   <Icon className="w-7 h-7 text-primary-600" />

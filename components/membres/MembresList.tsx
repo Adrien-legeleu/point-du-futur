@@ -88,7 +88,7 @@ export default function MembresList({ membres }: MembresListProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group bg-gradient-to-br from-white to-primary-50/20 rounded-2xl p-8 border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover-lift"
+                className="group bg-gradient-to-br from-white to-primary-50/20 rounded-2xl p-8 shadow-md hover:shadow-2xl transition-all duration-300 hover-lift"
               >
                 {/* Avatar */}
                 <div className="flex items-start gap-4 mb-6">

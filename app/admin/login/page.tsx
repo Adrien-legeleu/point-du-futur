@@ -28,8 +28,6 @@ export default function AdminLoginPage() {
       if (error) throw error;
 
       if (data.session) {
-        // Utiliser window.location.href pour forcer un rechargement complet
-        // et garantir que les cookies de session sont bien envoyés au serveur
         window.location.href = '/admin';
       }
     } catch (err: any) {
@@ -60,29 +58,63 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-pattern-light opacity-50" />
+
+      {/* Animated blobs */}
+      <motion.div
+        className="absolute top-20 left-20 w-96 h-96 bg-primary-300/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-20 w-96 h-96 bg-accent-300/20 rounded-full blur-3xl"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          opacity: [0.5, 0.3, 0.5],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 1,
+        }}
+      />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md relative z-10"
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-blue to-primary-green rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl mb-4 shadow-lg">
             <span className="text-3xl font-bold text-white">PF</span>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Administration</h1>
-          <p className="text-gray-400">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Administration</h1>
+          <p className="text-gray-600">
             Connectez-vous pour accéder au tableau de bord
           </p>
         </div>
 
         {/* Login form */}
-        <div className="bg-white rounded-3xl p-8 shadow-2xl">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gray-200">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
-              <p className="text-red-600 text-sm">{error}</p>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl"
+            >
+              <p className="text-red-600 text-sm font-medium">{error}</p>
+            </motion.div>
           )}
 
           <form onSubmit={handleEmailLogin} className="space-y-6">
@@ -98,7 +130,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all bg-white"
                   placeholder="admin@pontdufutur.org"
                 />
               </div>
@@ -116,7 +148,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all bg-white"
                   placeholder="••••••••"
                 />
               </div>
@@ -126,9 +158,9 @@ export default function AdminLoginPage() {
             <motion.button
               type="submit"
               disabled={loading}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: loading ? 1 : 1.02 }}
+              whileTap={{ scale: loading ? 1 : 0.98 }}
+              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -156,9 +188,9 @@ export default function AdminLoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={loading}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full flex items-center justify-center gap-3 py-3 bg-white border-2 border-gray-200 hover:border-gray-300 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={{ scale: loading ? 1 : 1.02 }}
+            whileTap={{ scale: loading ? 1 : 0.98 }}
+            className="w-full flex items-center justify-center gap-3 py-3 bg-white border-2 border-gray-200 hover:border-primary-300 hover:bg-gray-50 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Chrome className="w-5 h-5 text-gray-600" />
             <span className="text-gray-700">Continuer avec Google</span>
@@ -169,7 +201,7 @@ export default function AdminLoginPage() {
         <div className="text-center mt-6">
           <a
             href="/"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-600 hover:text-primary-600 transition-colors font-medium"
           >
             ← Retour au site
           </a>
