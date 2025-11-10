@@ -21,7 +21,7 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
     lieu: evenement?.lieu || '',
     ville: evenement?.ville || '',
     type: evenement?.type || 'seminaire',
-    status: evenement?.status || 'draft',
+    status: evenement?.status || 'upcoming',
     places_max: evenement?.places_max || '',
     places_disponibles: evenement?.places_disponibles || '',
     image_url: evenement?.image_url || '',
@@ -132,9 +132,10 @@ export default function EvenementForm({ evenement }: EvenementFormProps) {
               }
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all"
             >
-              <option value="draft">Brouillon</option>
-              <option value="published">Publié</option>
-              <option value="archived">Archivé</option>
+              <option value="upcoming">À venir</option>
+              <option value="ongoing">En cours</option>
+              <option value="completed">Terminé</option>
+              <option value="cancelled">Annulé</option>
             </select>
           </div>
         </div>
