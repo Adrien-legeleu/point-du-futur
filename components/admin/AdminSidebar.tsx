@@ -69,16 +69,16 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-gray-900 text-white flex flex-col">
+    <aside className="w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm">
       {/* Logo */}
-      <div className="p-6 border-b border-gray-800">
+      <div className="p-6 border-b border-gray-200">
         <Link href="/admin" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-green rounded-xl flex items-center justify-center">
-            <span className="text-xl font-bold">PF</span>
+          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-sm">
+            <span className="text-xl font-bold text-white">PF</span>
           </div>
           <div>
-            <div className="font-bold text-lg">Pont du Futur</div>
-            <div className="text-xs text-gray-400">Administration</div>
+            <div className="font-bold text-lg text-gray-900">Pont du Futur</div>
+            <div className="text-xs text-gray-500">Administration</div>
           </div>
         </Link>
       </div>
@@ -94,16 +94,16 @@ export default function AdminSidebar() {
             <Link key={index} href={item.href}>
               <motion.div
                 whileHover={{ x: 4 }}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors relative ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all relative ${
                   isActive
-                    ? 'bg-white/10 text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-primary-50 text-primary-700 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 <span className="font-medium">{item.title}</span>
                 {item.badge && (
-                  <span className="ml-auto w-6 h-6 bg-primary-blue rounded-full flex items-center justify-center text-xs font-bold">
+                  <span className="ml-auto w-6 h-6 bg-accent-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
                     {item.badge}
                   </span>
                 )}
@@ -114,18 +114,18 @@ export default function AdminSidebar() {
       </nav>
 
       {/* User */}
-      <div className="p-4 border-t border-gray-800">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors cursor-pointer">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-green rounded-full flex items-center justify-center">
-            👨‍💼
+      <div className="p-4 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white transition-colors cursor-pointer">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center shadow-sm">
+            <span className="text-lg">👨‍💼</span>
           </div>
           <div className="flex-1 min-w-0">
-            <div className="font-semibold text-sm truncate">Admin User</div>
-            <div className="text-xs text-gray-400">admin@pontdufutur.org</div>
+            <div className="font-semibold text-sm truncate text-gray-900">Admin User</div>
+            <div className="text-xs text-gray-500">admin@pontdufutur.org</div>
           </div>
         </div>
         <Link href="/admin/logout">
-          <button className="w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+          <button className="w-full mt-2 flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-white transition-colors">
             <LogOut className="w-5 h-5" />
             <span className="font-medium">Déconnexion</span>
           </button>

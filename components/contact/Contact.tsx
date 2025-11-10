@@ -61,11 +61,11 @@ export default function Contact() {
   };
 
   return (
-    <section className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-br from-primary-blue/10 via-white to-primary-green/10">
+    <section className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50">
       {/* Animated background blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute top-20 left-20 w-96 h-96 bg-primary-blue/20 rounded-full blur-3xl"
+          className="absolute top-20 left-20 w-96 h-96 bg-primary-300/20 rounded-full blur-3xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -77,7 +77,7 @@ export default function Contact() {
           }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-96 h-96 bg-primary-green/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-20 w-96 h-96 bg-accent-300/20 rounded-full blur-3xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.5, 0.3, 0.5],
@@ -95,7 +95,7 @@ export default function Contact() {
       {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-primary-blue/30 rounded-full"
+          className="absolute w-2 h-2 bg-primary-400/20 rounded-full"
           initial={{
             x:
               typeof window !== 'undefined'
@@ -127,17 +127,17 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-blue/20 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 glass-subtle border border-primary-100 mb-6"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="w-2 h-2 bg-primary-green rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-accent-500 rounded-full animate-pulse" />
             <span className="text-sm font-medium text-gray-700">
               Rejoins-nous
             </span>
           </motion.div>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="gradient-text">Contacte-nous</span>
+            <span className="text-primary-600">Contacte-nous</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -156,11 +156,11 @@ export default function Contact() {
           >
             {/* Devenir Membre Card */}
             <motion.div
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-blue/10"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-100"
               whileHover={{ scale: 1.02, translateY: -5 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-blue to-primary-blue/80 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-400 rounded-xl flex items-center justify-center mb-4">
                 <Users className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -170,7 +170,7 @@ export default function Contact() {
                 Rejoins notre communauté et accède à des opportunités de
                 mentorat, d'orientation et de networking.
               </p>
-              <div className="flex items-center gap-2 text-primary-blue font-medium">
+              <div className="flex items-center gap-2 text-primary-600 font-medium">
                 <Mail className="w-4 h-4" />
                 <span className="text-sm">membre@pontdufutur.org</span>
               </div>
@@ -178,11 +178,11 @@ export default function Contact() {
 
             {/* Devenir Mentor Card */}
             <motion.div
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-green/10"
+              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-accent-100"
               whileHover={{ scale: 1.02, translateY: -5 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-primary-green to-primary-green/80 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-400 rounded-xl flex items-center justify-center mb-4">
                 <Heart className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -192,7 +192,7 @@ export default function Contact() {
                 Partage ton expérience et accompagne les jeunes dans leur
                 parcours académique et professionnel.
               </p>
-              <div className="flex items-center gap-2 text-primary-green font-medium">
+              <div className="flex items-center gap-2 text-accent-600 font-medium">
                 <Mail className="w-4 h-4" />
                 <span className="text-sm">mentor@pontdufutur.org</span>
               </div>
@@ -212,14 +212,14 @@ export default function Contact() {
               </h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-primary-blue mt-0.5" />
+                  <Phone className="w-5 h-5 text-primary-500 mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Téléphone</p>
                     <p className="text-sm text-gray-600">+33 1 23 45 67 89</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-primary-green mt-0.5" />
+                  <MapPin className="w-5 h-5 text-accent-500 mt-0.5" />
                   <div>
                     <p className="font-medium text-gray-900">Adresse</p>
                     <p className="text-sm text-gray-600">Paris, France</p>
@@ -258,7 +258,7 @@ export default function Contact() {
                       value={formData.nom}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
                       placeholder="Ton nom"
                     />
                   </div>
@@ -276,7 +276,7 @@ export default function Contact() {
                       value={formData.prenom}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
                       placeholder="Ton prénom"
                     />
                   </div>
@@ -298,7 +298,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
                       placeholder="ton.email@exemple.com"
                     />
                   </div>
@@ -315,7 +315,7 @@ export default function Contact() {
                       name="telephone"
                       value={formData.telephone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
                       placeholder="+33 1 23 45 67 89"
                     />
                   </div>
@@ -370,10 +370,10 @@ export default function Contact() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-8 py-4 rounded-full font-semibold shadow-lg transition-all flex items-center justify-center gap-2 ${
+                  className={`w-full px-8 py-4 rounded-2xl font-semibold shadow-lg transition-all flex items-center justify-center gap-2 ${
                     submitStatus === 'success'
-                      ? 'bg-primary-green text-white'
-                      : 'bg-primary-blue text-white hover:shadow-xl glow-blue'
+                      ? 'bg-accent-500 text-white'
+                      : 'bg-primary-500 text-white hover:shadow-xl'
                   }`}
                   whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
@@ -423,9 +423,9 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 p-4 bg-primary-green/10 border border-primary-green/20 rounded-xl"
+                  className="mt-4 p-4 bg-accent-50 border border-accent-200 rounded-xl"
                 >
-                  <p className="text-primary-green font-medium text-center">
+                  <p className="text-accent-700 font-medium text-center">
                     Merci pour ton message ! Nous te répondrons très bientôt. 🎉
                   </p>
                 </motion.div>
