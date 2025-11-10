@@ -20,7 +20,7 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
             <input
               type="text"
               placeholder="Rechercher..."
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
             />
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
                 className="w-10 h-10 rounded-full"
               />
             ) : (
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-blue to-primary-green rounded-full flex items-center justify-center text-white font-bold">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white font-bold">
                 {(user?.email?.[0] || 'A').toUpperCase()}
               </div>
             )}
@@ -52,7 +52,7 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
           <button className="relative w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
             <Bell className="w-5 h-5 text-gray-600" />
             {notifications > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-blue text-white text-xs font-bold rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
                 {notifications}
               </span>
             )}

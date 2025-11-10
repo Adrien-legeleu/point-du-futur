@@ -60,7 +60,7 @@ export default function MembresList({ membres }: MembresListProps) {
                 placeholder="Rechercher un membre..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all bg-white shadow-sm"
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition-all bg-white shadow-sm"
               />
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function MembresList({ membres }: MembresListProps) {
             </p>
             <button
               onClick={() => setSearchQuery('')}
-              className="mt-4 px-6 py-3 bg-trust-500 text-white rounded-xl font-semibold hover:bg-trust-600 transition-colors"
+              className="mt-4 px-6 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-600 transition-colors"
             >
               Réinitialiser
             </button>
@@ -88,11 +88,11 @@ export default function MembresList({ membres }: MembresListProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group bg-gradient-to-br from-white to-trust-50/30 rounded-2xl p-8 border border-gray-100 hover:border-trust-200 hover:shadow-xl transition-all duration-300 hover-lift"
+                className="group bg-gradient-to-br from-white to-primary-50/20 rounded-2xl p-8 border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300 hover-lift"
               >
                 {/* Avatar */}
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-trust-400 to-future-400 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
                     {membre.prenom?.[0]}
                     {membre.nom?.[0]}
                   </div>
@@ -129,7 +129,7 @@ export default function MembresList({ membres }: MembresListProps) {
                   {membre.email && (
                     <a
                       href={`mailto:${membre.email}`}
-                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-trust-100 text-trust-600 hover:bg-trust-200 transition-colors"
+                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 text-primary-600 hover:bg-primary-200 transition-colors"
                       title="Envoyer un email"
                     >
                       <Mail className="w-5 h-5" />
@@ -140,7 +140,7 @@ export default function MembresList({ membres }: MembresListProps) {
                       href={membre.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-trust-100 text-trust-600 hover:bg-trust-200 transition-colors"
+                      className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 text-primary-600 hover:bg-primary-200 transition-colors"
                       title="Voir le profil LinkedIn"
                     >
                       <Linkedin className="w-5 h-5" />

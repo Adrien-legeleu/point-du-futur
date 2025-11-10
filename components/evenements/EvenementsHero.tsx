@@ -5,7 +5,7 @@ import { Calendar, Users, MapPin } from 'lucide-react';
 
 export default function EvenementsHero() {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-trust-50 via-white to-energy-50">
+    <section className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-pattern-light opacity-50" />
 
@@ -14,9 +14,9 @@ export default function EvenementsHero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="inline-block px-5 py-2 mb-6 rounded-full bg-energy-100 border border-energy-200"
+          className="inline-block px-5 py-2 mb-6 rounded-full bg-white/80 glass-subtle border border-accent-200"
         >
-          <span className="text-sm font-semibold text-energy-700 flex items-center gap-2">
+          <span className="text-sm font-semibold text-accent-700 flex items-center gap-2">
             <Calendar className="w-4 h-4" />
             Nos Événements
           </span>
@@ -28,7 +28,7 @@ export default function EvenementsHero() {
           className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6"
         >
           Rejoignez-nous lors de nos{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-energy-500 to-trust-500">
+          <span className="text-primary-600">
             événements
           </span>
         </motion.h1>
@@ -58,8 +58,8 @@ export default function EvenementsHero() {
             const Icon = stat.icon;
             return (
               <div key={index} className="text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-energy-100 to-trust-100 flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-energy-600" />
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-accent-50 flex items-center justify-center">
+                  <Icon className="w-6 h-6 text-accent-600" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-1">
                   {stat.value}

@@ -70,9 +70,9 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'seminaire':
-        return 'bg-trust-100 text-trust-700 border-trust-200';
+        return 'bg-primary-100 text-primary-700 border-primary-200';
       case 'colloque':
-        return 'bg-future-100 text-future-700 border-future-200';
+        return 'bg-accent-100 text-accent-700 border-accent-200';
       case 'atelier':
         return 'bg-energy-100 text-energy-700 border-energy-200';
       case 'rencontre':
@@ -101,7 +101,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                 placeholder="Rechercher un événement..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-trust-400 focus:ring-2 focus:ring-trust-100 outline-none transition-all bg-white shadow-sm"
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none transition-all bg-white shadow-sm"
               />
             </div>
 
@@ -114,7 +114,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                   onClick={() => setSelectedType(type.value)}
                   className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                     selectedType === type.value
-                      ? 'bg-trust-500 text-white shadow-md'
+                      ? 'bg-primary-500 text-white shadow-md'
                       : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
                   }`}
                 >
@@ -142,7 +142,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                 setSearchQuery('');
                 setSelectedType('all');
               }}
-              className="px-6 py-3 bg-trust-500 text-white rounded-xl font-semibold hover:bg-trust-600 transition-colors"
+              className="px-6 py-3 bg-primary-500 text-white rounded-xl font-semibold hover:bg-primary-600 transition-colors"
             >
               Réinitialiser les filtres
             </button>
@@ -156,10 +156,10 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-trust-300 hover:shadow-xl transition-all duration-300 hover-lift"
+                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover-lift"
               >
                 {/* Image placeholder */}
-                <div className="relative h-48 bg-gradient-to-br from-trust-100 to-energy-100">
+                <div className="relative h-48 bg-gradient-to-br from-primary-100 to-accent-100">
                   <div className="absolute top-4 left-4 z-10">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold border ${getTypeColor(
@@ -184,7 +184,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                   {/* Date & Location */}
                   <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                     <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4 text-trust-500" />
+                      <Calendar className="w-4 h-4 text-primary-500" />
                       {new Date(event.date_debut).toLocaleDateString('fr-FR', {
                         day: 'numeric',
                         month: 'short',
@@ -192,14 +192,14 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                     </div>
                     {event.heure_debut && (
                       <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4 text-future-500" />
+                        <Clock className="w-4 h-4 text-accent-500" />
                         {event.heure_debut}
                       </div>
                     )}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-trust-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-600 transition-colors">
                     {event.titre}
                   </h3>
 
@@ -222,7 +222,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                         {event.places_max} places
                       </div>
                     )}
-                    <button className="flex items-center gap-2 text-trust-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                    <button className="flex items-center gap-2 text-primary-600 font-semibold text-sm group-hover:gap-3 transition-all">
                       Détails
                       <ArrowRight className="w-4 h-4" />
                     </button>
