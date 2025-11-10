@@ -156,7 +156,7 @@ export default function EvenementsList({ evenements }: EvenementsListProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 hover-lift"
+                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover-lift"
               >
                 {/* Image placeholder */}
                 <div className="relative h-48 bg-gradient-to-br from-primary-100 to-accent-100">

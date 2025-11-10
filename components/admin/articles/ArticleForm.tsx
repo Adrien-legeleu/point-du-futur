@@ -2,38 +2,52 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Save, ArrowLeft, Eye } from 'lucide-react';
+import { Save, ArrowLeft, Eye, Upload } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import type { Article, ArticleFormData } from '@/lib/types';
 
-// Importer un éditeur riche (ex: react-quill)
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 interface ArticleFormProps {
-  article?: Article;
+  article?: {
+    id: string;
+    slug: string;
+    title: string;
+    excerpt: string;
+    content: string;
+    image: string;
+    category: 'actualite' | 'evenement' | 'temoignage' | 'partenariat';
+    author: {
+      name: string;
+      avatar: string;
+    };
+    publishedAt?: string;
+    readTime: number;
+    tags: string[];
+    status?: 'draft' | 'published' | 'archived';
+  };
 }
 
 export default function ArticleForm({ article }: ArticleFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<ArticleFormData>({
+  const [formData, setFormData] = useState({
     title: article?.title || '',
     slug: article?.slug || '',
     excerpt: article?.excerpt || '',
     content: article?.content || '',
+    image_url: article?.image || '',
     category: article?.category || 'actualite',
     tags: article?.tags?.join(', ') || '',
     status: article?.status || 'draft',
-    read_time: article?.read_time || 5,
-    author_name: article?.author_name || 'Admin',
-    author_avatar: article?.author_avatar || '👨‍💼',
+    read_time: article?.readTime || 5,
+    author_name: article?.author.name || 'Admin',
+    author_avatar: article?.author.avatar || '👨‍💼',
   });
 
-  // Générer le slug automatiquement
   const generateSlug = (title: string) => {
     return title
       .toLowerCase()
@@ -47,7 +61,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
     setFormData({
       ...formData,
       title,
-      slug: generateSlug(title),
+      slug: article ? formData.slug : generateSlug(title),
     });
   };
 
@@ -62,16 +76,24 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         .filter((tag) => tag);
 
       const articleData = {
-        ...formData,
+        title: formData.title,
+        slug: formData.slug,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        image_url: formData.image_url,
+        category: formData.category as 'actualite' | 'evenement' | 'temoignage' | 'partenariat',
         tags: tagsArray,
+        status: formData.status as 'draft' | 'published' | 'archived',
+        read_time: formData.read_time,
+        author_name: formData.author_name,
+        author_avatar: formData.author_avatar,
         published_at:
-          formData.status === 'published' && !article?.published_at
+          formData.status === 'published' && !article?.publishedAt
             ? new Date().toISOString()
-            : article?.published_at,
+            : article?.publishedAt || null,
       };
 
       if (article) {
-        // Update
         const { error } = await supabase
           .from('articles')
           .update(articleData)
@@ -79,7 +101,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
 
         if (error) throw error;
       } else {
-        // Create
         const { error } = await supabase.from('articles').insert([articleData]);
 
         if (error) throw error;
@@ -97,8 +118,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        {/* Title */}
+      <div className="bg-white rounded-2xl shadow-sm p-8">
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Titre *
@@ -108,12 +128,11 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             required
             value={formData.title}
             onChange={(e) => handleTitleChange(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
             placeholder="Titre de l'article"
           />
         </div>
 
-        {/* Slug */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Slug (URL)
@@ -127,13 +146,42 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, slug: e.target.value })
               }
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               placeholder="mon-article"
             />
           </div>
         </div>
 
-        {/* Excerpt */}
+        <div className="mb-6">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Image (URL)
+          </label>
+          <div className="relative">
+            <Upload className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="url"
+              value={formData.image_url}
+              onChange={(e) =>
+                setFormData({ ...formData, image_url: e.target.value })
+              }
+              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+              placeholder="https://example.com/image.jpg"
+            />
+          </div>
+          {formData.image_url && (
+            <div className="mt-4">
+              <img
+                src={formData.image_url}
+                alt="Preview"
+                className="w-full h-48 object-cover rounded-xl"
+                onError={(e) => {
+                  e.currentTarget.src = '/images/default-article.jpg';
+                }}
+              />
+            </div>
+          )}
+        </div>
+
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Extrait *
@@ -145,17 +193,16 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               setFormData({ ...formData, excerpt: e.target.value })
             }
             rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all resize-none"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all resize-none"
             placeholder="Court résumé de l'article..."
           />
         </div>
 
-        {/* Content */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Contenu *
           </label>
-          <div className="border border-gray-200 rounded-xl overflow-hidden">
+          <div className="border border-gray-300 rounded-xl overflow-hidden">
             <ReactQuill
               theme="snow"
               value={formData.content}
@@ -175,7 +222,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Category & Status */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -187,7 +233,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all bg-white"
             >
               <option value="actualite">Actualité</option>
               <option value="evenement">Événement</option>
@@ -206,7 +252,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, status: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all bg-white"
             >
               <option value="draft">Brouillon</option>
               <option value="published">Publié</option>
@@ -215,7 +261,6 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
-        {/* Tags & Read time */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -227,7 +272,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, tags: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               placeholder="Innovation, Tech, Mentorat"
             />
           </div>
@@ -243,15 +288,14 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  read_time: parseInt(e.target.value),
+                  read_time: parseInt(e.target.value) || 5,
                 })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
             />
           </div>
         </div>
 
-        {/* Author */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -263,14 +307,14 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, author_name: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               placeholder="Nom de l'auteur"
             />
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Avatar (emoji)
+              Avatar (emoji ou URL)
             </label>
             <input
               type="text"
@@ -278,14 +322,13 @@ export default function ArticleForm({ article }: ArticleFormProps) {
               onChange={(e) =>
                 setFormData({ ...formData, author_avatar: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               placeholder="👨‍💼"
             />
           </div>
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center justify-between">
         <Link href="/admin/articles">
           <button
@@ -302,7 +345,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             <Link href={`/actualites/${article.slug}`} target="_blank">
               <button
                 type="button"
-                className="flex items-center gap-2 px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-white shadow-sm text-gray-700 rounded-xl font-semibold hover:shadow-md transition-all"
               >
                 <Eye className="w-5 h-5" />
                 Prévisualiser
@@ -313,9 +356,9 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           <motion.button
             type="submit"
             disabled={loading}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            whileHover={{ scale: loading ? 1 : 1.02 }}
+            whileTap={{ scale: loading ? 1 : 0.98 }}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
