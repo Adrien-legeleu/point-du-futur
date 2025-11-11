@@ -7,28 +7,13 @@ import { supabase } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import type { ArticleDB } from '@/lib/types';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 interface ArticleFormProps {
-  article?: {
-    id: string;
-    slug: string;
-    title: string;
-    excerpt: string;
-    content: string;
-    image: string;
-    category: 'actualite' | 'evenement' | 'temoignage' | 'partenariat';
-    author: {
-      name: string;
-      avatar: string;
-    };
-    publishedAt?: string;
-    readTime: number;
-    tags: string[];
-    status?: 'draft' | 'published' | 'archived';
-  };
+  article?: ArticleDB;
 }
 
 export default function ArticleForm({ article }: ArticleFormProps) {
@@ -39,13 +24,13 @@ export default function ArticleForm({ article }: ArticleFormProps) {
     slug: article?.slug || '',
     excerpt: article?.excerpt || '',
     content: article?.content || '',
-    image_url: article?.image || '',
+    image_url: article?.image_url || '',
     category: article?.category || 'actualite',
     tags: article?.tags?.join(', ') || '',
     status: article?.status || 'draft',
-    read_time: article?.readTime || 5,
-    author_name: article?.author.name || 'Admin',
-    author_avatar: article?.author.avatar || '👨‍💼',
+    read_time: article?.read_time || 5,
+    author_name: article?.author_name || 'Admin',
+    author_avatar: article?.author_avatar || '👨‍💼',
   });
 
   const generateSlug = (title: string) => {
@@ -88,9 +73,9 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         author_name: formData.author_name,
         author_avatar: formData.author_avatar,
         published_at:
-          formData.status === 'published' && !article?.publishedAt
+          formData.status === 'published' && !article?.published_at
             ? new Date().toISOString()
-            : article?.publishedAt || null,
+            : article?.published_at || null,
       };
 
       if (article) {
