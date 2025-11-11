@@ -1,9 +1,10 @@
 import MembresTable from '@/components/membres/MembresTable';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Users, UserCheck, UserX, Clock } from 'lucide-react';
-import type { MembreStatus } from '@/lib/types';
 
-// Type minimal pour les stats
+// 🔹 Type minimal pour les stats
+type MembreStatus = 'active' | 'pending' | 'inactive';
+
 type MembreForStats = {
   status: MembreStatus;
 };
@@ -41,8 +42,8 @@ export default async function MembresPage() {
             color: 'blue',
           },
           {
-            label: 'Approuvés',
-            value: membresForStats.filter((m) => m.status === 'approved').length,
+            label: 'Actifs',
+            value: membresForStats.filter((m) => m.status === 'active').length,
             icon: UserCheck,
             color: 'green',
           },
@@ -53,8 +54,9 @@ export default async function MembresPage() {
             color: 'orange',
           },
           {
-            label: 'Rejetés',
-            value: membresForStats.filter((m) => m.status === 'rejected').length,
+            label: 'Inactifs',
+            value: membresForStats.filter((m) => m.status === 'inactive')
+              .length,
             icon: UserX,
             color: 'red',
           },

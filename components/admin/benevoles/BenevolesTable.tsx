@@ -17,17 +17,31 @@ import {
 import { supabase } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import BenevoleModal from './BenevoleModal';
-import type { BenevoleDB } from '@/lib/types';
+
+interface Benevole {
+  id: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string | null;
+  age: number | null;
+  ville: string | null;
+  motivation: string | null;
+  competences: string | null;
+  disponibilite: string | null;
+  status: string;
+  created_at: string;
+}
 
 export default function BenevolesTable({
   benevoles,
 }: {
-  benevoles: BenevoleDB[];
+  benevoles: Benevole[];
 }) {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [selectedBenevole, setSelectedBenevole] = useState<BenevoleDB | null>(
+  const [selectedBenevole, setSelectedBenevole] = useState<Benevole | null>(
     null
   );
   const [updating, setUpdating] = useState<string | null>(null);
