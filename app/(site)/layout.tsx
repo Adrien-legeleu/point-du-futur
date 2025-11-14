@@ -7,9 +7,9 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden">
+    <div className="">
       <Header />
-      <main className="min-h-screen">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );

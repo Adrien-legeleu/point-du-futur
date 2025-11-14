@@ -3,8 +3,9 @@
 import { motion, useScroll } from 'framer-motion';
 import { Menu, X, Heart } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 const navItems = [
   { name: 'Accueil', href: '/' },
@@ -19,137 +20,140 @@ const navItems = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [visible, setVisible] = useState(true); // show/hide on scroll direction
   const { scrollY } = useScroll();
+  const lastY = useRef<number>(0);
   const pathname = usePathname();
 
+  // scroll state + direction
   useEffect(() => {
-    const unsubscribe = scrollY.on('change', (latest) => {
-      setIsScrolled(latest > 50);
-    });
-    return () => unsubscribe();
-  }, [scrollY]);
+    const unsub = scrollY.on('change', (y) => {
+      setIsScrolled(y > 12);
 
-  const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    return pathname?.startsWith(href);
-  };
+      const prev = lastY.current;
+      const delta = y - prev;
+
+      // seuils anti-jitter
+      const down = delta > 4 && y > 64; // on descend
+      const up = delta < -4; // on remonte
+
+      if (down && visible) setVisible(false);
+      else if (up && !visible) setVisible(true);
+
+      lastY.current = y;
+    });
+    return () => unsub();
+  }, [scrollY, visible]);
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
-          isScrolled ? 'w-[95%] max-w-6xl' : 'w-[95%] max-w-7xl'
-        }`}
+    <motion.header
+      initial={{ y: 0, opacity: 1 }}
+      animate={{ y: visible ? 0 : -64, opacity: visible ? 1 : 0.98 }}
+      transition={{ type: 'tween', duration: 0.22 }} // smooth!!
+      className="sticky top-0 left-0 right-0 z-50"
+      style={{ willChange: 'transform' }}
+    >
+      <nav
+        className={[
+          'w-full',
+          'h-12 sm:h-12 md:h-[50px]',
+          'bg-gradient-to-b from-white to-white supports-[backdrop-filter]:backdrop-blur-xl',
+
+          isScrolled ? 'from-white to-white' : '',
+        ].join(' ')}
       >
-        <nav
-          className={`relative rounded-2xl transition-all duration-300 ${
-            isScrolled
-              ? 'bg-white/95 backdrop-blur-xl shadow-xl border border-gray-200'
-              : 'bg-white/90 backdrop-blur-lg shadow-lg border border-gray-100'
-          }`}
-        >
-          <div className="px-6 py-4">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <Link href="/" className="flex items-center gap-3 group">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-11 h-11 bg-primary-900 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all"
-                >
-                  <span className="text-white font-bold text-xl">PF</span>
-                </motion.div>
-                <div className="hidden sm:block">
-                  <div className="font-display font-bold text-lg text-primary-900">
-                    Pont du Futur
-                  </div>
-                  <div className="text-xs text-gray-500 -mt-0.5">
-                    Relier les parcours
-                  </div>
-                </div>
-              </Link>
+        <div className="mx-auto max-w-7xl h-full px-3 sm:px-4">
+          <div className="h-full flex items-center justify-around">
+            {/* Logo compact */}
+            <Link href="/" className="flex items-center   gap-2">
+              <Image
+                src="/logo/logo.png"
+                className="object-cover"
+                alt="Logo"
+                width={60}
+                height={70}
+              />
+            </Link>
 
-              {/* Desktop Navigation */}
-              <div className="hidden lg:flex items-center gap-1">
-                {navItems.map((item) => {
-                  const active = isActive(item.href);
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="relative group"
-                    >
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
-                          active
-                            ? 'text-accent-600 bg-accent-50 shadow-sm'
-                            : 'text-gray-700 hover:text-primary-900 hover:bg-gray-50'
-                        }`}
-                      >
-                        {item.name}
-                        {active && (
-                          <motion.div
-                            layoutId="activeTab"
-                            className="absolute inset-0 bg-accent-50 rounded-xl -z-10 border border-accent-100"
-                            transition={{
-                              type: 'spring',
-                              stiffness: 300,
-                              damping: 30,
-                            }}
-                          />
-                        )}
-                      </motion.div>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {/* CTA Button */}
-              <div className="hidden lg:flex items-center gap-3">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
+            {/* Desktop nav (compact + bleu) */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
                   <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary-900 hover:bg-primary-800 text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+                    key={item.name}
+                    href={item.href}
+                    className="relative block px-3 py-2"
                   >
-                    <Heart className="w-4 h-4" />
-                    Adhérer
+                    <span
+                      className={[
+                        'text-[12px] font-[450] tracking-[-0.01em]',
+                        active
+                          ? 'text-primary-700'
+                          : 'text-gray-700 hover:text-primary-800',
+                      ].join(' ')}
+                    >
+                      {item.name}
+                    </span>
+
+                    {/* indicateur bleu Apple-like */}
+                    {active && (
+                      <motion.span
+                        layoutId="blueActiveBar"
+                        className="absolute left-1/2 right-2 bottom-[4px] w-2 h-0.5 rounded-full bg-primary-600"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 500,
+                          damping: 34,
+                        }}
+                      />
+                    )}
+                    {/* hover bg bleu très léger */}
+                    <span className="pointer-events-none absolute inset-0 rounded-md opacity-0 hover:opacity-100 transition-opacity bg-primary-50/50" />
                   </Link>
-                </motion.div>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors"
-              >
-                {isOpen ? (
-                  <X className="w-5 h-5 text-gray-900" />
-                ) : (
-                  <Menu className="w-5 h-5 text-gray-900" />
-                )}
-              </motion.button>
+                );
+              })}
             </div>
-          </div>
 
-          {/* Mobile Navigation */}
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="lg:hidden border-t border-gray-200 bg-white/95"
+            {/* CTA compact desktop */}
+            <div className="hidden lg:flex items-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold text-white bg-primary-600 hover:bg-primary-700 transition-colors"
+              >
+                <Heart className="w-3.5 h-3.5" />
+                Adhérer
+              </Link>
+            </div>
+
+            {/* Burger mobile */}
+            <button
+              onClick={() => setIsOpen((v) => !v)}
+              className="lg:hidden p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
+              aria-label="Menu"
             >
-              <div className="px-6 py-4 space-y-2">
+              {isOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            transition={{ duration: 0.18 }}
+            className="lg:hidden border-t border-black/5 bg-white/95"
+          >
+            <div className="mx-auto max-w-7xl px-3 sm:px-4 py-2">
+              <div className="flex flex-col py-1">
                 {navItems.map((item) => {
                   const active = isActive(item.href);
                   return (
@@ -157,11 +161,12 @@ export default function Header() {
                       key={item.name}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-xl font-medium transition-all ${
+                      className={[
+                        'px-3 py-2 rounded-md text-[13px] font-medium transition-colors',
                         active
-                          ? 'text-accent-600 bg-accent-50'
-                          : 'text-gray-700 hover:text-primary-900 hover:bg-gray-50'
-                      }`}
+                          ? 'text-primary-700 bg-primary-50'
+                          : 'text-gray-700 hover:text-primary-800 hover:bg-primary-50/50',
+                      ].join(' ')}
                     >
                       {item.name}
                     </Link>
@@ -171,16 +176,16 @@ export default function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-primary-900 hover:bg-primary-800 text-white rounded-xl font-semibold shadow-md mt-4 transition-colors"
+                  className="mt-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-md text-[13px] font-semibold text-white bg-primary-700 hover:bg-primary-800"
                 >
                   <Heart className="w-4 h-4" />
                   Adhérer
                 </Link>
               </div>
-            </motion.div>
-          )}
-        </nav>
-      </motion.header>
-    </>
+            </div>
+          </motion.div>
+        )}
+      </nav>
+    </motion.header>
   );
 }

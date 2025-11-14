@@ -1,138 +1,102 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  Users,
-  Compass,
-  Lightbulb,
-  Calendar,
-  MessageCircle,
-  Network,
-} from 'lucide-react';
-import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
+import { LinkPreview } from '../ui/link-preview';
 
-const actions = [
+type Action = {
+  title: string;
+  description: string;
+  image: string; // chemin depuis /public
+};
+
+const actions: Action[] = [
   {
-    icon: Users,
     title: 'Mentorat',
     description:
-      'Programme de mentorat individuel avec des professionnelles et professionnels engagés, proches des réalités du terrain.',
-    image: '/actions/mentorat.jpg',
+      'Accompagnement individuel par des professionnelles et professionnels engagés, avec un suivi concret et humain.',
+    image: '/hero-1.jpg',
   },
   {
-    icon: Compass,
     title: 'Orientation',
     description:
-      'Ateliers d’orientation, de découverte des filières et des métiers pour aider chaque jeune à trouver sa voie.',
-    image: '/actions/orientation.jpg',
+      'Ateliers pour explorer les filières et métiers, clarifier ses choix et construire son cap.',
+    image: '/hero-1.jpg',
   },
   {
-    icon: Lightbulb,
     title: 'Sensibilisation',
     description:
-      'Sessions de sensibilisation sur l’égalité des chances, les discriminations et les enjeux sociaux actuels.',
-    image: '/actions/sensibilisation.jpg',
+      'Interventions sur l’égalité des chances, la lutte contre les discriminations et les enjeux sociaux.',
+    image: '/hero-1.jpg',
   },
   {
-    icon: Calendar,
     title: 'Séminaires',
     description:
-      'Séminaires thématiques, rencontres inspirantes et temps d’échanges avec des intervenants variés.',
-    image: '/actions/seminaires.jpg',
+      'Rencontres thématiques et échanges avec des intervenants inspirants.',
+    image: '/hero-1.jpg',
   },
   {
-    icon: MessageCircle,
     title: 'Colloques',
     description:
-      'Organisation de colloques sur l’intégration, la réussite académique et l’inclusion.',
-    image: '/actions/colloques.jpg',
+      'Événements autour de l’intégration, de la réussite académique et de l’inclusion.',
+    image: '/hero-1.jpg',
   },
   {
-    icon: Network,
     title: 'Réseau',
     description:
-      'Mise en relation entre étudiants, mentors, anciens et partenaires pour créer un réseau solide et durable.',
-    image: '/actions/reseau.jpg',
+      'Mise en relation entre étudiants, mentors, alumni et partenaires pour créer des trajectoires durables.',
+    image: '/hero-1.jpg',
   },
 ];
 
-export default function Actions() {
+export default function ActionsBentoClean() {
   return (
-    <section className="py-24 md:py-32 bg-gradient-to-b from-primary-50 via-white to-white relative overflow-hidden">
-      {/* Pattern léger */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 opacity-40 bg-pattern-light" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Section title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+    <section className="py-24 md:py-32 bg-gradient-to-bl from-primary-100 via-zinc-50 to-zinc-50">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.header
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-14 md:mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-primary-700">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-primary-500">
             Nos <span className="text-primary-500">Actions</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Mentorat, ateliers, séminaires, colloques… Découvrez comment nous
-            agissons concrètement pour accompagner les jeunes à chaque étape de
-            leur parcours.
+          <p className="text-sm text-neutral-600 mt-3 max-w-2xl">
+            Un aperçu clair et concret de nos initiatives au service des jeunes.
           </p>
-        </motion.div>
+        </motion.header>
 
-        {/* Actions grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {actions.map((action, index) => {
-            const Icon = action.icon;
-            return (
-              <motion.div
-                key={action.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group relative overflow-hidden rounded-3xl bg-white shadow-2xl shadow-black/[0.08] hover:shadow-lg transition-all duration-300 hover-lift border border-gray-100"
+        <div className="grid grid-cols-1 gap-4">
+          {actions.map((a, i) => (
+            <motion.article
+              key={a.title}
+              initial={{ y: '100%' }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.01, duration: 0.35 }}
+              className="group relative isolate border-t border-neutral-200 bg-transparent duration-300 hover:border-neutral-300"
+            >
+              {/* ⬇️ mode statique pour afficher l'image locale */}
+              <LinkPreview
+                isStatic
+                imageSrc={a.image}
+                url="#"
+                className="grid grid-cols-3 items-start gap-4 py-10"
               >
-                {/* Image background with soft blue gradient */}
-                <div className="relative h-48 overflow-hidden">
-                  {action.image && (
-                    <Image
-                      src={action.image}
-                      alt={action.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
+                <span className="text-2xl text-primary-500">{a.title}</span>
 
-                  {/* Dégradé bleu subtil par-dessus */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-700/60 via-primary-500/35 to-primary-200/10" />
+                <span className="text-sm max-w-lg text-left text-neutral-600">
+                  {a.description}
+                </span>
 
-                  {/* Icon */}
-                  <div className="absolute inset-0 z-10 flex items-center justify-center">
-                    <motion.div className="w-20 h-20 bg-white/80 group-hover:scale-105 group-hover:rotate-3  transition-all duration-500 backdrop-blur-xl rounded-2xl flex items-center justify-center border border-primary-100 shadow-md">
-                      <Icon className="w-10 h-10 group-hover:animate-bounce group-hover:text-accent-500 text-primary-600" />
-                    </motion.div>
-                  </div>
+                {/* Arrow animée quand on hover TOUT l’article */}
+                <div className="flex items-center cursor-pointer justify-end translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+                  <ArrowRight className="w-8 h-8 text-black" />
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-accent-600 transition-colors">
-                    {action.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {action.description}
-                  </p>
-                </div>
-
-                {/* Hover effect border */}
-                <div className="absolute inset-0 rounded-[2rem] border-2 border-transparent group-hover:border-accent-500/50 transition-all duration-300 pointer-events-none" />
-              </motion.div>
-            );
-          })}
+              </LinkPreview>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
