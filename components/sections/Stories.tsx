@@ -49,8 +49,9 @@ const Stories = () => {
   return (
     <div
       ref={scope}
-      className="relative flex w-full z-20 h-full min-h-screen items-center justify-center bg-gradient-to-b bg-zinc-50 via-primary-50 to-wzinc-50 "
+      className="relative flex w-full z-20 h-full overflow-hidden min-h-screen items-center justify-center bg-gradient-to-b bg-zinc-50 via-primary-50 to-wzinc-50 "
     >
+      <div className="absolute bottom-0 z-10 left-0 w-full h-20 bg-gradient-to-b from-transparent to-zinc-50" />
       {/* Titre + sous-titre */}
       <motion.div
         className="z-30 text-center space-y-2 flex flex-col"

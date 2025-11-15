@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
-import ActionsHero from '@/components/actions/ActionsHero';
-import ProgramsList from '@/components/actions/ProgramsList';
+import { ActionsHero } from '@/components/actions/ActionsHero';
 import Mentorat from '@/components/actions/Mentorat';
 import Orientation from '@/components/actions/Orientations';
-import Sensibilisation from '@/components/actions/Sensibilisation';
 import Seminaires from '@/components/actions/Seminaires';
 import Colloques from '@/components/actions/Colloques';
 import ActionsCTA from '@/components/actions/ActionsCta';
+import Sensibilisation from '@/components/actions/Sensibilisation';
 
 export const metadata: Metadata = {
   title: 'Nos Actions | Pont du Futur - Programmes et Accompagnement',
@@ -44,7 +43,6 @@ export default function NosActionsPage() {
   return (
     <>
       <ActionsHero />
-      <ProgramsList />
       <Mentorat />
       <Orientation />
       <Sensibilisation />

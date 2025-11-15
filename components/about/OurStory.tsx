@@ -1,97 +1,57 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import Image from 'next/image';
 
 export default function OurStory() {
   return (
-    <section className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left - Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative rounded-[3rem] overflow-hidden shadow-lg">
-              {/* Image placeholder */}
-              <Image
-                src="/about/since-2021.jpg"
-                alt="Equipe Pont du Futur"
-                width={600}
-                height={600}
-                className="w-full aspect-4/3 object-cover"
-              />
+    <section className="py-24 md:py-32 bg-gradient-to-t from-zinc-50 to-primary-100 ">
+      <div className="max-w-7xl mx-auto px-6 grid gap-20 md:grid-cols-[1.2fr_0.8fr] items-start">
+        {/* --- Left text side --- */}
+        <div className="space-y-10">
+          <h2 className="text-primary-500 h-40 font-bold text-5xl md:text-7xl leading-tight max-w-2xl">
+            Qui nous sommes
+          </h2>
 
-              {/* Badge flottant */}
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="absolute bottom-6 left-6 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-semibold text-accent-600 shadow-md"
-              >
-                Depuis 2021
-              </motion.div>
-            </div>
-          </motion.div>
+          <p className="text-md md:text-lg text-neutral-700 leading-8">
+            Pont du Futur est né d’une conviction simple : chaque jeune mérite
+            d’être accompagné, encouragé et entouré pour se projeter dans
+            l’avenir avec confiance.
+          </p>
 
-          {/* Right - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-6 h-6 text-primary-orange" />
-              <span className="text-sm font-semibold text-primary-orange uppercase tracking-wider">
-                Notre Histoire
-              </span>
-            </div>
+          <p className="text-md md:text-lg text-neutral-700 leading-8">
+            Au fil des rencontres, des ateliers, et des échanges avec les jeunes
+            comme avec les bénévoles, nous avons façonné une approche humaine,
+            ancrée dans la réalité, et centrée sur l’impact concret. Notre
+            objectif n’est pas seulement de transmettre des outils, mais de
+            créer un véritable accompagnement — individuel, collectif et durable
+            — qui ouvre des portes et révèle des potentiels.
+          </p>
+        </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Tout a commencé par une{' '}
-              <span className="text-accent-600">rencontre</span>
-            </h2>
+        {/* --- Right small column --- */}
+        <div className="flex flex-col gap-8 items-start justify-start">
+          <Image
+            src="/about/front-view-friends-spending-quality-time-together.jpg"
+            alt="image a propos"
+            width={300}
+            height={300}
+            className="rounded-sm aspect-square h-40 w-40 object-cover shadow-lg"
+          />
 
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                <strong className="text-gray-900">Pont du Futur</strong> est née
-                en 2021 de la volonté de Mamadou Niang, étudiant en science
-                politique, qui a vécu les difficultés de l'intégration et le
-                manque d'accompagnement.
-              </p>
+          <div className="h-[1px] bg-primary-200 w-full" />
 
-              <p>
-                Conscient que de nombreux jeunes issus de l'immigration et des
-                classes populaires font face aux mêmes obstacles, il décide de
-                créer un pont entre ces jeunes et les opportunités qui s'offrent
-                à eux.
-              </p>
+          <p className="italic text-neutral-600 text-sm md:text-md leading-relaxed">
+            “On a créé Pont du Futur pour donner à chaque jeune un espace où il
+            peut croire en lui, évoluer, et se sentir accompagné dans ses
+            choix.”
+          </p>
 
-              <p>
-                Aujourd'hui,{' '}
-                <strong className="text-gray-900">Pont du Futur</strong> est
-                devenue une communauté de plus de 120 membres, avec des mentors
-                bénévoles, des partenaires engagés, et surtout, des jeunes qui
-                réalisent leurs rêves.
-              </p>
-
-              <div className="mt-8 p-6 bg-accent-600/5 rounded-2xl border border-accent-600/10">
-                <p className="text-lg font-medium text-gray-900 italic">
-                  "Notre mission est simple : faire en sorte que chaque jeune,
-                  peu importe son origine, puisse construire son avenir avec
-                  confiance."
-                </p>
-                <p className="mt-2 text-sm text-gray-600">
-                  — Mamadou Niang, Fondateur
-                </p>
-              </div>
-            </div>
-          </motion.div>
+          <div>
+            <h3 className="text-primary-600 font-semibold text-2xl">Mamad</h3>
+            <p className="text-xs text-neutral-500">
+              Fondateur de Pont du Futur
+            </p>
+          </div>
         </div>
       </div>
     </section>

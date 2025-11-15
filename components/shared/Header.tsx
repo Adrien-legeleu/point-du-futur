@@ -60,9 +60,9 @@ export default function Header() {
         className={[
           'w-full',
           'h-12 sm:h-12 md:h-[50px]',
-          'bg-gradient-to-b from-white to-white supports-[backdrop-filter]:backdrop-blur-xl',
+          'bg-gradient-to-b from-[#ffffff] to-[#fafafa] supports-[backdrop-filter]:backdrop-blur-xl',
 
-          isScrolled ? 'from-white to-white' : '',
+          isScrolled ? 'from-[#ffffff] to-[#fcfcfc] ' : '',
         ].join(' ')}
       >
         <div className="mx-auto max-w-7xl h-full px-3 sm:px-4">

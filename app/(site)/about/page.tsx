@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
-import AboutHero from '@/components/about/AboutHero';
-import OurValues from '@/components/about/OurValues';
-import Team from '@/components/about/Team';
-import Timeline from '@/components/about/Timeline';
-import Partners from '@/components/about/Partners';
-import JoinUs from '@/components/about/JoinUs';
+import { AboutHero } from '@/components/about/AboutHero';
+import { TimelineComponent } from '@/components/about/Timeline';
 import OurStory from '@/components/about/OurStory';
+import Valeurs from '@/components/ui/sticky-scroll';
+import { HeroSection } from '@/components/ui/hero-section-2';
 
 export const metadata: Metadata = {
   title: 'À Propos | Pont du Futur - Notre Histoire et Équipe',
@@ -44,10 +42,11 @@ export default function AboutPage() {
     <>
       <AboutHero />
       <OurStory />
-      <OurValues />
-      <Timeline />
-      {/* <Partners /> */}
-      <JoinUs />
+      <Valeurs />
+      <TimelineComponent />
+      <div className="w-full">
+        <HeroSection backgroundImage="/group-teenagers-posing-together.jpg" />
+      </div>
     </>
   );
 }
