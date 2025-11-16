@@ -10,6 +10,10 @@ interface LayeredTextProps {
   lineHeight?: number;
   lineHeightMd?: number;
   className?: string;
+  lines: {
+    top: string;
+    bottom: string;
+  }[];
 }
 
 export function LayeredText({
@@ -18,17 +22,9 @@ export function LayeredText({
   lineHeight = 60,
   lineHeightMd = 35,
   className = '',
+  lines,
 }: LayeredTextProps) {
   // Nouveau titre Pont du Futur
-  const lines = [
-    { top: '\u00A0', bottom: 'Toute' },
-    { top: 'Toute', bottom: "l'actualité" },
-    { top: "l'actualité", bottom: 'de' },
-    { top: 'de', bottom: 'Pont' },
-    { top: 'Pont', bottom: 'du' },
-    { top: 'du', bottom: 'Futur' },
-    { top: 'Futur', bottom: '\u00A0' },
-  ];
 
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);

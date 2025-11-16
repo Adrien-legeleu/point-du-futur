@@ -1,6 +1,7 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import EvenementsHero from '@/components/evenements/EvenementsHero';
 import EvenementsList from '@/components/evenements/EvenementsList';
+import EvenementsCTA from '@/components/evenements/EvenementsCTA';
 
 export const metadata = {
   title: 'Événements | Pont du Futur',
@@ -24,6 +25,7 @@ export default async function EvenementsPage() {
     <>
       <EvenementsHero />
       <EvenementsList evenements={evenements || []} />
+      <EvenementsCTA />
     </>
   );
 }

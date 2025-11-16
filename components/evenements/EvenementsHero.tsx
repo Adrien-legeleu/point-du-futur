@@ -1,15 +1,52 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Calendar } from 'lucide-react';
+import { ImagePlayer } from '../ui/image-player';
+import Image from 'next/image';
+import { LayeredText } from '../ui/layered-text';
+
 export default function EvenementsHero() {
+  const IMAGES = [
+    '/about/conference-room-hotel.jpg',
+    '/actions/people-meeting-support-group.jpg',
+    '/about/authentic-book-club-scene.jpg',
+    '/happy-university-students-using-laptop-while-sitting-hallway.jpg',
+  ];
+  const lines = [
+    { top: '\u00A0', bottom: 'Tous' },
+    { top: 'Tous', bottom: 'les' },
+    { top: 'les', bottom: 'événements' },
+    { top: 'événements', bottom: 'de' },
+    { top: 'de', bottom: 'Pont' },
+    { top: 'Pont', bottom: 'du' },
+    { top: 'du', bottom: 'Futur' },
+    { top: 'Futur', bottom: '\u00A0' },
+  ];
+
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-blue-50 py-20">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-          Nos Événements
-        </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Découvrez nos séminaires, colloques, ateliers et rencontres pour
-          construire ensemble un avenir meilleur.
-        </p>
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-zinc-50 to-primary-50 pt-24 pb-12">
+      <div className="max-w-7xl flex-1 mx-auto px-6 relative z-10">
+        <div className="text-center">
+          <LayeredText lines={lines} />
+        </div>
       </div>
-    </div>
+
+      <div className="h-full inset-0 flex-1 w-full flex items-center justify-center">
+        <ImagePlayer
+          images={IMAGES}
+          interval={200}
+          renderImage={(src) => (
+            <Image
+              src={src}
+              width={400}
+              height={300}
+              className="size-full aspect-9/12 md:aspect-video h-auto max-h-full max-w-xl object-cover inline-block align-middle"
+              alt="showcase"
+            />
+          )}
+        />
+      </div>
+    </section>
   );
 }

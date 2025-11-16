@@ -13,11 +13,21 @@ export default function ActualitesHero() {
     '/about/conference-room-hotel.jpg',
     '/about/authentic-book-club-scene.jpg',
   ];
+  const lines = [
+    { top: '\u00A0', bottom: 'Toute' },
+    { top: 'Toute', bottom: "l'actualité" },
+    { top: "l'actualité", bottom: 'de' },
+    { top: 'de', bottom: 'Pont' },
+    { top: 'Pont', bottom: 'du' },
+    { top: 'du', bottom: 'Futur' },
+    { top: 'Futur', bottom: '\u00A0' },
+  ];
+
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-zinc-50 to-primary-50 pt-24 pb-12">
       <div className="max-w-7xl flex-1 mx-auto px-6 relative z-10">
         <div className="text-center">
-          <LayeredText />
+          <LayeredText lines={lines} />
         </div>
       </div>
       <div className="h-full inset-0 flex-1 w-full  flex items-center justify-center">
