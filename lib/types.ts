@@ -85,24 +85,23 @@ export type ArticleInsert = Omit<
 >;
 export type ArticleUpdate = Partial<ArticleInsert>;
 
-// ================================================
-// 2. ÉVÉNEMENTS
-// ================================================
 export interface EvenementDB {
   id: string;
   titre: string;
   description: string;
-  date_debut: string; // DATE
-  date_fin: string | null; // DATE
-  heure_debut: string | null; // TIME
-  heure_fin: string | null; // TIME
+  date_debut: string;
+  date_fin: string | null;
+  heure_debut: string | null;
+  heure_fin: string | null;
   lieu: string;
   ville: string;
-  type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre';
+  adresse: string | null;
+  type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
   places_max: number | null;
   places_disponibles: number | null;
   image_url: string | null;
-  status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
+  lien_inscription: string | null;
+  status: 'draft' | 'published' | 'archived';
   created_at: string;
   updated_at: string;
 }

@@ -4,14 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import { motion } from 'framer-motion';
-import {
-  Save,
-  Loader,
-  Calendar,
-  MapPin,
-  Users,
-  Image as ImageIcon,
-} from 'lucide-react';
+import { Save, Loader, Calendar, MapPin, Users } from 'lucide-react';
+import ImageUpload from './ImageUpload';
 
 type Evenement = {
   id?: string;
@@ -23,6 +17,7 @@ type Evenement = {
   heure_fin: string | null;
   lieu: string;
   ville: string;
+  adresse: string | null;
   type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
   places_max: number | null;
   places_disponibles: number | null;
@@ -51,6 +46,7 @@ export default function EvenementForm({ evenement }: Props) {
       heure_fin: null,
       lieu: '',
       ville: '',
+      adresse: null,
       type: 'seminaire',
       places_max: null,
       places_disponibles: null,
@@ -67,29 +63,24 @@ export default function EvenementForm({ evenement }: Props) {
     setSuccess('');
 
     try {
-      // Validation
       if (!formData.titre || !formData.description || !formData.date_debut) {
         throw new Error('Veuillez remplir tous les champs obligatoires');
       }
 
       if (evenement?.id) {
-        // Update
         const { error: updateError } = await supabase
           .from('evenements')
           .update(formData)
           .eq('id', evenement.id);
 
         if (updateError) throw updateError;
-
         setSuccess('Événement modifié avec succès !');
       } else {
-        // Create
         const { error: insertError } = await supabase
           .from('evenements')
           .insert(formData);
 
         if (insertError) throw insertError;
-
         setSuccess('Événement créé avec succès !');
       }
 
@@ -106,7 +97,6 @@ export default function EvenementForm({ evenement }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Messages */}
       {error && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -134,7 +124,6 @@ export default function EvenementForm({ evenement }: Props) {
           Informations de base
         </h3>
 
-        {/* Titre */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Titre de l'événement *
@@ -151,7 +140,6 @@ export default function EvenementForm({ evenement }: Props) {
           />
         </div>
 
-        {/* Type */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Type d'événement *
@@ -174,7 +162,6 @@ export default function EvenementForm({ evenement }: Props) {
           </select>
         </div>
 
-        {/* Description */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Description *
@@ -191,34 +178,11 @@ export default function EvenementForm({ evenement }: Props) {
           />
         </div>
 
-        {/* Image URL */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-            <ImageIcon className="w-4 h-4" />
-            URL de l'image
-          </label>
-          <input
-            type="url"
-            value={formData.image_url || ''}
-            onChange={(e) =>
-              setFormData({ ...formData, image_url: e.target.value || null })
-            }
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
-            placeholder="https://exemple.com/image.jpg"
-          />
-          {formData.image_url && (
-            <div className="mt-3">
-              <img
-                src={formData.image_url}
-                alt="Aperçu"
-                className="w-full max-w-md h-48 object-cover rounded-xl"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-            </div>
-          )}
-        </div>
+        {/* Upload d'image */}
+        <ImageUpload
+          currentImage={formData.image_url}
+          onImageChange={(url) => setFormData({ ...formData, image_url: url })}
+        />
       </div>
 
       {/* Date et heure */}
@@ -333,6 +297,21 @@ export default function EvenementForm({ evenement }: Props) {
               required
             />
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Adresse complète
+          </label>
+          <input
+            type="text"
+            value={formData.adresse || ''}
+            onChange={(e) =>
+              setFormData({ ...formData, adresse: e.target.value || null })
+            }
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+            placeholder="Ex: 12 rue de la Paix, 75002 Paris"
+          />
         </div>
       </div>
 
