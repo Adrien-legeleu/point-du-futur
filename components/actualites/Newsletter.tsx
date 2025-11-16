@@ -1,97 +1,57 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Send, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { ArrowRight, Mail } from 'lucide-react';
+import { WavePath } from '../ui/WavePath';
 
-export default function Newsletter() {
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Connecter à l'API newsletter
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setEmail('');
-      setIsSubmitted(false);
-    }, 3000);
-  };
-
+export default function ActualiteCTA() {
   return (
-    <section className="py-24 md:py-32 bg-white">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="relative w-full bg-gradient-to-b from-zinc-50 to-white">
+      {/* halo léger */}
+      <div
+        aria-hidden="true"
+        className={cn(
+          'pointer-events-none absolute -top-10 left-1/2 size-[1000px] -translate-x-1/2 rounded-full',
+          'bg-[radial-gradient(ellipse_at_center,hsl(var(--primary-h,200)_60%_85%/_0.08),transparent_55%)]',
+          'blur-[40px]'
+        )}
+      />
+
+      <div className="relative mx-auto flex min-height-[65vh] max-w-6xl flex-col items-center justify-center px-6 py-24 md:py-32">
+        {/* Ligne Wave */}
+        <WavePath className="mb-10" />
+
+        {/* Texte + bouton */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[3rem] bg-accent-600 p-12 md:p-16 text-white shadow-lg"
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl"
         >
-          <div className="relative z-10 text-center">
-            {/* Icon */}
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: 'spring', stiffness: 200 }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-2xl mb-6"
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-primary-600 mb-4">
+            Envie d’agir avec nous ?
+            <br />
+            Tu es au bon endroit.
+          </h2>
+          <p className="text-lg md:text-xl text-neutral-600 mb-8 leading-relaxed">
+            Rejoins notre mouvement : mentorat, événements, projets solidaires…
+            Ensemble, donnons vie à des initiatives concrètes pour la génération
+            de demain.
+          </p>
+
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-2xl bg-primary-600 px-8 py-4 font-semibold text-white shadow-md hover:shadow-lg transition-all"
             >
-              <Mail className="w-8 h-8" />
-            </motion.div>
-
-            {/* Title */}
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Reste informé de nos actualités
-            </h2>
-
-            {/* Subtitle */}
-            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-              Reçois nos derniers articles, événements et témoignages
-              directement dans ta boîte mail
-            </p>
-
-            {/* Form */}
-            {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="ton@email.com"
-                    className="flex-1 px-6 py-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/70 focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
-                  />
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="px-8 py-4 bg-white text-accent-600 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    <Send className="w-5 h-5" />
-                    S'inscrire
-                  </motion.button>
-                </div>
-              </form>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex items-center justify-center gap-3 py-4"
-              >
-                <Sparkles className="w-6 h-6 text-white" />
-                <p className="text-lg font-semibold">
-                  Merci ! Tu es maintenant inscrit(e) à notre newsletter
-                </p>
-              </motion.div>
-            )}
-
-            {/* Privacy note */}
-            <p className="mt-6 text-white/80 text-sm">
-              En t'inscrivant, tu acceptes de recevoir nos emails. Tu peux te
-              désinscrire à tout moment.
-            </p>
-          </div>
+              <Mail className="h-5 w-5" />
+              Je veux participer
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

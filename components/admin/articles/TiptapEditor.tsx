@@ -26,6 +26,7 @@ interface TiptapEditorProps {
 
 export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
   const editor = useEditor({
+    immediatelyRender: false, // ✅ Fix SSR hydration
     extensions: [
       StarterKit.configure({
         heading: {
@@ -57,7 +58,13 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
   });
 
   if (!editor) {
-    return null;
+    return (
+      <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-blue"></div>
+        </div>
+      </div>
+    );
   }
 
   const addLink = () => {

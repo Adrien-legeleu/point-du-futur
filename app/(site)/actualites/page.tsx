@@ -3,6 +3,7 @@ import ActualitesList from '@/components/actualites/ActualitesList';
 import Newsletter from '@/components/actualites/Newsletter';
 import ActualitesHero from '@/components/actualites/Actualiteshero';
 import { getPublishedArticles } from '@/lib/supabase/articles';
+import ActualiteCTA from '@/components/actualites/Newsletter';
 
 export const metadata: Metadata = {
   title: 'Actualités | Pont du Futur - Événements et Témoignages',
@@ -45,7 +46,7 @@ export default async function ActualitesPage() {
     <>
       <ActualitesHero />
       <ActualitesList articles={articles} />
-      <Newsletter />
+      <ActualiteCTA />
     </>
   );
 }
