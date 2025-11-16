@@ -2,15 +2,13 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Save, ArrowLeft, Eye, Upload } from 'lucide-react';
+import { Save, ArrowLeft, Eye } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import type { ArticleDB } from '@/lib/types';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
+import TiptapEditor from './TiptapEditor';
+import ImageUpload from './ImageUpload';
 
 interface ArticleFormProps {
   article?: ArticleDB;
@@ -29,7 +27,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
     tags: article?.tags?.join(', ') || '',
     status: article?.status || 'draft',
     read_time: article?.read_time || 5,
-    author_name: article?.author_name || 'Admin',
+    author_name: article?.author_name || 'Équipe Pont du Futur',
     author_avatar: article?.author_avatar || '👨‍💼',
   });
 
@@ -66,7 +64,11 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         excerpt: formData.excerpt,
         content: formData.content,
         image_url: formData.image_url,
-        category: formData.category as 'actualite' | 'evenement' | 'temoignage' | 'partenariat',
+        category: formData.category as
+          | 'actualite'
+          | 'evenement'
+          | 'temoignage'
+          | 'partenariat',
         tags: tagsArray,
         status: formData.status as 'draft' | 'published' | 'archived',
         read_time: formData.read_time,
@@ -87,15 +89,14 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         if (error) throw error;
       } else {
         const { error } = await supabase.from('articles').insert([articleData]);
-
         if (error) throw error;
       }
 
       router.push('/admin/articles');
       router.refresh();
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue';
-      alert('Erreur: ' + errorMessage);
+      console.error('Erreur:', error);
+      alert('Erreur lors de la sauvegarde');
     } finally {
       setLoading(false);
     }
@@ -104,6 +105,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="bg-white rounded-2xl shadow-sm p-8">
+        {/* Titre */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Titre *
@@ -118,6 +120,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           />
         </div>
 
+        {/* Slug */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Slug (URL)
@@ -137,36 +140,20 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
+        {/* Image Upload */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Image (URL)
+            Image de couverture
           </label>
-          <div className="relative">
-            <Upload className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="url"
-              value={formData.image_url}
-              onChange={(e) =>
-                setFormData({ ...formData, image_url: e.target.value })
-              }
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
-              placeholder="https://example.com/image.jpg"
-            />
-          </div>
-          {formData.image_url && (
-            <div className="mt-4">
-              <img
-                src={formData.image_url}
-                alt="Preview"
-                className="w-full h-48 object-cover rounded-xl"
-                onError={(e) => {
-                  e.currentTarget.src = '/images/default-article.jpg';
-                }}
-              />
-            </div>
-          )}
+          <ImageUpload
+            currentImage={formData.image_url}
+            onImageUploaded={(url) =>
+              setFormData({ ...formData, image_url: url })
+            }
+          />
         </div>
 
+        {/* Extrait */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Extrait *
@@ -179,34 +166,23 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             }
             rows={3}
             className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all resize-none"
-            placeholder="Court résumé de l'article..."
+            placeholder="Court résumé de l'article (max 200 caractères)"
+            maxLength={200}
           />
         </div>
 
+        {/* Éditeur de contenu */}
         <div className="mb-6">
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Contenu *
           </label>
-          <div className="border border-gray-300 rounded-xl overflow-hidden">
-            <ReactQuill
-              theme="snow"
-              value={formData.content}
-              onChange={(content) => setFormData({ ...formData, content })}
-              modules={{
-                toolbar: [
-                  [{ header: [2, 3, false] }],
-                  ['bold', 'italic', 'underline', 'strike'],
-                  [{ list: 'ordered' }, { list: 'bullet' }],
-                  ['blockquote', 'code-block'],
-                  ['link'],
-                  ['clean'],
-                ],
-              }}
-              className="bg-white"
-            />
-          </div>
+          <TiptapEditor
+            content={formData.content}
+            onChange={(content) => setFormData({ ...formData, content })}
+          />
         </div>
 
+        {/* Catégorie & Statut */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -246,6 +222,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
+        {/* Tags & Temps de lecture */}
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -281,6 +258,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
           </div>
         </div>
 
+        {/* Auteur */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -299,7 +277,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Avatar (emoji ou URL)
+              Avatar (emoji)
             </label>
             <input
               type="text"
@@ -314,6 +292,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         </div>
       </div>
 
+      {/* Actions */}
       <div className="flex items-center justify-between">
         <Link href="/admin/articles">
           <button
@@ -326,11 +305,11 @@ export default function ArticleForm({ article }: ArticleFormProps) {
         </Link>
 
         <div className="flex gap-3">
-          {article && (
-            <Link href={`/actualites/${article.slug}`} target="_blank">
+          {article && formData.slug && (
+            <Link href={`/actualites/${formData.slug}`} target="_blank">
               <button
                 type="button"
-                className="flex items-center gap-2 px-6 py-3 bg-white shadow-sm text-gray-700 rounded-xl font-semibold hover:shadow-md transition-all"
+                className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
               >
                 <Eye className="w-5 h-5" />
                 Prévisualiser
@@ -343,7 +322,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
             disabled={loading}
             whileHover={{ scale: loading ? 1 : 1.02 }}
             whileTap={{ scale: loading ? 1 : 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

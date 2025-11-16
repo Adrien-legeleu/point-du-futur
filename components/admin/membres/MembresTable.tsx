@@ -2,38 +2,77 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
-import { Trash2, Mail, Phone, MapPin } from 'lucide-react';
+import {
+  Edit,
+  Trash2,
+  Mail,
+  Phone,
+  MapPin,
+  CheckCircle,
+  XCircle,
+  Clock,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
+export default function MembresTable({ membres }: { membres: any[] }) {
   const [loading, setLoading] = useState(false);
-  const [localBenevoles, setLocalBenevoles] = useState(benevoles);
+  const [localMembres, setLocalMembres] = useState(membres);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setLoading(true);
     const { error } = await supabase
-      .from('benevoles')
+      .from('membres')
       .update({ status: newStatus })
       .eq('id', id);
 
     if (!error) {
-      setLocalBenevoles((prev) =>
-        prev.map((b) => (b.id === id ? { ...b, status: newStatus } : b))
+      setLocalMembres((prev) =>
+        prev.map((m) => (m.id === id ? { ...m, status: newStatus } : m))
       );
     }
     setLoading(false);
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce bénévole ?')) return;
+    if (!confirm('Êtes-vous sûr de vouloir supprimer ce membre ?')) return;
 
     setLoading(true);
-    const { error } = await supabase.from('benevoles').delete().eq('id', id);
+    const { error } = await supabase.from('membres').delete().eq('id', id);
 
     if (!error) {
-      setLocalBenevoles((prev) => prev.filter((b) => b.id !== id));
+      setLocalMembres((prev) => prev.filter((m) => m.id !== id));
     }
     setLoading(false);
+  };
+
+  const getStatusBadge = (status: string) => {
+    const styles = {
+      pending: 'bg-orange-100 text-orange-700',
+      accepted: 'bg-green-100 text-green-700',
+      rejected: 'bg-red-100 text-red-700',
+    };
+    const icons = {
+      pending: Clock,
+      accepted: CheckCircle,
+      rejected: XCircle,
+    };
+    const labels = {
+      pending: 'En attente',
+      accepted: 'Accepté',
+      rejected: 'Rejeté',
+    };
+
+    const Icon = icons[status as keyof typeof icons] || Clock;
+    return (
+      <span
+        className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
+          styles[status as keyof typeof styles]
+        }`}
+      >
+        <Icon className="w-3 h-3" />
+        {labels[status as keyof typeof labels]}
+      </span>
+    );
   };
 
   return (
@@ -43,13 +82,13 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
-                Bénévole
+                Membre
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
                 Contact
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
-                Compétences
+                Infos
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
                 Statut
@@ -60,25 +99,25 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {localBenevoles.map((benevole) => (
+            {localMembres.map((membre) => (
               <motion.tr
-                key={benevole.id}
+                key={membre.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="hover:bg-gray-50 transition-colors"
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white font-semibold">
-                      {benevole.prenom[0]}
-                      {benevole.nom[0]}
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-semibold">
+                      {membre.prenom[0]}
+                      {membre.nom[0]}
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900">
-                        {benevole.prenom} {benevole.nom}
+                        {membre.prenom} {membre.nom}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {benevole.profession || 'N/A'}
+                        {membre.etablissement || 'N/A'}
                       </div>
                     </div>
                   </div>
@@ -87,45 +126,52 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
                   <div className="space-y-1 text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
                       <Mail className="w-4 h-4" />
-                      {benevole.email}
+                      {membre.email}
                     </div>
-                    {benevole.telephone && (
+                    {membre.telephone && (
                       <div className="flex items-center gap-2 text-gray-600">
                         <Phone className="w-4 h-4" />
-                        {benevole.telephone}
+                        {membre.telephone}
                       </div>
                     )}
-                    {benevole.ville && (
+                    {membre.ville && (
                       <div className="flex items-center gap-2 text-gray-600">
                         <MapPin className="w-4 h-4" />
-                        {benevole.ville}
+                        {membre.ville}
                       </div>
                     )}
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <div className="text-sm text-gray-600">
-                    {benevole.competences || 'N/A'}
+                    <div>
+                      <span className="font-medium">Âge:</span>{' '}
+                      {membre.age || 'N/A'}
+                    </div>
+                    <div>
+                      <span className="font-medium">Niveau:</span>{' '}
+                      {membre.niveau_etude || 'N/A'}
+                    </div>
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <select
-                    value={benevole.status}
+                    value={membre.status}
                     onChange={(e) =>
-                      handleStatusChange(benevole.id, e.target.value)
+                      handleStatusChange(membre.id, e.target.value)
                     }
                     disabled={loading}
                     className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-primary-500 outline-none"
                   >
                     <option value="pending">En attente</option>
-                    <option value="active">Actif</option>
-                    <option value="inactive">Inactif</option>
+                    <option value="accepted">Accepté</option>
+                    <option value="rejected">Rejeté</option>
                   </select>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-end gap-2">
                     <button
-                      onClick={() => handleDelete(benevole.id)}
+                      onClick={() => handleDelete(membre.id)}
                       disabled={loading}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >
@@ -139,9 +185,9 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
         </table>
       </div>
 
-      {localBenevoles.length === 0 && (
+      {localMembres.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          Aucun bénévole pour le moment
+          Aucun membre pour le moment
         </div>
       )}
     </div>

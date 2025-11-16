@@ -2,36 +2,36 @@
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase/client';
-import { Trash2, Mail, Phone, MapPin } from 'lucide-react';
+import { Trash2, Mail, Phone, MapPin, Briefcase, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
+export default function MentorsTable({ mentors }: { mentors: any[] }) {
   const [loading, setLoading] = useState(false);
-  const [localBenevoles, setLocalBenevoles] = useState(benevoles);
+  const [localMentors, setLocalMentors] = useState(mentors);
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     setLoading(true);
     const { error } = await supabase
-      .from('benevoles')
+      .from('mentors')
       .update({ status: newStatus })
       .eq('id', id);
 
     if (!error) {
-      setLocalBenevoles((prev) =>
-        prev.map((b) => (b.id === id ? { ...b, status: newStatus } : b))
+      setLocalMentors((prev) =>
+        prev.map((m) => (m.id === id ? { ...m, status: newStatus } : m))
       );
     }
     setLoading(false);
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce bénévole ?')) return;
+    if (!confirm('Êtes-vous sûr de vouloir supprimer ce mentor ?')) return;
 
     setLoading(true);
-    const { error } = await supabase.from('benevoles').delete().eq('id', id);
+    const { error } = await supabase.from('mentors').delete().eq('id', id);
 
     if (!error) {
-      setLocalBenevoles((prev) => prev.filter((b) => b.id !== id));
+      setLocalMentors((prev) => prev.filter((m) => m.id !== id));
     }
     setLoading(false);
   };
@@ -43,13 +43,13 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
           <thead className="bg-gray-50 border-b border-gray-200">
             <tr>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
-                Bénévole
+                Mentor
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
                 Contact
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
-                Compétences
+                Expertise
               </th>
               <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">
                 Statut
@@ -60,25 +60,25 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {localBenevoles.map((benevole) => (
+            {localMentors.map((mentor) => (
               <motion.tr
-                key={benevole.id}
+                key={mentor.id}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="hover:bg-gray-50 transition-colors"
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white font-semibold">
-                      {benevole.prenom[0]}
-                      {benevole.nom[0]}
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white font-semibold">
+                      {mentor.prenom[0]}
+                      {mentor.nom[0]}
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900">
-                        {benevole.prenom} {benevole.nom}
+                        {mentor.prenom} {mentor.nom}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {benevole.profession || 'N/A'}
+                        {mentor.profession || 'N/A'}
                       </div>
                     </div>
                   </div>
@@ -87,32 +87,48 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
                   <div className="space-y-1 text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
                       <Mail className="w-4 h-4" />
-                      {benevole.email}
+                      {mentor.email}
                     </div>
-                    {benevole.telephone && (
+                    {mentor.telephone && (
                       <div className="flex items-center gap-2 text-gray-600">
                         <Phone className="w-4 h-4" />
-                        {benevole.telephone}
+                        {mentor.telephone}
                       </div>
                     )}
-                    {benevole.ville && (
+                    {mentor.ville && (
                       <div className="flex items-center gap-2 text-gray-600">
                         <MapPin className="w-4 h-4" />
-                        {benevole.ville}
+                        {mentor.ville}
                       </div>
                     )}
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <div className="text-sm text-gray-600">
-                    {benevole.competences || 'N/A'}
+                    <div className="flex items-center gap-2">
+                      <Briefcase className="w-4 h-4" />
+                      {mentor.domaine_expertise || 'N/A'}
+                    </div>
+                    {mentor.linkedin && (
+                      <div className="flex items-center gap-2 mt-1">
+                        <Linkedin className="w-4 h-4" />
+                        <a
+                          href={mentor.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary-600 hover:underline"
+                        >
+                          LinkedIn
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </td>
                 <td className="px-6 py-4">
                   <select
-                    value={benevole.status}
+                    value={mentor.status}
                     onChange={(e) =>
-                      handleStatusChange(benevole.id, e.target.value)
+                      handleStatusChange(mentor.id, e.target.value)
                     }
                     disabled={loading}
                     className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-primary-500 outline-none"
@@ -125,7 +141,7 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-end gap-2">
                     <button
-                      onClick={() => handleDelete(benevole.id)}
+                      onClick={() => handleDelete(mentor.id)}
                       disabled={loading}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                     >
@@ -139,9 +155,9 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
         </table>
       </div>
 
-      {localBenevoles.length === 0 && (
+      {localMentors.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          Aucun bénévole pour le moment
+          Aucun mentor pour le moment
         </div>
       )}
     </div>

@@ -1,11 +1,29 @@
-// ================================================
-// TYPES COMPLETS POUR PONT DU FUTUR
-// Basés sur le schéma Supabase SQL
-// ================================================
+// Ajoute cette interface dans lib/types.ts après BenevoleDB
 
 // ================================================
-// 1. ARTICLES
+// DEMANDES D'INFOS
 // ================================================
+export interface DemandInfosDB {
+  id: string;
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string | null;
+  type_demande: 'membre' | 'mentor' | 'benevole' | 'partenaire' | 'information';
+  message: string;
+  status: 'new' | 'read' | 'processed' | 'archived';
+  created_at: string;
+  updated_at: string;
+}
+
+export type DemandInfosStatus = DemandInfosDB['status'];
+export type DemandInfosType = DemandInfosDB['type_demande'];
+
+export type DemandInfosInsert = Omit<
+  DemandInfosDB,
+  'id' | 'created_at' | 'updated_at'
+>;
+export type DemandInfosUpdate = Partial<DemandInfosInsert>;
 export interface ArticleDB {
   id: string;
   title: string;
@@ -61,7 +79,10 @@ export interface ArticleFormData {
   author_avatar: string;
 }
 
-export type ArticleInsert = Omit<ArticleDB, 'id' | 'created_at' | 'updated_at' | 'views'>;
+export type ArticleInsert = Omit<
+  ArticleDB,
+  'id' | 'created_at' | 'updated_at' | 'views'
+>;
 export type ArticleUpdate = Partial<ArticleInsert>;
 
 // ================================================
@@ -105,7 +126,10 @@ export interface EvenementFormData {
   status: string;
 }
 
-export type EvenementInsert = Omit<EvenementDB, 'id' | 'created_at' | 'updated_at'>;
+export type EvenementInsert = Omit<
+  EvenementDB,
+  'id' | 'created_at' | 'updated_at'
+>;
 export type EvenementUpdate = Partial<EvenementInsert>;
 
 // ================================================
@@ -226,7 +250,10 @@ export interface BenevoleFormData {
   raison_rejet: string;
 }
 
-export type BenevoleInsert = Omit<BenevoleDB, 'id' | 'created_at' | 'updated_at'>;
+export type BenevoleInsert = Omit<
+  BenevoleDB,
+  'id' | 'created_at' | 'updated_at'
+>;
 export type BenevoleUpdate = Partial<BenevoleInsert>;
 
 // ================================================
@@ -257,7 +284,10 @@ export interface PartenaireFormData {
   ordre: number;
 }
 
-export type PartenaireInsert = Omit<PartenaireDB, 'id' | 'created_at' | 'updated_at'>;
+export type PartenaireInsert = Omit<
+  PartenaireDB,
+  'id' | 'created_at' | 'updated_at'
+>;
 export type PartenaireUpdate = Partial<PartenaireInsert>;
 
 // ================================================
@@ -288,7 +318,10 @@ export interface CandidatureFormData {
   message: string;
 }
 
-export type CandidatureInsert = Omit<CandidatureDB, 'id' | 'created_at' | 'updated_at'>;
+export type CandidatureInsert = Omit<
+  CandidatureDB,
+  'id' | 'created_at' | 'updated_at'
+>;
 export type CandidatureUpdate = Partial<CandidatureInsert>;
 
 // ================================================

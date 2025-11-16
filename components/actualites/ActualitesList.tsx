@@ -79,7 +79,16 @@ export default function ActualitesList({ articles }: ActualitesListProps) {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50">
+    <section className="pb-24 md:pb-32 bg-gradient-to-b from-primary-50 to-zinc-50 ">
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="text-sm md:text-base relative pb-10  text-gray-600 w-full text-center leading-relaxed"
+      >
+        Découvrez nos événements, témoignages inspirants et toutes nos
+        actualités
+      </motion.p>
       <div className="max-w-7xl mx-auto px-6">
         {/* Filters */}
         <div className="mb-12">
