@@ -34,11 +34,11 @@ export default function OurStory() {
         {/* --- Right small column --- */}
         <div className="flex flex-col gap-8 items-start justify-start">
           <Image
-            src="/about/front-view-friends-spending-quality-time-together.jpg"
+            src="/about/image.png"
             alt="image a propos"
             width={300}
             height={300}
-            className="rounded-sm aspect-square h-40 w-40 object-cover shadow-lg"
+            className="rounded-sm aspect-square h-40 w-40 object-cover object-top shadow-lg"
           />
 
           <div className="h-[1px] bg-primary-200 w-full" />
