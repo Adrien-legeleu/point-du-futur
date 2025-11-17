@@ -81,7 +81,7 @@ export default function ArticleForm({ article }: ArticleFormProps) {
       };
 
       if (article) {
-        const { error } = await supabase
+  // @ts-ignore        const { error } = await supabase
           .from('articles')
           .update(articleData)
           .eq('id', article.id);

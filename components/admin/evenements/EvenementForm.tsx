@@ -6,7 +6,11 @@ import { supabase } from '@/lib/supabase/client';
 import { motion } from 'framer-motion';
 import { Save, Loader, Calendar, MapPin, Users } from 'lucide-react';
 import ImageUpload from './ImageUpload';
-import type { EvenementDB, EvenementInsert } from '@/lib/types';
+import type {
+  EvenementDB,
+  EvenementInsert,
+  EvenementUpdate,
+} from '@/lib/types';
 
 type Props = {
   evenement?: EvenementDB;
@@ -18,7 +22,6 @@ export default function EvenementForm({ evenement }: Props) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // ✅ Utiliser EvenementInsert comme type pour formData
   const [formData, setFormData] = useState<EvenementInsert>(
     evenement
       ? {
@@ -69,18 +72,18 @@ export default function EvenementForm({ evenement }: Props) {
       }
 
       if (evenement?.id) {
-        // ✅ Cast explicite vers le type Update de Supabase
+        // ✅ Update - utiliser EvenementUpdate
+        const updateData: EvenementUpdate = formData;
+        // @ts-ignore
         const { error: updateError } = await supabase
           .from('evenements')
-          .update(
-            formData as Database['public']['Tables']['evenements']['Update']
-          )
+          .update(updateData)
           .eq('id', evenement.id);
 
         if (updateError) throw updateError;
         setSuccess('Événement modifié avec succès !');
       } else {
-        // ✅ Insert fonctionne déjà
+        // @ts-ignore
         const { error: insertError } = await supabase
           .from('evenements')
           .insert(formData);
@@ -183,7 +186,6 @@ export default function EvenementForm({ evenement }: Props) {
           />
         </div>
 
-        {/* Upload d'image */}
         <ImageUpload
           currentImage={formData.image_url}
           onImageChange={(url) => setFormData({ ...formData, image_url: url })}
@@ -257,7 +259,7 @@ export default function EvenementForm({ evenement }: Props) {
                   heure_fin: e.target.value || null,
                 })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
             />
           </div>
         </div>

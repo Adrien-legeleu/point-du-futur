@@ -10,6 +10,7 @@ import type {
   PartenaireDB,
   CandidatureDB,
   NotificationDB,
+  DemandInfosDB,
 } from '@/lib/types';
 
 // ================================================
@@ -61,6 +62,13 @@ export type Database = {
         Row: NotificationDB;
         Insert: Omit<NotificationDB, 'id' | 'created_at'>;
         Update: Partial<Omit<NotificationDB, 'id' | 'created_at'>>;
+      };
+      demandes_infos: {
+        Row: DemandInfosDB;
+        Insert: Omit<DemandInfosDB, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<
+          Omit<DemandInfosDB, 'id' | 'created_at' | 'updated_at'>
+        >;
       };
     };
   };

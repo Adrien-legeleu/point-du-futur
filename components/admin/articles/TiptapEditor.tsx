@@ -3,7 +3,6 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
-import Image from '@tiptap/extension-image';
 import Underline from '@tiptap/extension-underline';
 import {
   Bold,
@@ -12,12 +11,14 @@ import {
   List,
   ListOrdered,
   Link2,
-  Image as ImageIcon,
   Heading2,
   Quote,
   Undo,
   Redo,
+  Code,
+  Minus,
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface TiptapEditorProps {
   content: string;
@@ -26,7 +27,7 @@ interface TiptapEditorProps {
 
 export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
   const editor = useEditor({
-    immediatelyRender: false, // ✅ Fix SSR hydration
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: {
@@ -36,12 +37,7 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-blue-600 underline',
-        },
-      }),
-      Image.configure({
-        HTMLAttributes: {
-          class: 'max-w-full h-auto rounded-lg',
+          class: 'text-primary-600 underline hover:text-primary-700',
         },
       }),
       Underline,
@@ -49,7 +45,8 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     content,
     editorProps: {
       attributes: {
-        class: 'prose prose-sm max-w-none focus:outline-none min-h-[400px] p-4',
+        class:
+          'prose prose-sm max-w-none focus:outline-none min-h-[400px] p-4 text-gray-900',
       },
     },
     onUpdate: ({ editor }) => {
@@ -57,11 +54,17 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     },
   });
 
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
+
   if (!editor) {
     return (
       <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
         <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-blue"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
         </div>
       </div>
     );
@@ -74,143 +77,135 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
     }
   };
 
-  const addImage = () => {
-    const url = window.prompt("URL de l'image:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  };
+  const ToolbarButton = ({
+    onClick,
+    isActive,
+    children,
+    title,
+  }: {
+    onClick: () => void;
+    isActive?: boolean;
+    children: React.ReactNode;
+    title: string;
+  }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`p-2.5 rounded-lg hover:bg-gray-100 transition-colors ${
+        isActive ? 'bg-primary-100 text-primary-700' : 'text-gray-700'
+      }`}
+      title={title}
+    >
+      {children}
+    </button>
+  );
 
   return (
-    <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
-      {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 p-2 bg-gray-50 border-b border-gray-300">
-        <button
-          type="button"
+    <div className="border border-gray-300 rounded-xl overflow-hidden bg-white shadow-sm">
+      {/* Toolbar améliorée */}
+      <div className="flex flex-wrap items-center gap-1 p-3 bg-gray-50 border-b border-gray-200">
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('bold') ? 'bg-gray-300' : ''
-          }`}
-          title="Gras"
+          isActive={editor.isActive('bold')}
+          title="Gras (Ctrl+B)"
         >
           <Bold className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('italic') ? 'bg-gray-300' : ''
-          }`}
-          title="Italique"
+          isActive={editor.isActive('italic')}
+          title="Italique (Ctrl+I)"
         >
           <Italic className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('underline') ? 'bg-gray-300' : ''
-          }`}
-          title="Souligné"
+          isActive={editor.isActive('underline')}
+          title="Souligné (Ctrl+U)"
         >
           <UnderlineIcon className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-gray-300' : ''
-          }`}
-          title="Titre"
+          isActive={editor.isActive('heading', { level: 2 })}
+          title="Titre 2"
         >
           <Heading2 className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('blockquote') ? 'bg-gray-300' : ''
-          }`}
+          isActive={editor.isActive('blockquote')}
           title="Citation"
         >
           <Quote className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
+
+        <ToolbarButton
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          isActive={editor.isActive('code')}
+          title="Code inline"
+        >
+          <Code className="w-4 h-4" />
+        </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('bulletList') ? 'bg-gray-300' : ''
-          }`}
+          isActive={editor.isActive('bulletList')}
           title="Liste à puces"
         >
           <List className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('orderedList') ? 'bg-gray-300' : ''
-          }`}
+          isActive={editor.isActive('orderedList')}
           title="Liste numérotée"
         >
           <ListOrdered className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={addLink}
-          className={`p-2 rounded hover:bg-gray-200 transition-colors ${
-            editor.isActive('link') ? 'bg-gray-300' : ''
-          }`}
+          isActive={editor.isActive('link')}
           title="Insérer un lien"
         >
           <Link2 className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
-          onClick={addImage}
-          className="p-2 rounded hover:bg-gray-200 transition-colors"
-          title="Insérer une image"
+        <ToolbarButton
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          title="Ligne horizontale"
         >
-          <ImageIcon className="w-4 h-4" />
-        </button>
+          <Minus className="w-4 h-4" />
+        </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().undo()}
-          className="p-2 rounded hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Annuler"
+          title="Annuler (Ctrl+Z)"
         >
           <Undo className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
 
-        <button
-          type="button"
+        <ToolbarButton
           onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().redo()}
-          className="p-2 rounded hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Rétablir"
+          title="Rétablir (Ctrl+Y)"
         >
           <Redo className="w-4 h-4" />
-        </button>
+        </ToolbarButton>
       </div>
 
       {/* Éditeur */}

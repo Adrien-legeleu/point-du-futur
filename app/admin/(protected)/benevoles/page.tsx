@@ -19,18 +19,21 @@ export default async function BenevolesPage() {
     },
     {
       label: 'Actifs',
+      // @ts-ignore
       value: benevoles?.filter((b) => b.status === 'active').length || 0,
       icon: UserCheck,
       color: 'green',
     },
     {
       label: 'En attente',
+      // @ts-ignore
       value: benevoles?.filter((b) => b.status === 'pending').length || 0,
       icon: Clock,
       color: 'orange',
     },
     {
       label: 'Inactifs',
+      // @ts-ignore
       value: benevoles?.filter((b) => b.status === 'inactive').length || 0,
       icon: UserX,
       color: 'red',

@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+import EvenementModal from './EvenementModal';
 
 type Evenement = {
   id: string;
@@ -15,6 +16,7 @@ type Evenement = {
   heure_fin: string | null;
   lieu: string;
   ville: string;
+  adresse: string | null;
   type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
   places_max: number | null;
   places_disponibles: number | null;
@@ -28,6 +30,10 @@ type Props = {
 };
 
 export default function EvenementsList({ evenements }: Props) {
+  const [selectedEvenement, setSelectedEvenement] = useState<Evenement | null>(
+    null
+  );
+
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       day: 'numeric',
@@ -78,105 +84,102 @@ export default function EvenementsList({ evenements }: Props) {
   }
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-primary-50 to-zinc-50">
-      <div className="max-w-7xl mx-auto">
-        {/* Grid Pinterest style avec colonnes */}
-        <div className="columns-2 lg:columns-3 gap-8 space-y-8">
-          {evenements.map((evenement, index) => (
-            <motion.div
-              key={evenement.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="break-inside-avoid"
-            >
-              <div className="group cursor-pointer mb-8">
-                {/* Image */}
-                {evenement.image_url && (
-                  <div className="relative w-full overflow-hidden bg-gray-100">
-                    <Image
-                      src={evenement.image_url}
-                      alt={evenement.titre}
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-cover group-hover:opacity-90 transition-opacity duration-300"
-                    />
-
-                    {/* Badge type */}
-                    <div className="absolute top-4 right-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeBadge(
-                          evenement.type
-                        )}`}
-                      >
-                        {getTypeLabel(evenement.type)}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Contenu */}
-                <div className="mt-4">
-                  {/* Titre */}
-                  <h3 className="sm:text-3xl text-2xl md:text-4xl font-bold text-primary-600/80 mb-2 group-hover:text-primary-blue transition-colors">
-                    {evenement.titre}
-                  </h3>
-
-                  {/* Infos pratiques */}
-                  <div className="space-y-2 text-sm text-neutral-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4 flex-shrink-0" />
-                      <span>{formatDate(evenement.date_debut)}</span>
-                    </div>
-
-                    {evenement.heure_debut && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 flex-shrink-0" />
-                        <span>{evenement.heure_debut}</span>
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 flex-shrink-0" />
-                      <span>
-                        {evenement.lieu}, {evenement.ville}
-                      </span>
-                    </div>
-
-                    {evenement.places_disponibles !== null && (
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 flex-shrink-0" />
-                        <span>
-                          {evenement.places_disponibles} places disponibles
+    <>
+      <section className="py-20 px-6 bg-gradient-to-b from-primary-50 to-zinc-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="columns-2 lg:columns-3 gap-8 space-y-8">
+            {evenements.map((evenement, index) => (
+              <motion.div
+                key={evenement.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="break-inside-avoid mb-8"
+              >
+                <div
+                  className="group cursor-pointer"
+                  onClick={() => setSelectedEvenement(evenement)}
+                >
+                  {evenement.image_url && (
+                    <div className="relative w-full overflow-hidden rounded-2xl bg-gray-100 mb-4">
+                      <Image
+                        src={evenement.image_url}
+                        alt={evenement.titre}
+                        width={800}
+                        height={600}
+                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 right-4">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeBadge(
+                            evenement.type
+                          )}`}
+                        >
+                          {getTypeLabel(evenement.type)}
                         </span>
                       </div>
-                    )}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-neutral-600 text-sm line-clamp-3 mb-4">
-                    {evenement.description}
-                  </p>
-
-                  {/* Bouton inscription */}
-                  {evenement.lien_inscription && (
-                    <a
-                      href={evenement.lien_inscription}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-md hover:shadow-lg transition-all"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      S'inscrire
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    </div>
                   )}
+
+                  <div>
+                    <h3 className="sm:text-2xl text-xl md:text-3xl font-bold text-primary-600/90 mb-3 group-hover:text-primary-700 transition-colors">
+                      {evenement.titre}
+                    </h3>
+
+                    <div className="space-y-2 sm:text-sm text-xs text-neutral-600 mb-3">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 flex-shrink-0" />
+                        <span>{formatDate(evenement.date_debut)}</span>
+                      </div>
+
+                      {evenement.heure_debut && (
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-4 h-4 flex-shrink-0" />
+                          <span>{evenement.heure_debut}</span>
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 flex-shrink-0" />
+                        <span>
+                          {evenement.lieu}, {evenement.ville}
+                        </span>
+                      </div>
+
+                      {evenement.places_disponibles !== null && (
+                        <div className="flex items-center gap-2">
+                          <Users className="w-4 h-4 flex-shrink-0" />
+                          <span>
+                            {evenement.places_disponibles} places disponibles
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <p className="text-neutral-600 text-sm line-clamp-3 mb-4">
+                      {evenement.description}
+                    </p>
+
+                    <div className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                      Voir les détails
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Modal */}
+      {selectedEvenement && (
+        <EvenementModal
+          evenement={selectedEvenement}
+          isOpen={!!selectedEvenement}
+          onClose={() => setSelectedEvenement(null)}
+        />
+      )}
+    </>
   );
 }
