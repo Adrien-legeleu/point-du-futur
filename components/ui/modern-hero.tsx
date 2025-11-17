@@ -66,7 +66,7 @@ const CenterImage = () => {
           backgroundSize,
           opacity,
           // ✅ il faut une vraie URL CSS ici
-          backgroundImage: "url('/close-up-community-concept-with-hands.jpg')",
+          backgroundImage: "url('/cheerful-students-with-notepads.jpg')",
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
         }}

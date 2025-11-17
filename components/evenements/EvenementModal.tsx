@@ -3,9 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, MapPin, Clock, Users, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-
-const AddToCalendarButton: any = 'add-to-calendar-button';
 
 type EvenementModalProps = {
   evenement: {
@@ -33,26 +30,6 @@ export default function EvenementModal({
   isOpen,
   onClose,
 }: EvenementModalProps) {
-  const calendarButtonRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isOpen && calendarButtonRef.current) {
-      // Import dynamique du script add-to-calendar-button
-      const script = document.createElement('script');
-      script.src =
-        'https://cdn.jsdelivr.net/npm/add-to-calendar-button@2/dist/module/index.js';
-      script.type = 'module';
-      script.async = true;
-      document.head.appendChild(script);
-
-      return () => {
-        if (document.head.contains(script)) {
-          document.head.removeChild(script);
-        }
-      };
-    }
-  }, [isOpen]);
-
   if (!isOpen) return null;
 
   const formatDate = (date: string) => {
@@ -74,11 +51,7 @@ export default function EvenementModal({
     return colors[type as keyof typeof colors] || colors.seminaire;
   };
 
-  // Format pour add-to-calendar-button
-  const startDate = evenement.date_debut;
-  const startTime = evenement.heure_debut || '09:00';
-  const endDate = evenement.date_fin || evenement.date_debut;
-  const endTime = evenement.heure_fin || '18:00';
+  // Génère l'URL Google Calendar pré-remplie
   const getGoogleCalendarUrl = () => {
     const startTimeStr = evenement.heure_debut || '09:00';
     const endDateStr = evenement.date_fin || evenement.date_debut;
@@ -87,10 +60,10 @@ export default function EvenementModal({
     const start = new Date(`${evenement.date_debut}T${startTimeStr}`);
     const end = new Date(`${endDateStr}T${endTimeStr}`);
 
-    const formatDate = (date: Date) =>
+    const formatDateTime = (date: Date) =>
       date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
 
-    const dates = `${formatDate(start)}/${formatDate(end)}`;
+    const dates = `${formatDateTime(start)}/${formatDateTime(end)}`;
 
     const params = new URLSearchParams({
       action: 'TEMPLATE',
@@ -242,28 +215,15 @@ export default function EvenementModal({
                 </a>
               )}
 
-              <div ref={calendarButtonRef}>
-                <AddToCalendarButton
-                  name={evenement.titre}
-                  description={evenement.description}
-                  startDate={startDate}
-                  startTime={startTime}
-                  endDate={endDate}
-                  endTime={endTime}
-                  timeZone="Europe/Paris"
-                  location={`${evenement.lieu}, ${evenement.ville}${
-                    evenement.adresse ? ', ' + evenement.adresse : ''
-                  }`}
-                  options="Google,Apple,Outlook.com"
-                  buttonStyle="round"
-                  trigger="click"
-                  hideIconButton={true}
-                  inline={true}
-                  size="3"
-                  label="Ajouter au calendrier"
-                  lightMode="bodyScheme"
-                />
-              </div>
+              <a
+                href={getGoogleCalendarUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border border-gray-300 text-gray-800 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+              >
+                <Calendar className="w-5 h-5" />
+                Ajouter à mon calendrier
+              </a>
             </div>
           </div>
         </motion.div>
