@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/types';
+import type { Article } from '@/lib/supabase/articles';
 import { categories } from '@/lib/constants';
 
 interface RelatedArticlesProps {
@@ -53,8 +53,13 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
               {/* Image */}
               <Link href={`/actualites/${article.slug}`}>
                 <div className="relative h-48 overflow-hidden bg-gray-200">
-                  {/* Placeholder */}
-                  <div className="absolute inset-0 bg-gray-300" />
+                  {article.image && (
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
 
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 z-10">
@@ -81,14 +86,17 @@ export default function RelatedArticles({ articles }: RelatedArticlesProps) {
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    {new Date(article.publishedAt).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                    })}
+                    {new Date(article.published_at).toLocaleDateString(
+                      'fr-FR',
+                      {
+                        day: 'numeric',
+                        month: 'short',
+                      }
+                    )}
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
-                    {article.readTime} min
+                    {article.reading_time} min
                   </div>
                 </div>
 

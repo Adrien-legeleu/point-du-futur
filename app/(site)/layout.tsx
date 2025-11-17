@@ -8,7 +8,9 @@ export default function SiteLayout({
 }) {
   return (
     <div className="">
+      <Header />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }

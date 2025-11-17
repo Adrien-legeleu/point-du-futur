@@ -128,11 +128,11 @@ export default function ImageUpload({
       {error && <p className="text-sm text-red-600">{error}</p>}
 
       {preview && (
-        <div className="relative rounded-xl overflow-hidden">
+        <div className="relative  overflow-hidden">
           <img
             src={preview}
             alt="Preview"
-            className="w-full h-64 object-cover"
+            className="h-auto max-w-32 rounded-xl object-cover"
             onError={(e) => {
               e.currentTarget.src = '/images/default-article.jpg';
             }}

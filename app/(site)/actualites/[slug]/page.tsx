@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getRelatedArticles, getAllArticleSlugs } from '@/lib/supabase/articles';
+import {
+  getArticleBySlug,
+  getRelatedArticles,
+  getAllArticleSlugs,
+} from '@/lib/supabase/articles';
 import ArticleContent from '@/components/actualites/ArticleContent';
 import ArticleShare from '@/components/actualites/ArticleShare';
 import RelatedArticles from '@/components/actualites/RelatedArticles';
@@ -10,7 +14,7 @@ import ArticleHero from '@/components/actualites/ArticlesHero';
 export const revalidate = 60;
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // Au lieu de { slug: string }
 };
 
 // Generate static params for all articles
@@ -23,7 +27,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     return {
@@ -39,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: article.excerpt,
       url: `https://pontdufutur.org/actualites/${article.slug}`,
       type: 'article',
-      publishedTime: article.publishedAt,
+      publishedTime: article.published_at,
       authors: [article.author.name],
       images: [
         {
@@ -63,14 +68,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const article = await getArticleBySlug(params.slug);
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     notFound();
   }
 
   // Get related articles (same category, exclude current)
-  const relatedArticles = await getRelatedArticles(article.category, article.slug);
+  const relatedArticles = await getRelatedArticles(
+    article.category,
+    article.slug
+  );
 
   return (
     <>

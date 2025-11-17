@@ -85,14 +85,17 @@ export type ArticleInsert = Omit<
 >;
 export type ArticleUpdate = Partial<ArticleInsert>;
 
+// ================================================
+// 2. ÉVÉNEMENTS (selon schéma exact)
+// ================================================
 export interface EvenementDB {
   id: string;
   titre: string;
   description: string;
-  date_debut: string;
-  date_fin: string | null;
-  heure_debut: string | null;
-  heure_fin: string | null;
+  date_debut: string; // DATE
+  date_fin: string | null; // DATE
+  heure_debut: string | null; // TIME
+  heure_fin: string | null; // TIME
   lieu: string;
   ville: string;
   adresse: string | null;
@@ -100,37 +103,20 @@ export interface EvenementDB {
   places_max: number | null;
   places_disponibles: number | null;
   image_url: string | null;
-  lien_inscription: string | null;
   status: 'draft' | 'published' | 'archived';
-  created_at: string;
-  updated_at: string;
+  lien_inscription: string | null;
+  created_at: string; // TIMESTAMP
+  updated_at: string; // TIMESTAMP
 }
 
 export type EvenementStatus = EvenementDB['status'];
 export type EvenementType = EvenementDB['type'];
 
-export interface EvenementFormData {
-  titre: string;
-  description: string;
-  date_debut: string;
-  date_fin: string;
-  heure_debut: string;
-  heure_fin: string;
-  lieu: string;
-  ville: string;
-  type: string;
-  places_max: number;
-  places_disponibles: number;
-  image_url: string;
-  status: string;
-}
-
-export type EvenementInsert = Omit<
+export type EvenementInsert = Omit
   EvenementDB,
   'id' | 'created_at' | 'updated_at'
 >;
 export type EvenementUpdate = Partial<EvenementInsert>;
-
 // ================================================
 // 3. MEMBRES
 // ================================================

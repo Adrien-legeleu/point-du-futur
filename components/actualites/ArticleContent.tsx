@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Article } from '@/lib/types';
+import type { Article } from '@/lib/supabase/articles';
 
 interface ArticleContentProps {
   article: Article;
@@ -37,7 +37,7 @@ export default function ArticleContent({ article }: ArticleContentProps) {
         >
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-accent-600/10 flex items-center justify-center text-3xl">
-              {article.author.avatar}
+              {article.author.avatar || '👤'}
             </div>
             <div>
               <p className="text-sm text-gray-500 mb-1">Article rédigé par</p>

@@ -67,10 +67,45 @@ export default function EvenementForm({ evenement }: Props) {
         throw new Error('Veuillez remplir tous les champs obligatoires');
       }
 
+      // ✅ Créer un objet proprement typé pour Supabase
+      const evenementData: {
+        titre: string;
+        description: string;
+        date_debut: string;
+        date_fin: string | null;
+        heure_debut: string | null;
+        heure_fin: string | null;
+        lieu: string;
+        ville: string;
+        adresse: string | null;
+        type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
+        places_max: number | null;
+        places_disponibles: number | null;
+        image_url: string | null;
+        lien_inscription: string | null;
+        status: 'draft' | 'published' | 'archived';
+      } = {
+        titre: formData.titre,
+        description: formData.description,
+        date_debut: formData.date_debut,
+        date_fin: formData.date_fin,
+        heure_debut: formData.heure_debut,
+        heure_fin: formData.heure_fin,
+        lieu: formData.lieu,
+        ville: formData.ville,
+        adresse: formData.adresse,
+        type: formData.type,
+        places_max: formData.places_max,
+        places_disponibles: formData.places_disponibles,
+        image_url: formData.image_url,
+        lien_inscription: formData.lien_inscription,
+        status: formData.status,
+      };
+
       if (evenement?.id) {
         const { error: updateError } = await supabase
           .from('evenements')
-          .update(formData)
+          .update(evenementData)
           .eq('id', evenement.id);
 
         if (updateError) throw updateError;
@@ -78,7 +113,7 @@ export default function EvenementForm({ evenement }: Props) {
       } else {
         const { error: insertError } = await supabase
           .from('evenements')
-          .insert(formData);
+          .insert(evenementData);
 
         if (insertError) throw insertError;
         setSuccess('Événement créé avec succès !');

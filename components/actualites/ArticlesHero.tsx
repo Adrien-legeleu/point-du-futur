@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
 import Link from 'next/link';
-import type { Article } from '@/lib/types';
+import type { Article } from '@/lib/supabase/articles';
 import { categories } from '@/lib/constants';
 
 interface ArticleHeroProps {
@@ -72,7 +72,7 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           <div className="flex items-center gap-2">
             <Calendar className="w-5 h-5 text-success" />
             <span>
-              {new Date(article.publishedAt).toLocaleDateString('fr-FR', {
+              {new Date(article.published_at).toLocaleDateString('fr-FR', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric',
@@ -81,7 +81,7 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           </div>
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-warning" />
-            <span>{article.readTime} min de lecture</span>
+            <span>{article.reading_time} min de lecture</span>
           </div>
         </motion.div>
 
@@ -92,8 +92,13 @@ export default function ArticleHero({ article }: ArticleHeroProps) {
           transition={{ delay: 0.3 }}
           className="relative aspect-video rounded-[2rem] overflow-hidden shadow-lg mb-8 bg-gray-100"
         >
-          {/* Placeholder */}
-          <div className="absolute inset-0 bg-gray-200" />
+          {article.image && (
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-full object-cover"
+            />
+          )}
         </motion.div>
 
         {/* Tags */}
