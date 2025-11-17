@@ -9,7 +9,7 @@ interface ArticleContentProps {
 
 export default function ArticleContent({ article }: ArticleContentProps) {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-b from-white to-zinc-50">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,26 +26,6 @@ export default function ArticleContent({ article }: ArticleContentProps) {
             className="article-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
-        </motion.div>
-
-        {/* Author card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 p-8 bg-gray-50 rounded-[2rem] border border-gray-100"
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-accent-600/10 flex items-center justify-center text-3xl">
-              {article.author.avatar || '👤'}
-            </div>
-            <div>
-              <p className="text-sm text-gray-500 mb-1">Article rédigé par</p>
-              <p className="text-xl font-bold text-gray-900">
-                {article.author.name}
-              </p>
-            </div>
-          </div>
         </motion.div>
       </div>
 

@@ -53,7 +53,9 @@ export type Database = {
       candidatures: {
         Row: CandidatureDB;
         Insert: Omit<CandidatureDB, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<CandidatureDB, 'id' | 'created_at' | 'updated_at'>>;
+        Update: Partial<
+          Omit<CandidatureDB, 'id' | 'created_at' | 'updated_at'>
+        >;
       };
       notifications: {
         Row: NotificationDB;

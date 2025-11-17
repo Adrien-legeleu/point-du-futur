@@ -6,28 +6,10 @@ import { supabase } from '@/lib/supabase/client';
 import { motion } from 'framer-motion';
 import { Save, Loader, Calendar, MapPin, Users } from 'lucide-react';
 import ImageUpload from './ImageUpload';
-
-type Evenement = {
-  id?: string;
-  titre: string;
-  description: string;
-  date_debut: string;
-  date_fin: string | null;
-  heure_debut: string | null;
-  heure_fin: string | null;
-  lieu: string;
-  ville: string;
-  adresse: string | null;
-  type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
-  places_max: number | null;
-  places_disponibles: number | null;
-  image_url: string | null;
-  lien_inscription: string | null;
-  status: 'draft' | 'published' | 'archived';
-};
+import type { EvenementDB, EvenementInsert } from '@/lib/types';
 
 type Props = {
-  evenement?: Evenement;
+  evenement?: EvenementDB;
 };
 
 export default function EvenementForm({ evenement }: Props) {
@@ -36,24 +18,43 @@ export default function EvenementForm({ evenement }: Props) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const [formData, setFormData] = useState<Evenement>(
-    evenement || {
-      titre: '',
-      description: '',
-      date_debut: '',
-      date_fin: null,
-      heure_debut: null,
-      heure_fin: null,
-      lieu: '',
-      ville: '',
-      adresse: null,
-      type: 'seminaire',
-      places_max: null,
-      places_disponibles: null,
-      image_url: null,
-      lien_inscription: null,
-      status: 'draft',
-    }
+  // ✅ Utiliser EvenementInsert comme type pour formData
+  const [formData, setFormData] = useState<EvenementInsert>(
+    evenement
+      ? {
+          titre: evenement.titre,
+          description: evenement.description,
+          date_debut: evenement.date_debut,
+          date_fin: evenement.date_fin,
+          heure_debut: evenement.heure_debut,
+          heure_fin: evenement.heure_fin,
+          lieu: evenement.lieu,
+          ville: evenement.ville,
+          adresse: evenement.adresse,
+          type: evenement.type,
+          places_max: evenement.places_max,
+          places_disponibles: evenement.places_disponibles,
+          image_url: evenement.image_url,
+          status: evenement.status,
+          lien_inscription: evenement.lien_inscription,
+        }
+      : {
+          titre: '',
+          description: '',
+          date_debut: '',
+          date_fin: null,
+          heure_debut: null,
+          heure_fin: null,
+          lieu: '',
+          ville: '',
+          adresse: null,
+          type: 'seminaire',
+          places_max: null,
+          places_disponibles: null,
+          image_url: null,
+          status: 'draft',
+          lien_inscription: null,
+        }
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -67,53 +68,22 @@ export default function EvenementForm({ evenement }: Props) {
         throw new Error('Veuillez remplir tous les champs obligatoires');
       }
 
-      // ✅ Créer un objet proprement typé pour Supabase
-      const evenementData: {
-        titre: string;
-        description: string;
-        date_debut: string;
-        date_fin: string | null;
-        heure_debut: string | null;
-        heure_fin: string | null;
-        lieu: string;
-        ville: string;
-        adresse: string | null;
-        type: 'seminaire' | 'colloque' | 'atelier' | 'rencontre' | 'conference';
-        places_max: number | null;
-        places_disponibles: number | null;
-        image_url: string | null;
-        lien_inscription: string | null;
-        status: 'draft' | 'published' | 'archived';
-      } = {
-        titre: formData.titre,
-        description: formData.description,
-        date_debut: formData.date_debut,
-        date_fin: formData.date_fin,
-        heure_debut: formData.heure_debut,
-        heure_fin: formData.heure_fin,
-        lieu: formData.lieu,
-        ville: formData.ville,
-        adresse: formData.adresse,
-        type: formData.type,
-        places_max: formData.places_max,
-        places_disponibles: formData.places_disponibles,
-        image_url: formData.image_url,
-        lien_inscription: formData.lien_inscription,
-        status: formData.status,
-      };
-
       if (evenement?.id) {
+        // ✅ Cast explicite vers le type Update de Supabase
         const { error: updateError } = await supabase
           .from('evenements')
-          .update(evenementData)
+          .update(
+            formData as Database['public']['Tables']['evenements']['Update']
+          )
           .eq('id', evenement.id);
 
         if (updateError) throw updateError;
         setSuccess('Événement modifié avec succès !');
       } else {
+        // ✅ Insert fonctionne déjà
         const { error: insertError } = await supabase
           .from('evenements')
-          .insert(evenementData);
+          .insert(formData);
 
         if (insertError) throw insertError;
         setSuccess('Événement créé avec succès !');
@@ -184,7 +154,7 @@ export default function EvenementForm({ evenement }: Props) {
             onChange={(e) =>
               setFormData({
                 ...formData,
-                type: e.target.value as Evenement['type'],
+                type: e.target.value as EvenementDB['type'],
               })
             }
             className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
@@ -287,7 +257,7 @@ export default function EvenementForm({ evenement }: Props) {
                   heure_fin: e.target.value || null,
                 })
               }
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
             />
           </div>
         </div>
@@ -426,7 +396,7 @@ export default function EvenementForm({ evenement }: Props) {
           onChange={(e) =>
             setFormData({
               ...formData,
-              status: e.target.value as Evenement['status'],
+              status: e.target.value as EvenementDB['status'],
             })
           }
           className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"

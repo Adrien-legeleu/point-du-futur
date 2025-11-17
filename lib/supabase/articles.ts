@@ -141,7 +141,14 @@ export async function getRelatedArticles(
 }
 
 export async function getAllArticleSlugs(): Promise<string[]> {
-  const supabase = await createServerSupabaseClient();
+  // ⚠️ generateStaticParams s'exécute au build time, pas pendant une requête
+  // On ne peut pas utiliser cookies() ici, donc on utilise createClient directement
+  const { createClient } = await import('@supabase/supabase-js');
+
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const { data, error } = await supabase
     .from('articles')
@@ -158,17 +165,4 @@ export async function getAllArticleSlugs(): Promise<string[]> {
   }
 
   return data.map((article) => article.slug);
-}
-
-// Si tu veux utiliser la fonction RPC pour les vues (optionnel) :
-export async function incrementArticleViews(slug: string): Promise<void> {
-  const supabase = await createServerSupabaseClient();
-
-  const { error } = await supabase.rpc('increment_article_views', {
-    article_slug: slug,
-  });
-
-  if (error) {
-    console.error('Error incrementing views:', error);
-  }
 }

@@ -112,10 +112,11 @@ export interface EvenementDB {
 export type EvenementStatus = EvenementDB['status'];
 export type EvenementType = EvenementDB['type'];
 
-export type EvenementInsert = Omit
+export type EvenementInsert = Omit<
   EvenementDB,
   'id' | 'created_at' | 'updated_at'
 >;
+
 export type EvenementUpdate = Partial<EvenementInsert>;
 // ================================================
 // 3. MEMBRES
