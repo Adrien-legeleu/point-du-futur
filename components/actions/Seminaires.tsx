@@ -15,16 +15,14 @@ const seminairesBenefits = [
 
 export default function Seminaires() {
   return (
-    <section id="seminaires" className="py-24 md:py-32 bg-white relative">
+    <section
+      id="seminaires"
+      className="py-24 md:py-32 bg-gradient-to-b from-zinc-50 to-white relative"
+    >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-20 items-start">
+        <div className="md:grid flex flex-col-reverse md:grid-cols-2 gap-20 items-start">
           {/* ===== Left - Image (séminaires → image à gauche) ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 150 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative h-full w-full"
-          >
+          <motion.div className="relative h-full w-full">
             <PixelImage
               src="/actions/group-male-friends-enjoying-restaurant (1).jpg"
               grid="6x4"
@@ -53,10 +51,6 @@ export default function Seminaires() {
               {seminairesBenefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  initial={{ y: 40, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
                   className="flex items-center py-7 px-3 border-b-2 border-zinc-100 hover:border-primary-200 duration-300 gap-3"
                 >
                   <CheckCircle className="w-4 h-4 text-primary-600" />

@@ -13,6 +13,7 @@ type Grid = {
 const DEFAULT_GRIDS: Record<string, Grid> = {
   '6x4': { rows: 4, cols: 6 },
   '8x8': { rows: 8, cols: 8 },
+  '16x16': { rows: 16, cols: 16 },
   '8x3': { rows: 3, cols: 8 },
   '4x6': { rows: 6, cols: 4 },
   '3x8': { rows: 8, cols: 3 },

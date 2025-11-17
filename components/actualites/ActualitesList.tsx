@@ -45,7 +45,7 @@ export default function ActualitesList({ articles }: Props) {
     <section className="py-20 px-6 bg-gradient-to-b from-primary-50 to-zinc-50">
       <div className="max-w-7xl mx-auto">
         {/* Grid d'articles - Pinterest style avec colonnes */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        <div className="columns-2 lg:columns-3 gap-8 space-y-8">
           {articles.map((article, index) => (
             <motion.div
               key={article.id}
@@ -70,7 +70,7 @@ export default function ActualitesList({ articles }: Props) {
                   {/* Contenu */}
                   <div className="mt-4">
                     {/* Titre */}
-                    <h3 className="text-3xl md:text-4xl font-bold text-primary-600/80 mb-2 group-hover:text-primary-blue transition-colors">
+                    <h3 className="sm:text-3xl text-2xl md:text-4xl font-bold text-primary-600/80 mb-2 group-hover:text-primary-blue transition-colors">
                       {article.title}
                     </h3>
 

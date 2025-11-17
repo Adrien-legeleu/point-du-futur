@@ -22,11 +22,7 @@ export default function Sensibilisation() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-20 items-start">
           {/* ===== Left - Content ===== */}
-          <motion.div
-            initial={{ y: 150 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-1 text-energy-500">
               Sensibilisation
             </h2>
@@ -38,20 +34,11 @@ export default function Sensibilisation() {
               s’engager.
             </p>
 
-            <p className="text-xs uppercase tracking-wide text-energy-500 mb-6">
-              Sessions interactives · Intervenants engagés · Format adaptable
-              aux publics
-            </p>
-
             {/* Benefits list */}
             <div className="space-y-4 mb-8">
               {sensibilisationBenefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  initial={{ y: 40, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
                   className="flex items-center py-7 px-3 border-b-2 border-zinc-100 hover:border-energy-200 duration-300 gap-3"
                 >
                   <CheckCircle className="w-4 h-4 text-energy-500" />
@@ -73,15 +60,10 @@ export default function Sensibilisation() {
           </motion.div>
 
           {/* ===== Right - Image (sensibilisation → image à droite) ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 150 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative h-full w-full"
-          >
+          <motion.div className="relative h-full w-full">
             <PixelImage
               src="/actions/smiling-guy-turning-pages-textbook.jpg"
-              grid="8x3"
+              grid="6x4"
             />
           </motion.div>
         </div>

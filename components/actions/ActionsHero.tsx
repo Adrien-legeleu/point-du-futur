@@ -28,7 +28,7 @@ export const ActionsHero = () => {
 
           <ContainerInset className="max-h-[700px] w-auto  ">
             <HeroImage
-              src="/about/team-meeting-startups.jpg"
+              src="/happy-university-students-using-laptop-while-sitting-hallway.jpg"
               data-src="team-meeting-startups.jpg"
             />
           </ContainerInset>
@@ -44,7 +44,7 @@ const Schedule = () => {
   return (
     <section
       id="launch-schedule"
-      className="mx-auto max-w-5xl px-4 pb-48 pt-20 text-zinc-900"
+      className="mx-auto max-w-5xl px-4  pb-20 md:pb-48 md:pt-20 text-zinc-900"
     >
       <motion.h1
         initial={{ y: 48, opacity: 0 }}
@@ -125,7 +125,7 @@ const ScheduleItem = ({ id, title, meta, description }: ScheduleItemProps) => {
         initial={{ y: 48, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ ease: 'easeInOut', duration: 0.75 }}
-        className="group mb-9 flex cursor-pointer items-center justify-between border-b-2 border-zinc-100 px-3 pb-9"
+        className="group mb-9 flex max-md:flex-col max-md:gap-5 cursor-pointer md:items-center justify-between border-b-2 border-zinc-100 px-3 pb-9"
       >
         <div>
           <div className="mb-1.5 flex items-center gap-2">
@@ -135,7 +135,7 @@ const ScheduleItem = ({ id, title, meta, description }: ScheduleItemProps) => {
             {meta}
           </p>
         </div>
-        <div className="max-w-sm text-right text-sm text-zinc-400">
+        <div className="max-w-sm md:text-right text-sm text-zinc-400">
           {description}
         </div>
       </motion.div>

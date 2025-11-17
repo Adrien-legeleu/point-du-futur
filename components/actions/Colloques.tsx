@@ -15,15 +15,14 @@ const colloquesBenefits = [
 
 export default function Colloques() {
   return (
-    <section id="colloques" className="py-24 md:py-32 bg-zinc-50 relative">
+    <section
+      id="colloques"
+      className="py-24 md:py-32 bg-gradient-to-t to-white from-zinc-50 relative"
+    >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-20 items-start">
           {/* ===== Left - Content ===== */}
-          <motion.div
-            initial={{ y: 150 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-1 text-accent-500">
               Colloques
             </h2>
@@ -40,10 +39,6 @@ export default function Colloques() {
               {colloquesBenefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  initial={{ y: 40, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
                   className="flex items-center py-7 px-3 border-b-2 border-zinc-100 hover:border-accent-200 duration-300 gap-3"
                 >
                   <CheckCircle className="w-4 h-4 text-accent-500" />
@@ -65,15 +60,10 @@ export default function Colloques() {
           </motion.div>
 
           {/* ===== Right - Image (colloques → image à droite) ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 150 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative h-full w-full"
-          >
+          <motion.div className="relative h-full w-full">
             <PixelImage
               src="/actions/people-meeting-support-group.jpg"
-              grid="8x3"
+              grid="6x4"
             />
           </motion.div>
         </div>

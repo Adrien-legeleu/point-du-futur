@@ -20,14 +20,9 @@ export default function Orientation() {
       className="py-24 md:py-32 bg-gradient-to-b to-zinc-50 from-white relative"
     >
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-20 items-start">
+        <div className="md:grid flex flex-col-reverse md:grid-cols-2 gap-20 items-start">
           {/* ===== Left - Image (orientation → image à gauche) ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 150 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative h-full w-full"
-          >
+          <motion.div className="relative h-full w-full">
             <PixelImage
               src="/actions/call-center-onboarding-specialist-providing-training-new-agent-recruit.jpg"
               grid="6x4"
@@ -35,11 +30,7 @@ export default function Orientation() {
           </motion.div>
 
           {/* ===== Right - Content ===== */}
-          <motion.div
-            initial={{ y: 150 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-1 text-accent-500">
               Orientation
             </h2>
@@ -56,10 +47,6 @@ export default function Orientation() {
               {orientationBenefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
                   className="flex items-center py-7 px-3 border-b-2 border-zinc-100 hover:border-accent-200 duration-300 gap-3"
                 >
                   <CheckCircle className="w-4 h-4 text-accent-500" />

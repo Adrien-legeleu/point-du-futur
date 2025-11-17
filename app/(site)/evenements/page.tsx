@@ -22,10 +22,10 @@ export default async function EvenementsPage() {
     .order('date_debut', { ascending: true });
 
   return (
-    <>
+    <div className="overflow-hidden w-full">
       <EvenementsHero />
       <EvenementsList evenements={evenements || []} />
       <EvenementsCTA />
-    </>
+    </div>
   );
 }

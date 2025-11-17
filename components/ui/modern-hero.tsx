@@ -12,7 +12,7 @@ import { Users, BookOpen, Network, LucideIcon } from 'lucide-react';
 export const SmoothScrollHero = () => {
   return (
     <div className="bg-zinc-50">
-      <h1 className="absolute top-0 z-20 left-1/2 -translate-x-1/2 translate-y-1/2 text-center  text-9xl font-extrabold uppercase text-primary-600/80  ">
+      <h1 className="absolute top-0 z-20 left-1/2 -translate-x-1/2 translate-y-1/2 text-center  text-8xl md:text-9xl font-extrabold uppercase text-primary-600/80  ">
         Pont du Futur
       </h1>
       <Hero />
@@ -207,7 +207,7 @@ const ScheduleItem = ({ title, subtitle, detail, Icon }: ScheduleItemProps) => {
       initial={{ y: 48, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ ease: 'easeInOut', duration: 0.75 }}
-      className="mb-9 flex items-center justify-between border-b-2 border-zinc-100 px-3 pb-9"
+      className="mb-9 flex md:items-center max-md:flex-col max-md:gap-4 justify-between border-b-2 border-zinc-100 px-3 pb-9"
     >
       <div>
         <div className="mb-1.5 flex items-center gap-2">
@@ -218,7 +218,9 @@ const ScheduleItem = ({ title, subtitle, detail, Icon }: ScheduleItemProps) => {
           {subtitle}
         </p>
       </div>
-      <div className="max-w-sm text-right text-sm text-zinc-400">{detail}</div>
+      <div className="max-w-sm md:text-right text-sm text-zinc-400">
+        {detail}
+      </div>
     </motion.div>
   );
 };

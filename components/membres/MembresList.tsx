@@ -1,64 +1,50 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, MapPin, GraduationCap } from 'lucide-react';
+import { TextDisperse } from '../ui/text-disperse';
 
-export default function MembresList({ membres }: { membres: any[] }) {
+type Membre = {
+  id: string;
+  prenom: string;
+  nom: string;
+};
+
+export default function MembresList({ membres }: { membres: Membre[] }) {
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {membres.map((membre, index) => (
-          <motion.div
-            key={membre.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xl font-bold">
-                {membre.prenom[0]}
-                {membre.nom[0]}
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  {membre.prenom} {membre.nom}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {membre.etablissement || 'Étudiant'}
-                </p>
-              </div>
-            </div>
+    <section className="bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-950 dark:to-zinc-900 px-6 py-16">
+      <div className="max-w-7xl mx-auto">
+        {membres.length === 0 ? (
+          <div className="py-12 text-center">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              Aucun membre pour le moment
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-8 items-center justify-center md:gap-10 lg:gap-16">
+            {membres.map((membre, index) => {
+              const prenom_nom = `${membre.prenom} ${membre.nom}`;
 
-            <div className="space-y-2 text-sm text-gray-600">
-              {membre.ville && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  {membre.ville}
-                </div>
-              )}
-              {membre.niveau_etude && (
-                <div className="flex items-center gap-2">
-                  <GraduationCap className="w-4 h-4" />
-                  {membre.niveau_etude}
-                </div>
-              )}
-            </div>
-
-            {membre.besoins && (
-              <p className="mt-4 text-sm text-gray-600 line-clamp-3">
-                {membre.besoins}
-              </p>
-            )}
-          </motion.div>
-        ))}
+              return (
+                <motion.div
+                  key={membre.id}
+                  initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: index * 0.08,
+                    duration: 0.5,
+                    ease: 'easeOut',
+                  }}
+                  className=" text-lg font-semibold  text-zinc-900 "
+                >
+                  <TextDisperse className="sm:text-2xl text-sm tracking-[0.2rem] ">
+                    {prenom_nom}
+                  </TextDisperse>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
       </div>
-
-      {membres.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">Aucun membre pour le moment</p>
-        </div>
-      )}
-    </div>
+    </section>
   );
 }

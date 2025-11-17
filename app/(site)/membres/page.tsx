@@ -22,10 +22,10 @@ export default async function MembresPage() {
     .order('created_at', { ascending: false });
 
   return (
-    <>
+    <div className="w-full overflow-hidden">
       <MembresHero />
       <MembresList membres={membres || []} />
       <JoinCTA />
-    </>
+    </div>
   );
 }

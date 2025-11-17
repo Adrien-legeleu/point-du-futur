@@ -25,14 +25,14 @@ export default function EvenementsHero() {
   ];
 
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-zinc-50 to-primary-50 pt-24 pb-12">
-      <div className="max-w-7xl flex-1 mx-auto px-6 relative z-10">
+    <section className="relative min-h-[70vh] flex px-6  max-lg:flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-zinc-50 to-primary-50 pt-12 lg:pt-24 pb-12">
+      <div className="max-w-7xl lg:flex-1 px-6  mx-auto relative z-10">
         <div className="text-center">
           <LayeredText lines={lines} />
         </div>
       </div>
 
-      <div className="h-full inset-0 flex-1 w-full flex items-center justify-center">
+      <div className="h-full inset-0 lg:flex-1 w-full flex items-center justify-center">
         <ImagePlayer
           images={IMAGES}
           interval={200}
@@ -41,7 +41,7 @@ export default function EvenementsHero() {
               src={src}
               width={400}
               height={300}
-              className="size-full aspect-9/12 md:aspect-video h-auto max-h-full max-w-xl object-cover inline-block align-middle"
+              className="size-full aspect-video h-auto max-h-full  px-6 max-w-xl object-cover inline-block align-middle"
               alt="showcase"
             />
           )}

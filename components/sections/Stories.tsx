@@ -69,7 +69,10 @@ const Stories = () => {
 
       {/* Nuage de cards flottantes (pas d’images) */}
       <Floating sensitivity={-1} className="overflow-visible">
-        <FloatingElement depth={0.6} className="top-[10%] left-[8%]">
+        <FloatingElement
+          depth={0.6}
+          className="top-[10%] max-md:hidden left-[8%]"
+        >
           <StoryCard text={stories[0]} />
         </FloatingElement>
 
@@ -77,19 +80,31 @@ const Stories = () => {
           <StoryCard text={stories[1]} />
         </FloatingElement>
 
-        <FloatingElement depth={1.8} className="top-[6%] left-[64%]">
+        <FloatingElement
+          depth={1.8}
+          className="top-[6%] max-lg:hidden left-[64%]"
+        >
           <StoryCard text={stories[2]} />
         </FloatingElement>
 
-        <FloatingElement depth={0.8} className="top-[14%] left-[82%]">
+        <FloatingElement
+          depth={0.8}
+          className="top-[14%] max-md:hidden left-[82%]"
+        >
           <StoryCard text={stories[3]} />
         </FloatingElement>
 
-        <FloatingElement depth={1} className="top-[44%] left-[6%]">
+        <FloatingElement
+          depth={1}
+          className="top-[44%] max-md:hidden left-[6%]"
+        >
           <StoryCard text={stories[4]} />
         </FloatingElement>
 
-        <FloatingElement depth={2.2} className="top-[68%] left-[76%]">
+        <FloatingElement
+          depth={2.2}
+          className="top-[68%] max-lg:hidden left-[76%]"
+        >
           <StoryCard text={stories[5]} />
         </FloatingElement>
 
@@ -97,7 +112,10 @@ const Stories = () => {
           <StoryCard text={stories[6]} />
         </FloatingElement>
 
-        <FloatingElement depth={1.2} className="top-[82%] left-[48%]">
+        <FloatingElement
+          depth={1.2}
+          className="top-[82%]  max-md:hidden left-[48%]"
+        >
           <StoryCard text={stories[7]} />
         </FloatingElement>
       </Floating>

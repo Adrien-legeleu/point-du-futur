@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <>
+    <div className="overflow-hidden w-full">
       <Contact />
-    </>
+    </div>
   );
 }

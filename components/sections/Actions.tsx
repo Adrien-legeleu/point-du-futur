@@ -82,16 +82,18 @@ export default function ActionsBentoClean() {
                 isStatic
                 imageSrc={a.image}
                 url="#"
-                className="grid grid-cols-3 items-start gap-4 py-10"
+                className="grid grid-cols-2 md:grid-cols-3 items-start gap-4 py-10"
               >
-                <span className="text-2xl text-primary-500">{a.title}</span>
+                <span className="sm:text-2xl text-xl text-primary-500">
+                  {a.title}
+                </span>
 
-                <span className="text-sm max-w-lg text-left text-neutral-600">
+                <span className="sm:text-sm text-xs max-w-lg text-left text-neutral-600">
                   {a.description}
                 </span>
 
                 {/* Arrow animée quand on hover TOUT l’article */}
-                <div className="flex items-center cursor-pointer justify-end translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="flex items-center max-md:hidden cursor-pointer justify-end translate-y-3 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
                   <ArrowRight className="w-8 h-8 text-black" />
                 </div>
               </LinkPreview>

@@ -1,14 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import type React from 'react';
 
 interface LayeredTextProps {
-  fontSize?: string;
-  fontSizeMd?: string;
-  lineHeight?: number;
-  lineHeightMd?: number;
+  fontSize?: string; // taille pour lg (ex: '72px')
+  fontSizeMd?: string; // taille pour md (ex: '48px')
+  lineHeight?: number; // hauteur de ligne pour lg (ex: 60)
+  lineHeightMd?: number; // hauteur de ligne pour md (ex: 40)
   className?: string;
   lines: {
     top: string;
@@ -16,27 +16,90 @@ interface LayeredTextProps {
   }[];
 }
 
+// 🔎 Breakpoints Tailwind-like : sm < 640, md < 1024, sinon lg
+function useBreakpoint() {
+  const [bp, setBp] = useState<'sm' | 'md' | 'lg'>('lg');
+
+  useEffect(() => {
+    const check = () => {
+      if (typeof window === 'undefined') return;
+      const w = window.innerWidth;
+      if (w < 640) setBp('sm');
+      else if (w < 1024) setBp('md');
+      else setBp('lg');
+    };
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  return bp;
+}
+
 export function LayeredText({
   fontSize = '72px',
-  fontSizeMd = '36px',
+  fontSizeMd = '48px',
   lineHeight = 60,
-  lineHeightMd = 35,
+  lineHeightMd = 42,
   className = '',
   lines,
 }: LayeredTextProps) {
-  // Nouveau titre Pont du Futur
-
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const breakpoint = useBreakpoint();
+
+  const parsePx = (value: string) =>
+    Number.parseFloat(value.toString().replace('px', '') || '0');
+
+  // 📏 Calcul des valeurs actuelles selon le breakpoint
+  const getCurrentMetrics = () => {
+    const fontLg = parsePx(fontSize);
+    const fontMd = parsePx(fontSizeMd);
+
+    if (breakpoint === 'lg') {
+      return {
+        fontSizePx: fontLg,
+        lineHeightPx: lineHeight,
+        hoverYOffset: -lineHeight,
+      };
+    }
+
+    if (breakpoint === 'md') {
+      return {
+        fontSizePx: fontMd,
+        lineHeightPx: lineHeightMd,
+        hoverYOffset: -lineHeightMd * 0.9,
+      };
+    }
+
+    // sm : un cran en dessous encore, proportionnel
+    const fontSm = fontMd * 0.85;
+    const lineSm = lineHeightMd * 0.85;
+
+    return {
+      fontSizePx: fontSm,
+      lineHeightPx: lineSm,
+      hoverYOffset: -lineSm * 0.8,
+    };
+  };
+
+  const { fontSizePx, lineHeightPx, hoverYOffset } = getCurrentMetrics();
 
   const calculateTranslateX = (index: number) => {
-    const baseOffset = 35;
-    const baseOffsetMd = 20;
+    const baseOffsetLg = 35;
+    const baseOffsetMd = 26;
+    const baseOffsetSm = 18;
+
     const centerIndex = Math.floor(lines.length / 2);
-    return {
-      desktop: (index - centerIndex) * baseOffset,
-      mobile: (index - centerIndex) * baseOffsetMd,
-    };
+
+    const baseOffset =
+      breakpoint === 'lg'
+        ? baseOffsetLg
+        : breakpoint === 'md'
+        ? baseOffsetMd
+        : baseOffsetSm;
+
+    return (index - centerIndex) * baseOffset;
   };
 
   useEffect(() => {
@@ -45,34 +108,43 @@ export function LayeredText({
     const container = containerRef.current;
     const paragraphs = container.querySelectorAll('p');
 
-    timelineRef.current = gsap.timeline({ paused: true });
+    // on kill l'ancienne timeline si le breakpoint change
+    timelineRef.current?.kill();
 
-    timelineRef.current.to(paragraphs, {
-      y: window.innerWidth >= 768 ? -60 : -35,
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to(paragraphs, {
+      y: hoverYOffset,
       duration: 0.8,
       ease: 'power2.out',
       stagger: 0.08,
     });
 
-    container.addEventListener('mouseenter', () => timelineRef.current?.play());
-    container.addEventListener('mouseleave', () =>
-      timelineRef.current?.reverse()
-    );
+    timelineRef.current = tl;
+
+    const handleEnter = () => tl.play();
+    const handleLeave = () => tl.reverse();
+
+    container.addEventListener('mouseenter', handleEnter);
+    container.addEventListener('mouseleave', handleLeave);
 
     return () => {
-      timelineRef.current?.kill();
+      container.removeEventListener('mouseenter', handleEnter);
+      container.removeEventListener('mouseleave', handleLeave);
+      tl.kill();
     };
-  }, []);
+  }, [hoverYOffset, breakpoint]);
 
   return (
     <div
       ref={containerRef}
       className={`mx-auto pb-10 font-sans font-black tracking-[-2px] uppercase antialiased cursor-pointer ${className}`}
-      style={{ fontSize, '--md-font-size': fontSizeMd } as React.CSSProperties}
+      style={{ fontSize: `${fontSizePx}px` } as React.CSSProperties}
     >
       <ul className="list-none p-0 m-0 flex flex-col items-center text-primary-600/80">
         {lines.map((line, index) => {
           const translateX = calculateTranslateX(index);
+
           return (
             <li
               key={index}
@@ -85,24 +157,24 @@ export function LayeredText({
                 }
               `}
               style={{
-                height: `${lineHeight}px`,
-                transform: `translateX(${translateX.desktop}px) skew(${
+                height: `${lineHeightPx}px`,
+                transform: `translateX(${translateX}px) skew(${
                   index % 2 === 0 ? '60deg, -30deg' : '0deg, -30deg'
                 }) scaleY(${index % 2 === 0 ? '0.66667' : '1.33333'})`,
               }}
             >
               <p
                 style={{
-                  height: `${lineHeight}px`,
-                  lineHeight: `${lineHeight - 5}px`,
+                  height: `${lineHeightPx}px`,
+                  lineHeight: `${lineHeightPx - 5}px`,
                 }}
               >
                 {line.top}
               </p>
               <p
                 style={{
-                  height: `${lineHeight}px`,
-                  lineHeight: `${lineHeight - 5}px`,
+                  height: `${lineHeightPx}px`,
+                  lineHeight: `${lineHeightPx - 5}px`,
                 }}
               >
                 {line.bottom}

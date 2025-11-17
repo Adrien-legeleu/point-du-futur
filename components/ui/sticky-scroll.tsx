@@ -55,10 +55,10 @@ const values = [
 function ValueCard({ value }: { value: (typeof values)[number] }) {
   const iconBlurColor =
     value.color === 'primary'
-      ? 'bg-primary-300/30'
+      ? 'bg-primary-300/20'
       : value.color === 'accent'
-      ? 'bg-accent-300/30'
-      : 'bg-energy-300/30';
+      ? 'bg-accent-300/20'
+      : 'bg-energy-300/20';
   const titleColorClass =
     value.color === 'primary'
       ? 'text-primary-500'
@@ -67,7 +67,7 @@ function ValueCard({ value }: { value: (typeof values)[number] }) {
       : 'text-energy-500';
 
   return (
-    <article className="w-full relative  bg-transparent px-5 py-6 flex flex-col gap-3 items-center h-full justify-center">
+    <article className="w-full relative  bg-transparent px-5 py-12 flex flex-col gap-3 items-center h-full justify-center">
       <div
         className={`absolute top-1/2 w-1/2 h-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-2xl  ${iconBlurColor}`}
       />
@@ -98,14 +98,14 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4">
               {/* Colonne gauche */}
-              <div className="grid gap-3 md:gap-4 md:col-span-4">
+              <div className="grid gap-3 md:gap-4 items-center md:col-span-4">
                 <figure className="w-full">
                   <Image
                     width={400}
                     height={400}
                     src="/about/team-meeting-startups.jpg"
                     alt="Jeunes qui collaborent"
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
 
@@ -117,7 +117,7 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
                     height={400}
                     src="/about/young-colleagues-working-together-cafe.jpg"
                     alt="Travail en équipe"
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
 
@@ -129,7 +129,7 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
                     height={400}
                     src="/about/young-adults-meeting-up-study (2).jpg"
                     alt="Moment de partage"
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
               </div>
@@ -167,7 +167,7 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
                     height={400}
                     src="/about/college-students-cramming-outdoor.jpg"
                     alt="Échanges et rencontres"
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
 
@@ -179,7 +179,7 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
                     alt="Conférences et ateliers"
                     width={400}
                     height={400}
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
 
@@ -191,7 +191,7 @@ const Valeurs = forwardRef<HTMLElement>((props, ref) => {
                     height={400}
                     src="/about/business-executives-with-hand-stacked.jpg"
                     alt="Sourires et optimisme"
-                    className="w-full h-80 md:h-96 object-cover  transition-all duration-300"
+                    className="w-full h-80 md:h-114 object-cover  transition-all duration-300"
                   />
                 </figure>
 

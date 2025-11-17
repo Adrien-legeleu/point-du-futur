@@ -43,10 +43,10 @@ export default async function ActualitesPage() {
   const articles = await getPublishedArticles();
 
   return (
-    <>
+    <div className="w-ful overflow-hidden">
       <ActualitesHero />
       <ActualitesList articles={articles} />
       <ActualiteCTA />
-    </>
+    </div>
   );
 }

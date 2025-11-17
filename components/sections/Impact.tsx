@@ -67,7 +67,7 @@ function Counter({
 export default function Impact() {
   return (
     <section className="py-12 min-h-screen relative overflow-hidden bg-gradient-to-tl from-primary-100 via-zinc-50 to-zinc-50">
-      <div className="grid grid-cols-2 items-center justify-center h-full gap-10 px-10">
+      <div className="md:grid md:grid-cols-2 flex flex-col items-center justify-center h-full gap-10 px-10">
         <motion.div
           initial={{ opacity: 0.5, scale: 0.8, transform: 'translateY(50%)' }}
           whileInView={{ opacity: 1, scale: 1, transform: 'translateY(0)' }}
@@ -77,7 +77,7 @@ export default function Impact() {
             stiffness: 100,
             damping: 12,
           }}
-          className="w-full h-full relative"
+          className="w-full max-md:min-h-96 h-full relative"
         >
           <Image
             src="/group-teenagers-posing-together.jpg"
@@ -100,7 +100,7 @@ export default function Impact() {
                 initial={{ y: 10 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
-                className="text-center group grid-cols-2 py-8 border-t duration-300 hover:border-gray-300 border-gray-200 grid"
+                className="text-center group md:grid-cols-2 grid-cols-[auto_1fr] max-md:gap-8 py-8 border-t duration-300 hover:border-gray-300 border-gray-200 grid"
               >
                 <motion.div
                   initial={{ transform: 'translateY(20px)' }}
@@ -109,7 +109,7 @@ export default function Impact() {
                   className="text-3xl md:text-4xl space-x-6 font-bold mb-2 font-display text-primary-500"
                 >
                   <Counter value={stat.value} />
-                  <span className="ml-1">{stat.suffix}</span>
+                  <span className="md:ml-1">{stat.suffix}</span>
                 </motion.div>
 
                 <motion.p
@@ -124,7 +124,7 @@ export default function Impact() {
                     transform: 'translateY(0)',
                   }}
                   transition={{ delay: index * 0.1, duration: 0.2 }}
-                  className="text-sm md:text-md text-left leading-relaxed font-[400] font-display text-neutral-700"
+                  className="sm:text-sm text-xs md:text-md text-left leading-relaxed font-[400] font-display text-neutral-700"
                 >
                   {stat.label}
                 </motion.p>

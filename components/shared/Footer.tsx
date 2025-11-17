@@ -73,63 +73,63 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="my-8 max-w-7xl mx-auto text-base-content">
+    <footer className="my-4 sm:my-6 lg:my-8 max-w-7xl mx-auto text-base-content px-4 sm:px-6">
       {/* Carte principale avec tape */}
-      <div className="relative bg-zinc-50 rounded-3xl max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="hidden md:block absolute -top-4 -left-8 w-[80px] h-[36px] scale-75">
+      <div className="relative bg-zinc-50 rounded-2xl sm:rounded-3xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-4 py-8 sm:py-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 lg:gap-6">
+        <div className=" absolute -top-4 -left-8 w-[80px] h-[36px] scale-75">
           {tape}
         </div>
-        <div className="hidden md:block absolute -top-4 -right-8 rotate-90 w-[80px] h-[36px] scale-75">
+        <div className=" absolute -top-4 -right-8 rotate-90 w-[80px] h-[36px] scale-75">
           {tape}
         </div>
 
         {/* Colonne marque + pitch */}
-        <div className="flex flex-col items-start gap-2 px-2 md:px-8 flex-1">
-          <Link href="/" className="flex items-center   gap-2">
+        <div className="flex flex-col items-start gap-2 px-0 sm:px-2 lg:px-8 flex-1 w-full lg:w-auto">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo/logo.png"
               className="object-cover"
               alt="Logo"
-              width={150}
-              height={90}
+              width={120}
+              height={72}
             />
           </Link>
-          <p className="text-neutral-500 font-medium text-base w-full md:w-4/5">
+          <p className="text-neutral-500 font-medium text-sm sm:text-base w-full lg:w-4/5">
             Pont du Futur accompagne les jeunes dans leur parcours académique et
-            professionnel, avec du mentorat, des ateliers d’orientation et un
+            professionnel, avec du mentorat, des ateliers d'orientation et un
             réseau bienveillant.
           </p>
 
           {/* Contacts compacts */}
-          <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+          <div className="mt-3 grid grid-cols-1 lg:grid-cols-3 gap-2 sm:gap-3 text-xs sm:text-sm w-full">
             <a
               href="mailto:contact@pontdufutur.org"
               className="inline-flex items-center gap-2 text-neutral-700 hover:text-primary-700"
             >
-              <Mail className="w-4 h-4" />
-              contact@pontdufutur.org
+              <Mail className="w-4 h-4 flex-shrink-0" />
+              <span className="truncate">contact@pontdufutur.org</span>
             </a>
             <a
               href="tel:+33123456789"
               className="inline-flex items-center gap-2 text-neutral-700 hover:text-primary-700"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4 flex-shrink-0" />
               +33 1 23 45 67 89
             </a>
             <span className="inline-flex items-center gap-2 text-neutral-700">
-              <MapPin className="w-4 h-4" />
+              <MapPin className="w-4 h-4 flex-shrink-0" />
               Paris, France
             </span>
           </div>
         </div>
 
         {/* Colonnes de liens */}
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 lg:gap-16 items-start w-full lg:w-auto">
           <div className="flex flex-col gap-2">
-            <h4 className="uppercase font-display text-sm text-neutral-400 font-semibold">
-              L’Association
+            <h4 className="uppercase font-display text-xs sm:text-sm text-neutral-400 font-semibold">
+              L'Association
             </h4>
-            <div className="flex flex-col gap-2 text-sm text-neutral-700">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm text-neutral-700">
               {footerLinks.association.map((l) => (
                 <Link
                   key={l.name}
@@ -143,10 +143,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <h4 className="uppercase font-display text-sm text-neutral-400 font-semibold">
+            <h4 className="uppercase font-display text-xs sm:text-sm text-neutral-400 font-semibold">
               Programmes
             </h4>
-            <div className="flex flex-col gap-2 text-sm text-neutral-700">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm text-neutral-700">
               {footerLinks.programmes.map((l) => (
                 <Link
                   key={l.name}
@@ -160,10 +160,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <h4 className="uppercase font-display text-sm text-neutral-400 font-semibold">
+            <h4 className="uppercase font-display text-xs sm:text-sm text-neutral-400 font-semibold">
               Ressources
             </h4>
-            <div className="flex flex-col gap-2 text-sm text-neutral-700">
+            <div className="flex flex-col gap-2 text-xs sm:text-sm text-neutral-700">
               {footerLinks.ressources.map((l) => (
                 <Link
                   key={l.name}
@@ -179,12 +179,12 @@ export default function Footer() {
       </div>
 
       {/* Barre bottom */}
-      <div className="my-3 px-4 md:px-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-neutral-600">
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 items-start sm:items-center">
+      <div className="my-3 px-0 sm:px-4 lg:px-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 text-xs sm:text-sm text-neutral-600">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 lg:gap-8 items-start sm:items-center w-full lg:w-auto">
           <p className="whitespace-nowrap">
             ©{currentYear} Pont du Futur. Tous droits réservés.
           </p>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-3 sm:gap-4">
             <Link href="/mentions-legales">Mentions légales</Link>
             <Link href="/confidentialite">Confidentialité</Link>
             <Link href="/cgu">CGU</Link>
@@ -207,7 +207,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-2">
           <span>Fait avec</span>
           <Heart className="w-4 h-4 text-red-400" />
         </div>

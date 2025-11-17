@@ -57,11 +57,7 @@ export default function Mentorat() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-20 items-start">
           {/* ===== Left - Content ===== */}
-          <motion.div
-            initial={{ y: 150 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-          >
+          <motion.div>
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-1 text-primary-500">
               Mentorat
             </h2>
@@ -77,10 +73,6 @@ export default function Mentorat() {
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  initial={{ y: 50 }}
-                  whileInView={{ y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className="flex items-center py-7 px-3 border-b-2 border-zinc-100 hover:border-zinc-200 duration-300 gap-3"
                 >
                   <CheckCircle className="w-4 h-4 text-primary-600/80" />
@@ -102,15 +94,10 @@ export default function Mentorat() {
           </motion.div>
 
           {/* ===== Right - Process ===== */}
-          <motion.div
-            initial={{ opacity: 0, y: 150 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative  h-full w-full"
-          >
+          <motion.div className="relative  h-full w-full">
             <PixelImage
               src="/actions/sign-language-being-used-by-women-communicate-with-each-other.jpg"
-              grid="8x8"
+              grid="6x4"
             />
           </motion.div>
         </div>
