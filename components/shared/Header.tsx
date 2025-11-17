@@ -71,9 +71,9 @@ export default function Header() {
         <nav
           className={[
             'w-full',
-            'h-12 sm:h-12 md:h-[50px]',
-            'bg-gradient-to-b  from-[#ffffff] to-[#fafafa] supports-[backdrop-filter]:backdrop-blur-xl',
-            isScrolled ? 'from-[#ffffff] to-[#fcfcfc]' : '',
+            'h-14 sm:h-14 md:h-[50px]',
+            'bg-gradient-to-b max-md:bg-none  from-[#ffffff] to-[#fafafa] md:supports-[backdrop-filter]:backdrop-blur-xl',
+            isScrolled ? 'from-[#ffffff] max-md:bg-none  to-[#fcfcfc]' : '',
           ].join(' ')}
         >
           <div className="mx-auto max-w-7xl h-full px-3 sm:px-4">
@@ -148,9 +148,9 @@ export default function Header() {
                 aria-label="Menu"
               >
                 {isOpen ? (
-                  <X className="w-5 h-5 text-primary-600/80" />
+                  <X className="w-6 h-6 text-primary-600/80" />
                 ) : (
-                  <Menu className="w-5 h-5 text-primary-600/80" />
+                  <Menu className="w-6 h-6 text-primary-600/80" />
                 )}
               </button>
             </div>
@@ -169,7 +169,7 @@ export default function Header() {
             className="lg:hidden fixed inset-0 z-[55] bg-white/90 backdrop-blur-xl"
           >
             {/* Header fixe dans le menu */}
-            <div className="absolute top-0 left-0 right-0 h-12 sm:h-12 md:h-[50px] bg-transparent z-[60]">
+            <div className="absolute top-0 left-0 right-0 h-14 sm:h-14 md:h-[50px] bg-transparent z-[60]">
               <div className="mx-auto max-w-7xl h-full px-3 sm:px-4">
                 <div className="h-full flex items-center justify-between">
                   <Link
@@ -191,7 +191,7 @@ export default function Header() {
                     className="p-2 rounded-md bg-zinc-50 hover:bg-zinc-100 text-primary-600/80 transition-colors"
                     aria-label="Fermer le menu"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-6 h-6" />
                   </button>
                 </div>
               </div>
