@@ -79,6 +79,31 @@ export default function EvenementModal({
   const startTime = evenement.heure_debut || '09:00';
   const endDate = evenement.date_fin || evenement.date_debut;
   const endTime = evenement.heure_fin || '18:00';
+  const getGoogleCalendarUrl = () => {
+    const startTimeStr = evenement.heure_debut || '09:00';
+    const endDateStr = evenement.date_fin || evenement.date_debut;
+    const endTimeStr = evenement.heure_fin || '18:00';
+
+    const start = new Date(`${evenement.date_debut}T${startTimeStr}`);
+    const end = new Date(`${endDateStr}T${endTimeStr}`);
+
+    const formatDate = (date: Date) =>
+      date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+    const dates = `${formatDate(start)}/${formatDate(end)}`;
+
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: evenement.titre,
+      details: evenement.description,
+      location: `${evenement.lieu}, ${evenement.ville}${
+        evenement.adresse ? ', ' + evenement.adresse : ''
+      }`,
+      dates,
+    });
+
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  };
 
   return (
     <AnimatePresence>
