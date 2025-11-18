@@ -23,8 +23,8 @@ export function TimelineComponent() {
             <Image
               src="/about/front-view-friends-spending-quality-time-together.jpg"
               alt="Atelier d'orientation"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="aspect-9/12 object-cover rounded-sm"
             />
           </div>
@@ -48,15 +48,15 @@ export function TimelineComponent() {
             <Image
               src="/about/authentic-book-club-scene.jpg"
               alt="Atelier d'orientation"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="aspect-9/12 object-cover rounded-sm"
             />
             <Image
               src="/about/conference-room-hotel.jpg"
               alt="Atelier d'orientation"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="aspect-9/12 object-cover rounded-sm"
             />
           </div>
@@ -95,15 +95,15 @@ export function TimelineComponent() {
             <Image
               src="/about/girl-laughing-with-friends-university.jpg"
               alt="Atelier d'orientation"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="aspect-9/12 object-cover rounded-sm"
             />
             <Image
               src="/about/young-adults-meeting-up-study (2).jpg"
               alt="Atelier d'orientation"
-              width={500}
-              height={500}
+              width={300}
+              height={300}
               className="aspect-9/12 object-cover rounded-sm"
             />
           </div>

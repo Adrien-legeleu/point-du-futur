@@ -22,11 +22,11 @@ function StoryCard({ text }: { text: string }) {
       initial={{ opacity: 0, scale: 0.92, y: 10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-      className="story-card max-w-xs md:max-w-[200px]"
+      className="story-card max-w-[200px] sm:max-w-xs md:max-w-[200px]"
     >
       <div className="rounded-md bg-gradient-to-br from-primary-50/60 to-white backdrop-blur-xl shadow-[0_8px_48px_-12px_rgba(0,0,0,0.15)]">
         <div className="p-4 md:p-6">
-          <p className="italic text-[13.5px] md:text-[15px] leading-relaxed text-neutral-900">
+          <p className="italic text-[10px] sm:text-[13.5px] md:text-[15px] leading-relaxed text-neutral-900">
             {text}
           </p>
         </div>
@@ -115,7 +115,13 @@ const Stories = () => {
           <StoryCard text={stories[1]} />
         </div>
 
-        <div className="absolute top-[74%] left-[8%]">
+        <div className="absolute top-[30%] right-[4%]">
+          <StoryCard text={stories[4]} />
+        </div>
+        <div className="absolute top-[64%] right-[8%]">
+          <StoryCard text={stories[6]} />
+        </div>
+        <div className="absolute top-[80%] left-[8%]">
           <StoryCard text={stories[6]} />
         </div>
       </div>

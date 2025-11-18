@@ -108,8 +108,8 @@ export const PixelImage = ({
           }}
         >
           <Image
-            width={1000}
-            height={1500}
+            width={500}
+            height={500}
             src={src}
             alt={`Pixel image piece pont du futur ${index + 1}`}
             className={cn(

@@ -36,7 +36,7 @@ export default function MembresList({ membres }: { membres: Membre[] }) {
                   }}
                   className=" text-lg font-semibold  text-zinc-900 "
                 >
-                  <TextDisperse className="sm:text-2xl text-sm tracking-[0.2rem] ">
+                  <TextDisperse className="sm:text-sm text-xs tracking-[0.2rem] ">
                     {prenom_nom}
                   </TextDisperse>
                 </motion.div>

@@ -12,7 +12,7 @@ import Link from 'next/link';
 export const ActionsHero = () => {
   return (
     <section className="bg-zinc-50">
-      <ContainerScroll className="min-h-[350vh]">
+      <ContainerScroll className="lg:min-h-[280vh] min-h-[150vh] ">
         <ContainerSticky className="bg-zinc-50 px-6 py-10 ">
           <ContainerAnimated className="space-y-4 text-center">
             <h1 className="text-5xl sm:text-6xl text-primary-600/80 font-bold md:text-7xl lg:text-8xl">
@@ -26,7 +26,7 @@ export const ActionsHero = () => {
             </p>
           </ContainerAnimated>
 
-          <ContainerInset className="max-h-[700px] w-auto  ">
+          <ContainerInset className="max-h-[700px] w-auto mt-4  ">
             <HeroImage
               src="/happy-university-students-using-laptop-while-sitting-hallway.jpg"
               data-src="team-meeting-startups.jpg"

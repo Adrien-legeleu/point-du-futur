@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import { ActionsHero } from '@/components/actions/ActionsHero';
 import Mentorat from '@/components/actions/Mentorat';
 import Orientation from '@/components/actions/Orientations';
@@ -48,7 +49,9 @@ export default function NosActionsPage() {
       <Sensibilisation />
       <Seminaires />
       <Colloques />
-      <ActionsCTA />
+      <div className="overflow-hidden w-full ">
+        <ActionsCTA />
+      </div>
     </>
   );
 }

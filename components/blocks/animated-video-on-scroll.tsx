@@ -143,8 +143,7 @@ export const HeroImage = React.forwardRef<
   HTMLMotionProps<'img'>
 >(({ style, className, ...props }, ref) => {
   const { scrollYProgress } = useContainerScrollContext();
-  const scale = useTransform(scrollYProgress, [0, 0.8], [0.7, 1]);
-
+  const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1.35]);
   return (
     <motion.img
       ref={ref}
@@ -190,8 +189,8 @@ export const ContainerInset = React.forwardRef<
     {
       className,
       style,
-      insetYRange = [45, 0],
-      insetXRange = [45, 0],
+      insetYRange = [35, 0],
+      insetXRange = [35, 0],
       roundednessRange = [1000, 5],
       ...props
     },
@@ -199,9 +198,41 @@ export const ContainerInset = React.forwardRef<
   ) => {
     const { scrollYProgress } = useContainerScrollContext();
 
+    // 👇 state pour savoir si on est sur mobile
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+      if (typeof window === 'undefined') return;
+
+      const mql = window.matchMedia('(max-width: 768px)');
+
+      const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
+        setIsMobile(e.matches);
+      };
+
+      // init
+      handleChange(mql);
+
+      // listener
+      const listener = (e: MediaQueryListEvent) => handleChange(e);
+      mql.addEventListener('change', listener);
+
+      return () => {
+        mql.removeEventListener('change', listener);
+      };
+    }, []);
+
     const insetY = useTransform(scrollYProgress, [0, 0.8], insetYRange);
     const insetX = useTransform(scrollYProgress, [0, 0.8], insetXRange);
-    const roundedness = useTransform(scrollYProgress, [0, 1], roundednessRange);
+
+    // 👉 sur mobile : quasiment pas arrondi
+    const effectiveRoundedRange = isMobile ? [8, 12] : roundednessRange;
+
+    const roundedness = useTransform(
+      scrollYProgress,
+      [0, 1],
+      effectiveRoundedRange
+    );
 
     const clipPath = useMotionTemplate`inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${roundedness}px)`;
 

@@ -37,7 +37,7 @@ export default function ActualitesHero() {
               src={src}
               width={400}
               height={300}
-              className="size-full aspect-video h-auto max-h-full px-6 max-w-xl object-cover inline-block align-middle"
+              className="size-full aspect-video h-auto max-h-full px-6 max-w-sm object-cover inline-block align-middle"
               alt="showcalse"
             />
           )}

@@ -9,8 +9,8 @@ import {
 export const AboutHero = () => {
   return (
     <section>
-      <ContainerScroll className="min-h-[350vh] ">
-        <ContainerSticky className="bg-gradient-to-b from-zinc-50 via-zinc-50 to-primary-50 px-6 md:py-10 ">
+      <ContainerScroll className="lg:min-h-[280vh] min-h-[150vh] ">
+        <ContainerSticky className="bg-gradient-to-b from-zinc-50 via-zinc-50 to-primary-50 px-6 py-10 ">
           <ContainerAnimated className="space-y-4 text-center">
             <h1 className="text-5xl sm:text-6xl text-primary-600/80 font-bold  md:text-7xl lg:text-8xl">
               Une équipe engagée
@@ -23,7 +23,7 @@ export const AboutHero = () => {
             </p>
           </ContainerAnimated>
 
-          <ContainerInset className="max-h-[700px] w-auto  ">
+          <ContainerInset className="max-h-[700px] mt-4 w-auto  ">
             <HeroImage
               src="/about/team-meeting-startups.jpg"
               data-src="team-meeting-startups.jpg"

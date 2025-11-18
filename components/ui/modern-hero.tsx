@@ -8,6 +8,7 @@ import {
 import { useRef } from 'react';
 
 import { Users, BookOpen, Network, LucideIcon } from 'lucide-react';
+import Image from 'next/image';
 
 export const SmoothScrollHero = () => {
   return (
@@ -110,7 +111,6 @@ const ParallaxImages = () => {
   );
 };
 
-// ✅ typage propre des props
 type ParallaxImgProps = {
   className?: string;
   alt: string;
@@ -120,7 +120,7 @@ type ParallaxImgProps = {
 };
 
 const ParallaxImg = ({ className, alt, src, start, end }: ParallaxImgProps) => {
-  const ref = useRef<HTMLImageElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -129,18 +129,22 @@ const ParallaxImg = ({ className, alt, src, start, end }: ParallaxImgProps) => {
 
   const opacity = useTransform(scrollYProgress, [0.75, 1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0.75, 1], [1, 0.85]);
-
   const y = useTransform(scrollYProgress, [0, 1], [start, end]);
   const transform = useMotionTemplate`translateY(${y}px) scale(${scale})`;
 
   return (
-    <motion.img
-      src={src}
-      alt={alt}
-      className={className}
-      ref={ref}
-      style={{ transform, opacity }}
-    />
+    <motion.div ref={ref} style={{ transform, opacity }} className={className}>
+      <div className="relative w-full h-full">
+        <Image
+          src={src}
+          alt={alt}
+          width={500}
+          height={500}
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
+    </motion.div>
   );
 };
 

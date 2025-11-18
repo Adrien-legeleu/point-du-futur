@@ -100,7 +100,7 @@ export default function Impact() {
                 initial={{ y: 10 }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
-                className="text-center group md:grid-cols-2 grid-cols-[auto_1fr] max-md:gap-8 py-8 border-t duration-300 hover:border-gray-300 border-gray-200 grid"
+                className="text-center group md:grid-cols-2 grid-cols-[0.8fr_1.2fr] max-md:gap-8 py-8 border-t duration-300 hover:border-gray-300 border-gray-200 grid"
               >
                 <motion.div
                   initial={{ transform: 'translateY(20px)' }}
