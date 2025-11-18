@@ -63,11 +63,8 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
         `}
       >
         {/* Header */}
-        <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+        <div className="p-3.5 border-b border-zinc-50 flex items-center justify-between">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">PF</span>
-            </div>
             <div>
               <div className="font-bold text-gray-900">Pont du Futur</div>
               <div className="text-xs text-gray-500">Administration</div>
@@ -96,7 +93,7 @@ export default function AdminSidebar({ isOpen, onClose }: AdminSidebarProps) {
                 }}
                 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                   isActive
-                    ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg'
+                    ? 'bg-primary-600/80 text-white shadow-lg'
                     : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >

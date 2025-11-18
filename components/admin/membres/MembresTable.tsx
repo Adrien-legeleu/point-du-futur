@@ -108,10 +108,6 @@ export default function MembresTable({ membres }: { membres: any[] }) {
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-semibold">
-                      {membre.prenom[0]}
-                      {membre.nom[0]}
-                    </div>
                     <div>
                       <div className="font-semibold text-gray-900">
                         {membre.prenom} {membre.nom}

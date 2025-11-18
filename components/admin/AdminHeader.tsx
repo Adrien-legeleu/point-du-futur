@@ -41,17 +41,6 @@ export default function AdminHeader({ user, onMenuClick }: AdminHeaderProps) {
               </div>
               <div className="text-xs text-gray-500">Administrateur</div>
             </div>
-            {user?.user_metadata?.avatar_url ? (
-              <img
-                src={user.user_metadata.avatar_url}
-                alt="Avatar"
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white font-bold">
-                {(user?.email?.[0] || 'A').toUpperCase()}
-              </div>
-            )}
           </div>
         </div>
       </div>

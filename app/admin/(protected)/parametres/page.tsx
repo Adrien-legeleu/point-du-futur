@@ -2,12 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, Save, Loader } from 'lucide-react';
+import {
+  User,
+  Mail,
+  Lock,
+  Save,
+  Loader,
+  Eye,
+  EyeOff,
+  CheckCircle,
+  AlertCircle,
+} from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
 export default function ParametresPage() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     new_password: '',
@@ -71,30 +83,10 @@ export default function ParametresPage() {
         <p className="text-gray-600 mt-2">Gérez votre compte administrateur</p>
       </div>
 
-      {error && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-4 bg-red-50 rounded-xl"
-        >
-          <p className="text-red-600 text-sm font-medium">{error}</p>
-        </motion.div>
-      )}
-
-      {success && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-4 bg-green-50 rounded-xl"
-        >
-          <p className="text-green-600 text-sm font-medium">{success}</p>
-        </motion.div>
-      )}
-
       {/* Informations compte */}
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-primary-600/80 rounded-xl flex items-center justify-center">
             <User className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -148,7 +140,7 @@ export default function ParametresPage() {
       {/* Modifier mot de passe */}
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-primary-600/80 rounded-xl flex items-center justify-center">
             <Lock className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -166,40 +158,87 @@ export default function ParametresPage() {
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Nouveau mot de passe
             </label>
-            <input
-              type="password"
-              value={formData.new_password}
-              onChange={(e) =>
-                setFormData({ ...formData, new_password: e.target.value })
-              }
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
-              placeholder="••••••••"
-              minLength={6}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={formData.new_password}
+                onChange={(e) =>
+                  setFormData({ ...formData, new_password: e.target.value })
+                }
+                className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+                placeholder="••••••••"
+                minLength={6}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 mt-1">Minimum 6 caractères</p>
           </div>
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               Confirmer le mot de passe
             </label>
-            <input
-              type="password"
-              value={formData.confirm_password}
-              onChange={(e) =>
-                setFormData({ ...formData, confirm_password: e.target.value })
-              }
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
-              placeholder="••••••••"
-              minLength={6}
-            />
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={formData.confirm_password}
+                onChange={(e) =>
+                  setFormData({ ...formData, confirm_password: e.target.value })
+                }
+                className="w-full px-4 py-3 pr-12 rounded-xl border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
+                placeholder="••••••••"
+                minLength={6}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
           </div>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 bg-red-50 rounded-xl border border-red-200 flex items-start gap-3"
+            >
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <p className="text-red-600 text-sm font-medium">{error}</p>
+            </motion.div>
+          )}
 
+          {success && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 bg-green-50 rounded-xl border border-green-200 flex items-start gap-3"
+            >
+              <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+              <p className="text-green-600 text-sm font-medium">{success}</p>
+            </motion.div>
+          )}
           <motion.button
             type="submit"
             disabled={loading || !formData.new_password}
             whileHover={{ scale: loading ? 1 : 1.02 }}
             whileTap={{ scale: loading ? 1 : 0.98 }}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-6 py-3 bg-primary-600/80 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>

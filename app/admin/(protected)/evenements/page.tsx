@@ -21,7 +21,7 @@ export default async function EvenementsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-5 justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Événements</h1>
           <p className="text-gray-600 mt-1">
@@ -29,7 +29,7 @@ export default async function EvenementsPage() {
           </p>
         </div>
         <Link href="/admin/evenements/nouveau">
-          <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-trust-500 to-trust-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+          <button className="flex items-center max-md:text-sm gap-2 px-6 py-3 bg-primary-600/80 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
             <Plus className="w-5 h-5" />
             Nouvel événement
           </button>
@@ -72,10 +72,7 @@ export default async function EvenementsPage() {
         ].map((stat, index) => {
           const Icon = stat.icon;
           return (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-6 shadow-sm"
-            >
+            <div key={index} className="bg-white rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center ${

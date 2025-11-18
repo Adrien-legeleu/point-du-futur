@@ -34,7 +34,7 @@ export default async function ArticlesPage() {
           </p>
         </div>
         <Link href="/admin/articles/nouveau">
-          <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-blue to-primary-green text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
+          <button className="flex items-center gap-2 max-md:text-sm px-6 py-3 bg-primary-600/80 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
             <Plus className="w-5 h-5" />
             Nouvel article
           </button>

@@ -91,10 +91,9 @@ export default function AdminLoginPage() {
         className="w-full max-w-md relative z-10"
       >
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl mb-4 shadow-lg">
-            <span className="text-3xl font-bold text-white">PF</span>
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Administration</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Administration
+          </h1>
           <p className="text-gray-600">
             Connectez-vous pour accéder au tableau de bord
           </p>
@@ -151,7 +150,7 @@ export default function AdminLoginPage() {
               disabled={loading}
               whileHover={{ scale: loading ? 1 : 1.02 }}
               whileTap={{ scale: loading ? 1 : 0.98 }}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-primary-600/80 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -163,27 +162,6 @@ export default function AdminLoginPage() {
               )}
             </motion.button>
           </form>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">OU</span>
-            </div>
-          </div>
-
-          <motion.button
-            type="button"
-            onClick={handleGoogleLogin}
-            disabled={loading}
-            whileHover={{ scale: loading ? 1 : 1.02 }}
-            whileTap={{ scale: loading ? 1 : 0.98 }}
-            className="w-full flex items-center justify-center gap-3 py-3 bg-white border-2 border-gray-200 hover:border-primary-300 hover:bg-gray-50 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Chrome className="w-5 h-5 text-gray-600" />
-            <span className="text-gray-700">Continuer avec Google</span>
-          </motion.button>
         </div>
 
         <div className="text-center mt-6">
