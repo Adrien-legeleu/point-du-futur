@@ -102,6 +102,86 @@ export default function TiptapEditor({ content, onChange }: TiptapEditorProps) {
 
   return (
     <div className="border border-gray-300 rounded-xl overflow-hidden bg-white shadow-sm">
+      {/* Styles pour les listes et le formatage */}
+      <style jsx global>{`
+        .ProseMirror ul {
+          list-style-type: disc;
+          padding-left: 1.5rem;
+          margin: 1rem 0;
+        }
+        .ProseMirror ol {
+          list-style-type: decimal;
+          padding-left: 1.5rem;
+          margin: 1rem 0;
+        }
+        .ProseMirror li {
+          margin: 0.25rem 0;
+          display: list-item;
+        }
+        .ProseMirror ul ul,
+        .ProseMirror ol ul {
+          list-style-type: circle;
+          margin: 0.25rem 0;
+        }
+        .ProseMirror ol ol,
+        .ProseMirror ul ol {
+          list-style-type: lower-alpha;
+          margin: 0.25rem 0;
+        }
+        .ProseMirror h2 {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin: 1.5rem 0 1rem 0;
+          color: #111827;
+        }
+        .ProseMirror h3 {
+          font-size: 1.25rem;
+          font-weight: bold;
+          margin: 1.25rem 0 0.75rem 0;
+          color: #111827;
+        }
+        .ProseMirror blockquote {
+          border-left: 4px solid #e5e7eb;
+          padding-left: 1rem;
+          margin: 1rem 0;
+          color: #6b7280;
+          font-style: italic;
+        }
+        .ProseMirror code {
+          background-color: #f3f4f6;
+          padding: 0.2rem 0.4rem;
+          border-radius: 0.25rem;
+          font-family: monospace;
+          font-size: 0.875rem;
+          color: #dc2626;
+        }
+        .ProseMirror hr {
+          border: none;
+          border-top: 2px solid #e5e7eb;
+          margin: 2rem 0;
+        }
+        .ProseMirror a {
+          color: #3b82f6;
+          text-decoration: underline;
+        }
+        .ProseMirror a:hover {
+          color: #2563eb;
+        }
+        .ProseMirror p {
+          margin: 0.5rem 0;
+          line-height: 1.6;
+        }
+        .ProseMirror strong {
+          font-weight: 600;
+        }
+        .ProseMirror em {
+          font-style: italic;
+        }
+        .ProseMirror u {
+          text-decoration: underline;
+        }
+      `}</style>
+
       {/* Toolbar améliorée */}
       <div className="flex flex-wrap items-center gap-1 p-3 bg-gray-50 border-b border-gray-200">
         <ToolbarButton

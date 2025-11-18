@@ -54,21 +54,58 @@ export default function ArticleContent({ article }: ArticleContentProps) {
           margin-bottom: 1.5rem;
         }
 
-        .article-content ul,
-        .article-content ol {
+        .article-content ul {
+          list-style-type: disc;
           margin-left: 1.5rem;
           margin-bottom: 1.5rem;
+          padding-left: 1rem;
+          color: #4b5563;
+        }
+
+        .article-content ol {
+          list-style-type: decimal;
+          margin-left: 1.5rem;
+          margin-bottom: 1.5rem;
+          padding-left: 1rem;
           color: #4b5563;
         }
 
         .article-content li {
           margin-bottom: 0.75rem;
           line-height: 1.8;
+          display: list-item;
+        }
+
+        .article-content ul ul {
+          list-style-type: circle;
+          margin-top: 0.5rem;
+        }
+
+        .article-content ol ol {
+          list-style-type: lower-alpha;
+          margin-top: 0.5rem;
         }
 
         .article-content strong {
           color: #111827;
           font-weight: 600;
+        }
+
+        .article-content em {
+          font-style: italic;
+        }
+
+        .article-content u {
+          text-decoration: underline;
+        }
+
+        .article-content code {
+          background-color: #f3f4f6;
+          padding: 0.2rem 0.4rem;
+          border-radius: 0.25rem;
+          font-family: monospace;
+          font-size: 0.875em;
+          color: #dc2626;
         }
 
         .article-content blockquote {
@@ -95,6 +132,12 @@ export default function ArticleContent({ article }: ArticleContentProps) {
 
         .article-content a:hover {
           color: #1d4ed8;
+        }
+
+        .article-content hr {
+          border: none;
+          border-top: 2px solid #e5e7eb;
+          margin: 2.5rem 0;
         }
       `}</style>
     </section>

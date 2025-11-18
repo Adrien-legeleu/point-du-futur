@@ -265,7 +265,7 @@ export default function MentorsTable({ mentors }: { mentors: Mentor[] }) {
                         <div className="flex gap-1">
                           <button
                             onClick={() =>
-                              handleStatusChange(mentor.id, 'approved')
+                              handleStatusChange(mentor.id, 'active')
                             }
                             disabled={updating === mentor.id}
                             className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold hover:bg-green-200 transition-colors disabled:opacity-50"
@@ -274,7 +274,7 @@ export default function MentorsTable({ mentors }: { mentors: Mentor[] }) {
                           </button>
                           <button
                             onClick={() =>
-                              handleStatusChange(mentor.id, 'rejected')
+                              handleStatusChange(mentor.id, 'inactive')
                             }
                             disabled={updating === mentor.id}
                             className="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-semibold hover:bg-red-200 transition-colors disabled:opacity-50"

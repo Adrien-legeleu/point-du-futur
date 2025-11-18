@@ -69,10 +69,6 @@ export default function BenevolesTable({ benevoles }: { benevoles: any[] }) {
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center text-white font-semibold">
-                      {benevole.prenom[0]}
-                      {benevole.nom[0]}
-                    </div>
                     <div>
                       <div className="font-semibold text-gray-900">
                         {benevole.prenom} {benevole.nom}

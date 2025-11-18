@@ -87,12 +87,12 @@ export default function ImageUpload({ currentImage, onImageChange }: Props) {
             alt="Preview"
             width={800}
             height={400}
-            className="w-full max-w-2xl h-64 object-cover rounded-xl border-2 border-gray-200"
+            className="w-full max-w-2xl  object-cover rounded-xl border-2 border-gray-200"
           />
           <button
             type="button"
             onClick={handleRemove}
-            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-lg transition-opacity"
           >
             <X className="w-5 h-5" />
           </button>
