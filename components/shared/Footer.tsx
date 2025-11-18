@@ -187,8 +187,6 @@ export default function Footer() {
           <div className="flex flex-row gap-3 sm:gap-4">
             <Link href="/admin">Administration</Link>
             <Link href="/mentions-legales">Mentions légales</Link>
-            <Link href="/confidentialite">Confidentialité</Link>
-            <Link href="/cgu">CGU</Link>
           </div>
         </div>
 

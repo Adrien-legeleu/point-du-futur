@@ -7,17 +7,21 @@ import { notFound } from 'next/navigation';
 export default async function ModifierEvenementPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>; // ✅ Promise comme pour les articles
 }) {
+  // ✅ AWAIT params d'abord
+  const { id } = await params;
+
   const supabase = await createServerSupabaseClient();
 
   const { data: evenement, error } = await supabase
     .from('evenements')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id) // ✅ Utiliser id au lieu de params.id
     .single();
 
   if (error || !evenement) {
+    console.error('Erreur chargement événement :', error);
     notFound();
   }
 
